@@ -40,7 +40,7 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[Short title, max. 45 characters]{blackjax-ns for gravitational wave inference on GPUs}
+\title[Short title, max. 45 characters]{blackjax-nss for gravitational wave inference on GPUs}
 
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
@@ -105,34 +105,33 @@ keyword1 -- keyword2 -- keyword3
 The era of gravitational wave (GW) astronomy, initiated by the landmark
 detections of the Laser Interferometer Gravitational-Wave Observatory (LIGO) and
 Virgo, and now advanced by the global network including KAGRA, has revolutionized
-our view of the cosmos [CITE: GW detection papers]. Extracting scientific insights
-from the faint, transient signals buried in detector noise—from measuring the
+our view of the cosmos~\citep{GW150914, GW170817,GWTC1,GWTC2, GWTC3,GWTC3_pop_analysis,GWTC2_GR,siren}. 
+Extracting scientific insights from the faint, transient signals buried in detector noise—from measuring the
 masses and spins of binary black holes to performing precision tests of general
-relativity—relies critically on the framework of Bayesian inference [CITE: a key
-GW inference review paper]. This allows for the estimation of posteriors on source parameters
+relativity—relies critically on the framework of Bayesian inference~\citep{Thrane_2019}. 
+This allows for the estimation of posteriors on source parameters
 (parameter estimation) and the comparison of competing physical models (model selection).
 
 The process of Bayesian inference in GW astronomy is, however, computationally
 demanding. Realistic theoretical models for the GW waveform are complex, and the
 stochastic sampling algorithms required to explore the high-dimensional parameter
-space can require millions of likelihood evaluations per analysis [CITE: specific
-topic]. The community-standard software tools, the inference library \texttt{bilby} [CITE:
-bilby paper] paired with a custom implementation of the nested sampler \texttt{dynesty} [CITE:
-dynesty paper], have proven to be a robust and highly effective framework.
+space can require millions of likelihood evaluations per analysis~\citep{LIGO_guide_signalextraction}.
+The community-standard software tools, the inference library \texttt{bilby}~\citep{bilby_paper}
+paired with a custom implementation of the nested sampler \texttt{dynesty}~\citep{dynesty}, 
+have proven to be a robust and highly effective framework.
 However, this framework is predominantly executed on central processing units
 (CPUs), making individual analyses time-consuming and creating a significant
 computational bottleneck. This challenge is set to become acute with the
-increased data volumes from future observing runs and the advent of
-next-generation observatories, such as the Einstein Telescope, which promise
-unprecedented sensitivity and detection volumes [CITE: Einstein Telescope
-science case].
+increased data volumes from future observing runs~\citep{aLIGO, aVirgo, aLVK_prospects} and the advent of
+next-generation observatories, such as the Einstein Telescope~\citep{ET_science_case}, which promise
+unprecedented sensitivity and detection volumes~\citep{HuAccelerationReview}.
 
 In response to this challenge, the GW community has begun to leverage the immense
 parallel processing power of graphics processing units (GPUs). Pioneering work in
-this domain, such as the \texttt{jimgw} codebase [CITE: jimgw paper], has successfully
-implemented GPU-accelerated Markov Chain Monte Carlo (MCMC) samplers like \texttt{flowMC}
-[CITE: flowMC paper], paired with GPU implementations of waveform models provided by the
-\texttt{ripple} library [CITE: ripple paper]. This work has demonstrated that
+this domain, such as the \texttt{jimgw} codebase~\citep{wong2023fastgravitationalwaveparameter}, has successfully
+implemented GPU-accelerated Markov Chain Monte Carlo (MCMC) samplers like \texttt{flowMC}~\citep{flowMC}, 
+paired with GPU implementations of waveform models provided by the
+\texttt{ripple} library~\citep{ripple}. This work has demonstrated that
 substantial, order-of-magnitude speedups for GW parameter estimation are
 achievable. While these MCMC-based approaches excel at rapidly generating samples
 from the posterior for parameter estimation, they do not directly compute the
@@ -141,13 +140,14 @@ Bayesian evidence, which remains key for robust model selection.
 In this paper, we apply a GPU-accelerated nested sampler to gravitational wave
 data analysis. Nested Sampling is a powerful Bayesian algorithm particularly
 regarded for its ability to robustly calculate the evidence while simultaneously
-producing posterior samples, even for complex, multimodal distributions [CITE:
-Skilling's original nested sampling paper]. We employ the \texttt{blackjax ns} sampler,
-recently developed by Yallup et al. [CITE: Yallup et al., YEAR]. This sampler is
+producing posterior samples, even for complex, multimodal distributions~\citep{skilling}. 
+We employ the \texttt{blackjax ns} sampler,
+recently developed by Yallup et al.~\citep{yallup2025nested} and implemented within the pre-existing software 
+\texttt{blackjax}~\citep{cabezas2024blackjax}. This sampler is
 based on a novel reformulation of the nested sampling algorithm that is natively
 vectorized for highly parallel execution on GPUs and incorporates other
 significant algorithmic refinements. We present the first application and
-validation of \texttt{blackjax-ns} for the analysis of binary black hole mergers.
+validation of \texttt{blackjax-ns} for the analysis of simulated binary black hole mergers.
 This work complements the existing suite of GPU-MCMC tools by providing an
 efficient and robust implementation of GPU-accelerated nested sampling in this
 context, thereby unifying rapid parameter estimation and model selection within
@@ -207,7 +207,7 @@ The inclusion of a Data Availability Statement is a requirement for articles pub
 % The best way to enter references is to use BibTeX:
 
 \bibliographystyle{mnras}
-\bibliography{example} % if your bibtex file is called example.bib
+\bibliography{references} % if your bibtex file is called example.bib
 
 
 % Alternatively you could enter them by hand, like this:
