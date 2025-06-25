@@ -1,0 +1,239 @@
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+
+% Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
+% Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Avoid using amssymb if newtxmath is enabled, as these packages can cause conflicts. newtxmatch covers the same math symbols while producing a consistent Times New Roman font. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[Short title, max. 45 characters]{blackjax-ns for gravitational wave inference on GPUs}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[Metha Prathaban et al.]{
+Metha Prathaban,$^{1}$\thanks{E-mail: myp23@cam.ac.uk (MP)}
+A. N. Other,$^{2}$
+Third Author$^{2,3}$
+and Fourth Author$^{3}$
+\\
+% List of institutions
+$^{1}$University of Cambridge, Cambridge, CB3 0HE, UK\\
+$^{2}$\\
+$^{3}$
+}
+
+% These dates will be filled out by the publisher
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Prints the current year, for the copyright statements etc. To achieve a fixed year, replace the expression with a number. 
+\pubyear{\the\year{}}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+This is a simple template for authors to write new MNRAS papers.
+The abstract should briefly describe the aims, methods, and main results of the paper.
+It should be a single paragraph not more than 250 words (200 words for Letters).
+No references should appear in the abstract.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+keyword1 -- keyword2 -- keyword3
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+
+
+% Bayesian inference serves as the foundation for gravitational wave data analysis, providing a robust framework for computing posterior distributions and evidences.
+% Among the various tools available in this domain, nested sampling is particularly popular for its capacity to efficiently perform parameter estimation, model comparison and tension quantification.
+
+
+% Name popular nested samplers used within established codes such as bilby, lalinference (dynesty, polychord, nessai, cpnest). Both these samplers and codes have been widely tested, but it is known that they are computationally intensive. Whilst still feasible for current experiments, the future brings an entirely different data landscape.
+
+% Compare and contrast current and future data. Talk about scaling of nested sampling in particular, and how all these factors will make the runtime too large. Cite John Veitch's paper on expected runtime, and Mac's paper on single BNS event. Current traditional methods simply will not scale to this era. Moreover, many of the current established acceleration methods may not scale in accuracy to this era either (cite Paul's paper).
+
+% The two biggest technological advancements driving progress in this area. The first is machine learning, which has been used to accelerate waveform evaluation through ROQ, make general improvements to the sampler (nessai), and accelerate the core nested sampling algorithm in other ways (cite my paper, others). Combining these techniques could result in orders of magnitude improvement if properly leveraged. There are also innovative alternative Bayesian inference methods such as SBI which are posed to address future challenges. 
+
+% The other main technological advancement is the introduction of GPUs, and this presents major opportunities for nested sampling in the 3G era. Introduce parallisation. In (david's paper), he introduced a nested sampler designed to be run on GPUs, making use of the parallelization of GPUs. David's paper demonstrated the accuracy and performance of the sampler. Here, we apply it to gravitational wave problems to show its advantages and opportunities in the 3G era.
+
+The era of gravitational wave (GW) astronomy, initiated by the landmark
+detections of the Laser Interferometer Gravitational-Wave Observatory (LIGO) and
+Virgo, and now advanced by the global network including KAGRA, has revolutionized
+our view of the cosmos [CITE: GW detection papers]. Extracting scientific insights
+from the faint, transient signals buried in detector noise—from measuring the
+masses and spins of binary black holes to performing precision tests of general
+relativity—relies critically on the framework of Bayesian inference [CITE: a key
+GW inference review paper]. This allows for the estimation of posteriors on source parameters
+(parameter estimation) and the comparison of competing physical models (model selection).
+
+The process of Bayesian inference in GW astronomy is, however, computationally
+demanding. Realistic theoretical models for the GW waveform are complex, and the
+stochastic sampling algorithms required to explore the high-dimensional parameter
+space can require millions of likelihood evaluations per analysis [CITE: specific
+topic]. The community-standard software tools, the inference library \texttt{bilby} [CITE:
+bilby paper] paired with a custom implementation of the nested sampler \texttt{dynesty} [CITE:
+dynesty paper], have proven to be a robust and highly effective framework.
+However, this framework is predominantly executed on central processing units
+(CPUs), making individual analyses time-consuming and creating a significant
+computational bottleneck. This challenge is set to become acute with the
+increased data volumes from future observing runs and the advent of
+next-generation observatories, such as the Einstein Telescope, which promise
+unprecedented sensitivity and detection volumes [CITE: Einstein Telescope
+science case].
+
+In response to this challenge, the GW community has begun to leverage the immense
+parallel processing power of graphics processing units (GPUs). Pioneering work in
+this domain, such as the \texttt{jimgw} codebase [CITE: jimgw paper], has successfully
+implemented GPU-accelerated Markov Chain Monte Carlo (MCMC) samplers like \texttt{flowMC}
+[CITE: flowMC paper], paired with GPU implementations of waveform models provided by the
+\texttt{ripple} library [CITE: ripple paper]. This work has demonstrated that
+substantial, order-of-magnitude speedups for GW parameter estimation are
+achievable. While these MCMC-based approaches excel at rapidly generating samples
+from the posterior for parameter estimation, they do not directly compute the
+Bayesian evidence, which remains key for robust model selection.
+
+In this paper, we apply a GPU-accelerated nested sampler to gravitational wave
+data analysis. Nested Sampling is a powerful Bayesian algorithm particularly
+regarded for its ability to robustly calculate the evidence while simultaneously
+producing posterior samples, even for complex, multimodal distributions [CITE:
+Skilling's original nested sampling paper]. We employ the \texttt{blackjax ns} sampler,
+recently developed by Yallup et al. [CITE: Yallup et al., YEAR]. This sampler is
+based on a novel reformulation of the nested sampling algorithm that is natively
+vectorized for highly parallel execution on GPUs and incorporates other
+significant algorithmic refinements. We present the first application and
+validation of \texttt{blackjax-ns} for the analysis of binary black hole mergers.
+This work complements the existing suite of GPU-MCMC tools by providing an
+efficient and robust implementation of GPU-accelerated nested sampling in this
+context, thereby unifying rapid parameter estimation and model selection within
+a single high-performance computational framework.
+
+\section{Methods}
+
+Discuss basics of GW inference, with each component.
+
+\subsection{Likelihood}
+
+Say we use the Ripple waveforms, no heterodyning, but just a basic Whittle likelihood, working in the frequency domain. Say we do this to be able to isolate the speedup provided by the sampler+GPU, without other acceleration methods. 
+
+\subsection{Priors}
+
+Give details of priors used for BBHs and BNS problem.
+
+\subsection{Sampler}
+
+Describe briefly how the sampler is set up to improve efficiency in the sampling. 
+
+\section{Results}
+
+\subsection{Injections}
+
+Give details of exact injections and comparison with bilby+dynesty. Write here about pp-plots?
+
+\subsection{Real Data}
+
+Give real data examples.
+
+\section{Discussion}
+
+Compare to bilby in terms of runtimes!
+
+\section{Conclusions}
+
+Talk about putting more waveforms on GPU. Current things we have not implemented that are available in bilby. The compatibility of using NFs with this, as we can evaluate many samples at once, meaning approaches like in nessai or PR become more efficient. 
+
+\section*{Acknowledgements}
+
+The Acknowledgements section is not numbered. Here you can thank helpful
+colleagues, acknowledge funding agencies, telescopes and facilities used etc.
+Try to keep it short.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Data Availability}
+
+ 
+The inclusion of a Data Availability Statement is a requirement for articles published in MNRAS. Data Availability Statements provide a standardised format for readers to understand the availability of data underlying the research results described in the article. The statement may refer to original data generated in the course of the study or to third-party data analysed in the article. The statement should describe and provide means of access, where possible, by linking to the data or providing the required accession numbers for the relevant databases or DOIs.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+\bibliographystyle{mnras}
+\bibliography{example} % if your bibtex file is called example.bib
+
+
+% Alternatively you could enter them by hand, like this:
+% This method is tedious and prone to error if you have lots of references
+%\begin{thebibliography}{99}
+%\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
+%Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
+%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
+%Others S., 2012, Journal of Interesting Stuff, 17, 198
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Some extra material}
+
+If you want to present additional material which would interrupt the flow of the main paper,
+it can be placed in an Appendix which appears after the list of references.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
