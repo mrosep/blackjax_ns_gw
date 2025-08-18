@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex main"] 1755513898.9453 "main.aux" "main.bbl" "main" 1755513900.21803 0
+["bibtex main"] 1755513898.9453 "main.aux" "main.bbl" "main" 1755514688.08462 0
   "./references.bib" 1755511863.59774 26415 508816b41adb0c56f4ca0968e25b1185 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/mnras/mnras.bst" 1593726342 43376 8463aa2cc1948e346d5641ca59bb4619 ""
-  "main.aux" 1755513899.83412 8989 c5dcaaad8770b59fa7336e7b92c6b319 "pdflatex"
+  "main.aux" 1755514687.71477 8989 c5dcaaad8770b59fa7336e7b92c6b319 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1755513899.10457 "/home/metha/Documents/Phd/gpu_gw/blackjax_ns_gw/paper/main.tex" "main.pdf" "main" 1755513900.21828 0
+["pdflatex"] 1755514686.94327 "/home/metha/Documents/Phd/gpu_gw/blackjax_ns_gw/paper/main.tex" "main.pdf" "main" 1755514688.08483 0
   "/etc/texmf/web2c/texmf.cnf" 1727791474.36774 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/metha/Documents/Phd/gpu_gw/blackjax_ns_gw/paper/main.tex" 1755513897.48804 33651 f19247c90c6d7c8d70059f5e02500734 ""
+  "/home/metha/Documents/Phd/gpu_gw/blackjax_ns_gw/paper/main.tex" 1755514686.73077 33650 89732549c3a11e685365914e36572fa4 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc" 1698694482 2914 fdbc4a54b9bc76f4551b5303f2737d33 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc" 1422827479 2083 60e36f8eac802fcaf19eabe2633b406e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -161,10 +161,10 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1727854188 8214416 0e1d987cab4c57b5dde65b6e59045179 ""
   "figures/4s_logZ_comparison.pdf" 1755509324.40579 439329 e298e2b5b99387705b1f9b87432a9720 ""
   "figures/bilby_blackjax_comparison_4s.pdf" 1755499892.15361 1062557 f57e6535f858bfa9499a31e520830a4a ""
-  "main.aux" 1755513899.83412 8989 c5dcaaad8770b59fa7336e7b92c6b319 "pdflatex"
+  "main.aux" 1755514687.71477 8989 c5dcaaad8770b59fa7336e7b92c6b319 "pdflatex"
   "main.bbl" 1755513899.09809 8401 9188690ab69b92e00cb6c6c9afbf803b "bibtex main"
-  "main.out" 1755513899.83512 1921 702893011a84afff9ff3746b79c67dec "pdflatex"
-  "main.tex" 1755513897.48804 33651 f19247c90c6d7c8d70059f5e02500734 ""
+  "main.out" 1755514687.71577 1921 702893011a84afff9ff3746b79c67dec "pdflatex"
+  "main.tex" 1755514686.73077 33650 89732549c3a11e685365914e36572fa4 ""
   (generated)
   "main.aux"
   "main.log"
