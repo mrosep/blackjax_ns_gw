@@ -1,0 +1,115 @@
+\begin{thebibliography}{}
+\makeatletter
+\relax
+\def\mn@urlcharsother{\let\do\@makeother \do\$\do\&\do\#\do\^\do\_\do\%\do\~}
+\def\mn@doi{\begingroup\mn@urlcharsother \@ifnextchar [ {\mn@doi@} {\mn@doi@[]}}
+\def\mn@doi@[#1]#2{\def\@tempa{#1}\ifx\@tempa\@empty \href {http://dx.doi.org/#2} {doi:#2}\else \href {http://dx.doi.org/#2} {#1}\fi \endgroup}
+\def\mn@eprint#1#2{\mn@eprint@#1:#2::\@nil}
+\def\mn@eprint@arXiv#1{\href {http://arxiv.org/abs/#1} {{\tt arXiv:#1}}}
+\def\mn@eprint@dblp#1{\href {http://dblp.uni-trier.de/rec/bibtex/#1.xml} {dblp:#1}}
+\def\mn@eprint@#1:#2:#3:#4\@nil{\def\@tempa {#1}\def\@tempb {#2}\def\@tempc {#3}\ifx \@tempc \@empty \let \@tempc \@tempb \let \@tempb \@tempa \fi \ifx \@tempb \@empty \def\@tempb {arXiv}\fi \@ifundefined {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2016}]{GW150914}
+Abbott B.~P.,  et~al., 2016, \mn@doi [Phys. Rev. Lett.] {10.1103/PhysRevLett.116.061102}, 116, 061102
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2017a}]{GW170817}
+Abbott B.~P.,  et~al., 2017a, \mn@doi [Phys. Rev. Lett.] {10.1103/PhysRevLett.119.161101}, 119, 161101
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2017b}]{siren}
+Abbott B.~P.,  et~al., 2017b, \mn@doi [Nature] {10.1038/nature24471}, 551, 85
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2019}]{GWTC1}
+Abbott B.~P.,  et~al., 2019, \mn@doi [Phys. Rev. X] {10.1103/PhysRevX.9.031040}, 9, 031040
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2020a}]{aLVK_prospects}
+Abbott B.~P.,  et~al., 2020a, \mn@doi [Living Rev. Rel.] {10.1007/s41114-020-00026-9}, 23, 3
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2020b}]{LIGO_guide_signalextraction}
+Abbott B.~P.,  et~al., 2020b, \mn@doi [Classical and Quantum Gravity] {10.1088/1361-6382/ab685e}, 37, 055002
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2021}]{GWTC2_GR}
+Abbott R.,  et~al., 2021, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.103.122002}, 103, 122002
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2023a}]{GWTC3_pop_analysis}
+Abbott R.,  et~al., 2023a, \mn@doi [Phys. Rev. X] {10.1103/PhysRevX.13.011048}, 13, 011048
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2023b}]{GWTC3}
+Abbott R.,  et~al., 2023b, \mn@doi [Phys. Rev. X] {10.1103/PhysRevX.13.041039}, 13, 041039
+
+\bibitem[\protect\citeauthoryear{Abbott et~al.}{Abbott et~al.}{2024}]{GWTC2}
+Abbott R.,  et~al., 2024, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.109.022001}, 109, 022001
+
+\bibitem[\protect\citeauthoryear{Acernese et~al.,}{Acernese et~al.}{2014}]{aVirgo}
+Acernese F.,  et~al., 2014, Classical and Quantum Gravity, 32, 024001
+
+\bibitem[\protect\citeauthoryear{Ashton et~al.}{Ashton et~al.}{2019}]{bilby_paper}
+Ashton G.,  et~al., 2019, \mn@doi [Astrophys. J. Suppl.] {10.3847/1538-4365/ab06fc}, 241, 27
+
+\bibitem[\protect\citeauthoryear{Ashton, Bernstein, Buchner  \& et al.}{Ashton et~al.}{2022}]{NSNature}
+Ashton G.,  Bernstein N.,  Buchner J.,   et al. 2022, \mn@doi [Nature Reviews Methods Primers] {10.1038/s43586-022-00121-x}, 2, 39
+
+\bibitem[\protect\citeauthoryear{{Bayes}}{{Bayes}}{1763}]{Bayes1763}
+{Bayes} T.,  1763, \mn@doi [Philosophical Transactions of the Royal Society of London] {10.1098/rstl.1763.0053}, \href {https://ui.adsabs.harvard.edu/abs/1763RSPT...53..370B} {53, 370}
+
+\bibitem[\protect\citeauthoryear{Branchesi et~al.}{Branchesi et~al.}{2023}]{ET_science_case}
+Branchesi M.,  et~al., 2023, \mn@doi [Journal of Cosmology and Astroparticle Physics] {10.1088/1475-7516/2023/07/068}, 2023, 068
+
+\bibitem[\protect\citeauthoryear{Cabezas, Corenflos, Lao  \& Louf}{Cabezas et~al.}{2024}]{cabezas2024blackjax}
+Cabezas A.,  Corenflos A.,  Lao J.,   Louf R.,  2024, BlackJAX: Composable {B}ayesian inference in {JAX} (\mn@eprint {arXiv} {2402.10797})
+
+\bibitem[\protect\citeauthoryear{Cornish}{Cornish}{2013}]{relativebinning4}
+Cornish N.~J.,  2013, Fast Fisher Matrices and Lazy Likelihoods (\mn@eprint {arXiv} {1007.4820}), \url {https://arxiv.org/abs/1007.4820}
+
+\bibitem[\protect\citeauthoryear{Edwards, Wong, Lam, Coogan, Foreman-Mackey, Isi  \& Zimmerman}{Edwards et~al.}{2024}]{ripple}
+Edwards T. D.~P.,  Wong K. W.~K.,  Lam K. K.~H.,  Coogan A.,  Foreman-Mackey D.,  Isi M.,   Zimmerman A.,  2024, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.110.064028}, 110, 064028
+
+\bibitem[\protect\citeauthoryear{Hu \& Veitch}{Hu \& Veitch}{2024}]{HuAccelerationReview}
+Hu Q.,  Veitch J.,  2024, Costs of Bayesian Parameter Estimation in Third-Generation Gravitational Wave Detectors: a Review of Acceleration Methods (\mn@eprint {arXiv} {2412.02651}), \url {https://arxiv.org/abs/2412.02651}
+
+\bibitem[\protect\citeauthoryear{Khan, Husa, Hannam, Ohme, P\"urrer, Jim\'enez~Forteza  \& Boh\'e}{Khan et~al.}{2016}]{Khan:2015jqa}
+Khan S.,  Husa S.,  Hannam M.,  Ohme F.,  P\"urrer M.,  Jim\'enez~Forteza X.,   Boh\'e A.,  2016, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.93.044007}, 93, 044007
+
+\bibitem[\protect\citeauthoryear{Krishna, Vijaykumar, Ganguly, Talbot, Biscoveanu, George, Williams  \& Zimmerman}{Krishna et~al.}{2023}]{TL_relativebinning}
+Krishna K.,  Vijaykumar A.,  Ganguly A.,  Talbot C.,  Biscoveanu S.,  George R.~N.,  Williams N.,   Zimmerman A.,  2023, Accelerated parameter estimation in Bilby with relative binning (\mn@eprint {arXiv} {2312.06009}), \url {https://arxiv.org/abs/2312.06009}
+
+\bibitem[\protect\citeauthoryear{Leslie, Dai  \& Pratten}{Leslie et~al.}{2021}]{relativebinning3}
+Leslie N.,  Dai L.,   Pratten G.,  2021, \mn@doi [Physical Review D] {10.1103/physrevd.104.123030}, 104
+
+\bibitem[\protect\citeauthoryear{Romero-Shaw et~al.,}{Romero-Shaw et~al.}{2020}]{bilby_validation}
+Romero-Shaw I.~M.,  et~al., 2020, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staa2850}, 499, 3295
+
+\bibitem[\protect\citeauthoryear{Skilling}{Skilling}{2006}]{skilling}
+Skilling J.,  2006, \mn@doi [Bayesian Analysis] {10.1214/06-BA127}, 1, 833
+
+\bibitem[\protect\citeauthoryear{Speagle}{Speagle}{2020}]{dynesty}
+Speagle J.~S.,  2020, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staa278}, 493, 3132–3158
+
+\bibitem[\protect\citeauthoryear{Storn \& Price}{Storn \& Price}{1997}]{DE}
+Storn R.,  Price K.,  1997, \mn@doi [J. Global Optim.] {10.1023/A:1008202821328}, 11, 341
+
+\bibitem[\protect\citeauthoryear{{The LIGO Scientific Collaboration} et~al.}{{The LIGO Scientific Collaboration} et~al.}{2015}]{aLIGO}
+{The LIGO Scientific Collaboration} et~al., 2015, \mn@doi [Classical and Quantum Gravity] {10.1088/0264-9381/32/7/074001}, 32, 074001
+
+\bibitem[\protect\citeauthoryear{Thrane \& Talbot}{Thrane \& Talbot}{2019}]{Thrane_2019}
+Thrane E.,  Talbot C.,  2019, \mn@doi [Publications of the Astronomical Society of Australia] {10.1017/pasa.2019.2}, 36
+
+\bibitem[\protect\citeauthoryear{Veitch et~al.,}{Veitch et~al.}{2015}]{lal}
+Veitch J.,  et~al., 2015, \mn@doi [Physical Review D] {10.1103/physrevd.91.042003}, 91
+
+\bibitem[\protect\citeauthoryear{Wong, Isi  \& Edwards}{Wong et~al.}{2023a}]{wong2023fastgravitationalwaveparameter}
+Wong K. W.~K.,  Isi M.,   Edwards T. D.~P.,  2023a, Fast gravitational wave parameter estimation without compromises (\mn@eprint {arXiv} {2302.05333}), \url {https://arxiv.org/abs/2302.05333}
+
+\bibitem[\protect\citeauthoryear{Wong, Gabri\'e  \& Foreman-Mackey}{Wong et~al.}{2023b}]{flowMC}
+Wong K. W.~k.,  Gabri\'e M.,   Foreman-Mackey D.,  2023b, \mn@doi [J. Open Source Softw.] {10.21105/joss.05021}, 8, 5021
+
+\bibitem[\protect\citeauthoryear{Yallup, Kroupa  \& Handley}{Yallup et~al.}{2025}]{yallup2025nested}
+Yallup D.,  Kroupa N.,   Handley W.,  2025, in Frontiers in Probabilistic Inference: Learning meets Sampling. \url {https://openreview.net/forum?id=ekbkMSuPo4}
+
+\bibitem[\protect\citeauthoryear{Zackay, Dai  \& Venumadhav}{Zackay et~al.}{2018}]{relativebinning2}
+Zackay B.,  Dai L.,   Venumadhav T.,  2018, Relative Binning and Fast Likelihood Evaluation for Gravitational Wave Parameter Estimation (\mn@eprint {arXiv} {1806.08792}), \url {https://arxiv.org/abs/1806.08792}
+
+\bibitem[\protect\citeauthoryear{{ter Braak}}{{ter Braak}}{2006}]{DE2}
+{ter Braak} C. J.~F.,  2006, \mn@doi [Statistics and Computing] {10.1007/s11222-006-8769-1}, 16, 239
+
+\makeatother
+\end{thebibliography}

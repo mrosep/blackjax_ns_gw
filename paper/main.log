@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.2)  18 JUN 2025 13:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.2)  18 AUG 2025 11:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/metha/Documents/Phd/gpu_gw/gpu_gw_paper/main.tex
-(/home/metha/Documents/Phd/gpu_gw/gpu_gw_paper/main.tex
+**/home/metha/Documents/Phd/gpu_gw/blackjax_ns_gw/paper/main.tex
+(/home/metha/Documents/Phd/gpu_gw/blackjax_ns_gw/paper/main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/mnras/mnras.cls
@@ -553,6 +553,16 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 16.0pt on input line 69.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 16.0pt on input line 69.
+LaTeX Font Info:    Trying to load font information for T1+ntxtt on input line 69.
+ (/usr/share/texlive/texmf-dist/tex/latex/newtx/t1ntxtt.fd
+File: t1ntxtt.fd 2012/04/20 v3.1
+)
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 69.
+ (/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
+File: t1txtt.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <16> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 69.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 12.0pt on input line 69.
 LaTeX Font Info:    Trying to load font information for OT1+minntx on input line 69.
@@ -586,30 +596,82 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 10.0pt on input line 72.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 10.0pt on input line 81.
-LaTeX Font Info:    Trying to load font information for T1+ntxtt on input line 119.
-(/usr/share/texlive/texmf-dist/tex/latex/newtx/t1ntxtt.fd
-File: t1ntxtt.fd 2012/04/20 v3.1
-)
 LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
 (Font)              scaled to size 9.0pt on input line 119.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 8.0pt on input line 172.
+(Font)              scaled to size 8.0pt on input line 190.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.2pt on input line 172.
-LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 172.
- (/usr/share/texlive/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
+(Font)              scaled to size 6.2pt on input line 190.
+LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 190.
+(/usr/share/texlive/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
 File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 172.
+(Font)              scaled to size 8.0pt on input line 190.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}
 
 
 {/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-No file main.bbl.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 239.
-[2
+(Font)              scaled to size 9.0pt on input line 229.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 7.3pt on input line 241.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 5.5pt on input line 241.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 328.
+ [2]
+Underfull \vbox (badness 3930) has occurred while \output is active []
+
+
+Overfull \hbox (13.95207pt too wide) in paragraph at lines 421--439
+ [][] 
+ []
+
+[3
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.488 
+      ]
+<figures/4s_logZ_comparison.pdf, id=237, 222.46399pt x 177.2253pt>
+File: figures/4s_logZ_comparison.pdf Graphic file (type pdf)
+<use figures/4s_logZ_comparison.pdf>
+Package pdftex.def Info: figures/4s_logZ_comparison.pdf  used on input line 540.
+(pdftex.def)             Requested size: 222.46344pt x 177.22485pt.
+LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
+(Font)              scaled to size 8.0pt on input line 543.
+<figures/bilby_blackjax_comparison_4s.pdf, id=238, 452.01866pt x 402.35019pt>
+File: figures/bilby_blackjax_comparison_4s.pdf Graphic file (type pdf)
+<use figures/bilby_blackjax_comparison_4s.pdf>
+Package pdftex.def Info: figures/bilby_blackjax_comparison_4s.pdf  used on input line 549.
+(pdftex.def)             Requested size: 452.01755pt x 402.3492pt.
+ (./main.bbl
+LaTeX Info: Redefining \VAN on input line 1.
+ [4
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.54 ...{Branchesi et~al.}{2023}]{ET_science_case}
+                                                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.54 ...{Branchesi et~al.}{2023}]{ET_science_case}
+                                                   <./figures/4s_logZ_comparison.pdf>]
+Underfull \hbox (badness 2334) in paragraph at lines 61--62
+[]\T1/ntxtlf/m/n/8 Cornish N. J., 2013, Fast Fisher Ma-tri-ces and Lazy Like-li-hoods
+ []
+
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.619 \bsp
+          	% typesetting comment <./figures/bilby_blackjax_comparison_4s.pdf>] [6
 
 ] (./main.aux)
  ***********
@@ -622,24 +684,24 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 866DE869B6B867D178C7E3907F2420BC;1095.
+(rerunfilecheck)             Checksum: 702893011A84AFFF9FF3746B79C67DEC;1921.
  ) 
 Here is how much of TeX's memory you used:
- 14763 strings out of 474222
- 213666 string characters out of 5748733
- 1948975 words of memory out of 5000000
- 36780 multiletter control sequences out of 15000+600000
- 623577 words of font info for 115 fonts, out of 8000000 for 9000
+ 15044 strings out of 474222
+ 218845 string characters out of 5748733
+ 1952975 words of memory out of 5000000
+ 36983 multiletter control sequences out of 15000+600000
+ 647741 words of font info for 154 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,15n,93p,644b,427s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,93p,652b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
-</usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI5.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on main.pdf (2 pages, 144332 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI7.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
+Output written on main.pdf (6 pages, 1257667 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
- 15 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 420 PDF objects out of 1000 (max. 8388607)
+ 379 compressed objects within 4 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
 

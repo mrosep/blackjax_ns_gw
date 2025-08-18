@@ -2,19 +2,103 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{GW150914,GW170817,GWTC1,GWTC2,GWTC3,GWTC3_pop_analysis,GWTC2_GR,siren}
+\citation{Thrane_2019}
+\citation{LIGO_guide_signalextraction}
+\citation{bilby_paper}
+\citation{dynesty}
+\citation{aLIGO,aVirgo,aLVK_prospects}
+\citation{ET_science_case}
+\citation{HuAccelerationReview}
+\citation{wong2023fastgravitationalwaveparameter}
+\citation{flowMC}
+\citation{ripple}
+\citation{yallup2025nested}
+\citation{cabezas2024blackjax}
+\citation{skilling,Thrane_2019,lal,bilby_paper,LIGO_guide_signalextraction}
+\citation{Bayes1763}
 \newlabel{firstpage}{{}{1}{}{Doc-Start}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Likelihood}{1}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Priors}{1}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Bayesian inference in GW astronomy}{1}{subsection.2.1}\protected@file@percent }
+\newlabel{sec:background_bayes}{{2.1}{1}{}{subsection.2.1}{}}
+\citation{LIGO_guide_signalextraction}
+\citation{skilling}
+\citation{NSNature}
+\citation{yallup2025nested,cabezas2024blackjax}
+\citation{bilby_paper,dynesty}
+\citation{DE,DE2}
+\newlabel{eq:bayes_theorem}{{1}{2}{}{equation.1}{}}
+\newlabel{eq:evidence}{{2}{2}{}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}GPU-accelerated nested sampling}{2}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:background_ns_and_gpus}{{2.2}{2}{}{subsection.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}The nested sampling algorithm}{2}{subsubsection.2.2.1}\protected@file@percent }
+\newlabel{sec:background_ns}{{2.2.1}{2}{}{subsubsection.2.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}GPU architectures for scientific computing}{2}{subsubsection.2.2.2}\protected@file@percent }
+\newlabel{sec:background_gpus}{{2.2.2}{2}{}{subsubsection.2.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}A vectorized formulation of nested sampling}{2}{subsubsection.2.2.3}\protected@file@percent }
+\newlabel{sec:background_vectorized_ns}{{2.2.3}{2}{}{subsubsection.2.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The inner sampling kernel}{2}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:methods_kernel}{{3.1}{2}{}{subsection.3.1}{}}
+\citation{ripple}
+\citation{TL_relativebinning,relativebinning2,relativebinning3,relativebinning4}
+\citation{Khan:2015jqa}
+\citation{bilby_validation}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Likelihood}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Prior distributions for the parameters of the binary black hole system. The specific ranges for the masses and spins are dependent on the injection and are specified in Section~\ref {sec:results}.}}{3}{table.1}\protected@file@percent }
+\newlabel{tab:priors}{{1}{3}{Prior distributions for the parameters of the binary black hole system. The specific ranges for the masses and spins are dependent on the injection and are specified in Section~\ref {sec:results}}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Priors}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{3}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{3}{}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Simulated signals}{3}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}4-second simulated signal}{3}{subsubsection.4.1.1}\protected@file@percent }
 \bibstyle{mnras}
-\bibdata{example}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Sampler}{2}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{2}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Injections}{2}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Real Data}{2}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{2}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{2}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Some extra material}{2}{section.A1}\protected@file@percent }
-\newlabel{lastpage}{{A}{2}{}{section.A1}{}}
-\gdef \@abspage@last{2}
+\bibdata{references}
+\bibcite{GW150914}{{1}{2016}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{GW170817}{{2}{2017a}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{siren}{{3}{2017b}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{GWTC1}{{4}{2019}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{aLVK_prospects}{{5}{2020a}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{LIGO_guide_signalextraction}{{6}{2020b}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{GWTC2_GR}{{7}{2021}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{GWTC3_pop_analysis}{{8}{2023a}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{GWTC3}{{9}{2023b}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{GWTC2}{{10}{2024}{{Abbott et~al.}}{{Abbott et~al.}}}
+\bibcite{aVirgo}{{11}{2014}{{Acernese et~al.}}{{Acernese et~al.,}}}
+\bibcite{bilby_paper}{{12}{2019}{{Ashton et~al.}}{{Ashton et~al.}}}
+\bibcite{NSNature}{{13}{2022}{{Ashton et~al.}}{{Ashton, Bernstein, Buchner \& et al.}}}
+\bibcite{Bayes1763}{{14}{1763}{{{Bayes}}}{{{Bayes}}}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Injection parameters for the 4s signal.}}{4}{table.2}\protected@file@percent }
+\newlabel{tab:injection_params}{{2}{4}{Injection parameters for the 4s signal}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Injection Study}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Real Data}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{4}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{4}{section.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Comparison of the log evidence for the 4s signal. The results are in excellent agreement, demonstrating the robustness of the \texttt  {blackjax ns} implementation in recovering the same posteriors and evidence as the \texttt  {bilby} implementation. This unifies parameter estimation and evidence evaluation into a single GPU-accelerated framework.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:4s_logZ_comparison}{{1}{4}{Comparison of the log evidence for the 4s signal. The results are in excellent agreement, demonstrating the robustness of the \texttt {blackjax ns} implementation in recovering the same posteriors and evidence as the \texttt {bilby} implementation. This unifies parameter estimation and evidence evaluation into a single GPU-accelerated framework}{figure.1}{}}
+\bibcite{ET_science_case}{{15}{2023}{{Branchesi et~al.}}{{Branchesi et~al.}}}
+\bibcite{cabezas2024blackjax}{{16}{2024}{{Cabezas et~al.}}{{Cabezas, Corenflos, Lao \& Louf}}}
+\bibcite{relativebinning4}{{17}{2013}{{Cornish}}{{Cornish}}}
+\bibcite{ripple}{{18}{2024}{{Edwards et~al.}}{{Edwards, Wong, Lam, Coogan, Foreman-Mackey, Isi \& Zimmerman}}}
+\bibcite{HuAccelerationReview}{{19}{2024}{{Hu \& Veitch}}{{Hu \& Veitch}}}
+\bibcite{Khan:2015jqa}{{20}{2016}{{Khan et~al.}}{{Khan, Husa, Hannam, Ohme, P\"urrer, Jim\'enez~Forteza \& Boh\'e}}}
+\bibcite{TL_relativebinning}{{21}{2023}{{Krishna et~al.}}{{Krishna, Vijaykumar, Ganguly, Talbot, Biscoveanu, George, Williams \& Zimmerman}}}
+\bibcite{relativebinning3}{{22}{2021}{{Leslie et~al.}}{{Leslie, Dai \& Pratten}}}
+\bibcite{bilby_validation}{{23}{2020}{{Romero-Shaw et~al.}}{{Romero-Shaw et~al.,}}}
+\bibcite{skilling}{{24}{2006}{{Skilling}}{{Skilling}}}
+\bibcite{dynesty}{{25}{2020}{{Speagle}}{{Speagle}}}
+\bibcite{DE}{{26}{1997}{{Storn \& Price}}{{Storn \& Price}}}
+\bibcite{aLIGO}{{27}{2015}{{{The LIGO Scientific Collaboration} et~al.}}{{{The LIGO Scientific Collaboration} et~al.}}}
+\bibcite{Thrane_2019}{{28}{2019}{{Thrane \& Talbot}}{{Thrane \& Talbot}}}
+\bibcite{lal}{{29}{2015}{{Veitch et~al.}}{{Veitch et~al.,}}}
+\bibcite{wong2023fastgravitationalwaveparameter}{{30}{2023a}{{Wong et~al.}}{{Wong, Isi \& Edwards}}}
+\bibcite{flowMC}{{31}{2023b}{{Wong et~al.}}{{Wong, Gabri\'e \& Foreman-Mackey}}}
+\bibcite{yallup2025nested}{{32}{2025}{{Yallup et~al.}}{{Yallup, Kroupa \& Handley}}}
+\bibcite{relativebinning2}{{33}{2018}{{Zackay et~al.}}{{Zackay, Dai \& Venumadhav}}}
+\bibcite{DE2}{{34}{2006}{{{ter Braak}}}{{{ter Braak}}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Recovered posteriors for the 4s signal. The posteriors are in agreement with each other, demonstrating that \texttt  {blackjax ns} implementation with our custom kernel is functionally equivalent to the \texttt  {bilby} + \texttt  {dynesty} implementation.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:4s_posteriors}{{2}{5}{Recovered posteriors for the 4s signal. The posteriors are in agreement with each other, demonstrating that \texttt {blackjax ns} implementation with our custom kernel is functionally equivalent to the \texttt {bilby} + \texttt {dynesty} implementation}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Some extra material}{6}{section.A1}\protected@file@percent }
+\newlabel{lastpage}{{A}{6}{}{section.A1}{}}
+\gdef \@abspage@last{6}
