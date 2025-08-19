@@ -474,7 +474,11 @@ The frequency range of data analysed is from 20 Hz to 1024 Hz,
 and the network matched filtered SNR is 39.6. 
 
 Both the CPU and GPU-based analyses were configured with 1000 live
-points and a termination condition of dlogZ < 0.1, the default in \texttt{bilby}. The prior ranges
+points and a termination condition of dlogZ < 0.1, the default in \texttt{bilby},
+as well as the settings \texttt{naccept} = 60 and \texttt{maxmcmc} = 5000. 
+The \texttt{blackjax ns} sampler was configured with \texttt{num\_delete} = 500, describing the batch size.
+In both cases, periodic boundary conditions were used for the right ascension, 
+polarization angle, and coalescence phase parameters. The prior ranges
 for the chirp mass and mass ratio were set to $[25.0, 50.0]~M_{\odot}$
 and $[0.25, 1.0]$, respectively, with uniform priors on the aligned
 spin components over the range $[-1, 1]$. 
