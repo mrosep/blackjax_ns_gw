@@ -63,6 +63,9 @@ Cornish N.~J.,  2013, Fast Fisher Matrices and Lazy Likelihoods (\mn@eprint {arX
 \bibitem[\protect\citeauthoryear{Edwards, Wong, Lam, Coogan, Foreman-Mackey, Isi  \& Zimmerman}{Edwards et~al.}{2024}]{ripple}
 Edwards T. D.~P.,  Wong K. W.~K.,  Lam K. K.~H.,  Coogan A.,  Foreman-Mackey D.,  Isi M.,   Zimmerman A.,  2024, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.110.064028}, 110, 064028
 
+\bibitem[\protect\citeauthoryear{Higson, Handley, Hobson  \& Lasenby}{Higson et~al.}{2018}]{Higson_Errors}
+Higson E.,  Handley W.,  Hobson M.,   Lasenby A.,  2018, \mn@doi [Bayesian Analysis] {10.1214/17-BA1075}, 13, 873
+
 \bibitem[\protect\citeauthoryear{Hu \& Veitch}{Hu \& Veitch}{2024}]{HuAccelerationReview}
 Hu Q.,  Veitch J.,  2024, Costs of Bayesian Parameter Estimation in Third-Generation Gravitational Wave Detectors: a Review of Acceleration Methods (\mn@eprint {arXiv} {2412.02651}), \url {https://arxiv.org/abs/2412.02651}
 
@@ -74,6 +77,12 @@ Krishna K.,  Vijaykumar A.,  Ganguly A.,  Talbot C.,  Biscoveanu S.,  George R.~
 
 \bibitem[\protect\citeauthoryear{Leslie, Dai  \& Pratten}{Leslie et~al.}{2021}]{relativebinning3}
 Leslie N.,  Dai L.,   Pratten G.,  2021, \mn@doi [Physical Review D] {10.1103/physrevd.104.123030}, 104
+
+\bibitem[\protect\citeauthoryear{Prathaban \& Handley}{Prathaban \& Handley}{2024}]{Prathaban_PE_errors}
+Prathaban M.,  Handley W.,  2024, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/stae1908}, 533, 1839
+
+\bibitem[\protect\citeauthoryear{Prathaban, Bevins  \& Handley}{Prathaban et~al.}{2025}]{Prathaban}
+Prathaban M.,  Bevins H.,   Handley W.,  2025, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staf962}, p. staf962
 
 \bibitem[\protect\citeauthoryear{Romero-Shaw et~al.,}{Romero-Shaw et~al.}{2020}]{bilby_validation}
 Romero-Shaw I.~M.,  et~al., 2020, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staa2850}, 499, 3295
@@ -95,6 +104,9 @@ Thrane E.,  Talbot C.,  2019, \mn@doi [Publications of the Astronomical Society 
 
 \bibitem[\protect\citeauthoryear{Veitch et~al.,}{Veitch et~al.}{2015}]{lal}
 Veitch J.,  et~al., 2015, \mn@doi [Physical Review D] {10.1103/physrevd.91.042003}, 91
+
+\bibitem[\protect\citeauthoryear{{Williams}, {Veitch}  \& {Messenger}}{{Williams} et~al.}{2021}]{Williams2021Nessai}
+{Williams} M.~J.,  {Veitch} J.,   {Messenger} C.,  2021, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.103.103006}, \href {https://ui.adsabs.harvard.edu/abs/2021PhRvD.103j3006W} {103, 103006}
 
 \bibitem[\protect\citeauthoryear{Wong, Isi  \& Edwards}{Wong et~al.}{2023a}]{wong2023fastgravitationalwaveparameter}
 Wong K. W.~K.,  Isi M.,   Edwards T. D.~P.,  2023a, Fast gravitational wave parameter estimation without compromises (\mn@eprint {arXiv} {2302.05333}), \url {https://arxiv.org/abs/2302.05333}
