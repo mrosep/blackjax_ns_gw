@@ -1,7 +1,7 @@
 % Basic setup. Most papers should leave these options alone.
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL main_old.tex   Mon Sep  1 15:28:44 2025
-%DIF ADD main.tex       Mon Sep  1 15:30:30 2025
+%DIF ADD main.tex       Mon Sep  1 15:51:46 2025
 \documentclass[fleqn,usenatbib]{mnras}
 
 % MNRAS is set in Times font. If you don't have this installed (most LaTeX
@@ -499,7 +499,8 @@ algorithm, an individual MCMC walk that proves to be an outlier with a low accep
 will result in a longer walk only for the iteration after it. In our parallel algorithm, if a subset of points
 in a batch has a low acceptance rate, the average rate will be reduced,
 causing the walk length for the entire next batch to increase. 
-The converse is also true: if a subset of points in a batch has a particularly high acceptance rate, the average rate will be increased, causing the walk length for the entire next batch to decrease.
+The converse is also true: if a subset of points in a batch has a particularly high acceptance rate,
+the average rate will be increased, causing the walk length for the entire next batch to decrease.
 This can often lead to a very different total number of likelihood
 evaluations compared to the sequential counterpart. We discuss this further in Sections~\ref{sec:sampler_config}and~\ref{sec:results}
 but depending on the evidence, the likelihood evaluations can be higher or lower, and 
@@ -971,23 +972,23 @@ publicly available in the data repository accompanying this paper\DIFdelbegin \D
     \label{fig:cost_reduction}
 \end{figure}
 
-The average chain length for the \texttt{blackjax-ns}
-sampler was 1376, consistent with the average of 1337 for the
+The average \DIFdelbegin \DIFdel{chain length }\DIFdelend \DIFaddbegin \DIFadd{number of likelihood evaluations }\DIFaddend for the \texttt{blackjax-ns}
+sampler was \DIFdelbegin \DIFdel{1376}\DIFdelend \DIFaddbegin {} \DIFadd{million}\DIFaddend , consistent with the average of \DIFdelbegin \DIFdel{1337 }\DIFdelend \DIFaddbegin {} \DIFadd{million }\DIFaddend for the
 \texttt{bilby+dynesty} sampler. A more detailed breakdown of all run
 statistics is provided in Appendix~\ref{app:injection_study_stats}.
 In terms of \DIFdelbegin \DIFdel{wall-time}\DIFdelend \DIFaddbegin \DIFadd{runtime}\DIFaddend , the \texttt{blackjax-ns} sampler completed the analyses
-in an average of 0.4 hours per injection, with individual run
-times ranging from 9 to 56 minutes.
+in an average of \DIFdelbegin \DIFdel{0.4 }\DIFdelend \DIFaddbegin {} \DIFaddend hours per injection, with individual run
+times ranging from \DIFdelbegin \DIFdel{9 to 56 }\DIFdelend \DIFaddbegin {} \DIFadd{to }{} \DIFaddend minutes.
 In contrast, the CPU-based runs
 required an average of 26.4 total CPU-hours, with some runs taking as long as 
 100 hours. 
 Figure~\ref{fig:speedup_comparison} shows the distribution of the
 resulting \DIFdelbegin \DIFdel{wall-time }\DIFdelend \DIFaddbegin \DIFadd{runtime }\DIFaddend speedup factors, which have a mean value of
-$\times$81.2. As in 
+$\times$\DIFdelbegin \DIFdel{81.2}\DIFdelend \DIFaddbegin {}\DIFaddend . As in 
 section~\ref{sec:4s_simulated_signal}, we also translate this performance 
 gain into a cost reduction using commercial cloud computing rates.
 As shown in Figure~\ref{fig:cost_reduction}, the speedup
-corresponds to an average cost-reduction factor of $\times$5.1 for the
+corresponds to an average cost-reduction factor of $\times$\DIFdelbegin \DIFdel{5.1 }\DIFdelend \DIFaddbegin {} \DIFaddend for the
 GPU-based analysis compared to its CPU-based counterpart.
 
 \subsection{Disentangling Sources of GPU Acceleration}
@@ -1020,13 +1021,13 @@ SNR of 8.82). The baseline CPU-based \texttt{bilby} analysis required
 benefits only from intra-likelihood parallelisation, completed in
 10.44 hours. This represents a speedup of $\times$2.9. Finally, the
 fully parallel run, using its correctly scaled live point count of 1400\DIFdelbegin \DIFdel{and }\DIFdelend \DIFaddbegin \DIFadd{,
-}\DIFaddend a batch size of \texttt{num\_delete} = 700 \DIFaddbegin \DIFadd{and }{\texttt{\DIFadd{naccept}} \DIFadd{= 120}}\DIFaddend , completed in \DIFdelbegin \DIFdel{0.45 }\DIFdelend \DIFaddbegin \DIFadd{1.29 }\DIFaddend hours.
-This corresponds to a further speedup of $\times$\DIFdelbegin \DIFdel{23.2 }\DIFdelend \DIFaddbegin \DIFadd{8.1 }\DIFaddend over the
+}\DIFaddend a batch size of \texttt{num\_delete} = 700 \DIFaddbegin \DIFadd{and }{\texttt{\DIFadd{naccept}} \DIFadd{= 120}}\DIFaddend , completed in \DIFdelbegin \DIFdel{0.45 }\DIFdelend \DIFaddbegin \DIFadd{0.82 }\DIFaddend hours.
+This corresponds to a further speedup of $\times$\DIFdelbegin \DIFdel{23.2 }\DIFdelend \DIFaddbegin \DIFadd{12.7 }\DIFaddend over the
 sequential-GPU run.
 
 This result demonstrates that while a GPU-native likelihood provides
 a significant performance benefit, the \DIFaddbegin \DIFadd{more }\DIFaddend dominant contribution to the
-overall speedup (a total of $\times$\DIFdelbegin \DIFdel{67.6 }\DIFdelend \DIFaddbegin \DIFadd{23.6 }\DIFaddend in this case) originates from the
+overall speedup (a total of $\times$\DIFdelbegin \DIFdel{67.6 }\DIFdelend \DIFaddbegin \DIFadd{37.1 }\DIFaddend in this case) originates from the
 massively parallel, batched sampling architecture. This result
 underscores the importance of the algorithmic reformulation 
 of nested sampling pioneered in~\cite{yallup2025nested}.
@@ -1052,7 +1053,7 @@ Table~\ref{tab:priors}. The sampler configurations were identical to
 those used in the injection study (Sec.~\ref{sec:injection_study}), with
 $n_{\text{live}}=1400$ for \texttt{blackjax-ns} and
 $n_{\text{live}}=1000$ for \texttt{bilby}, and an \texttt{naccept}
-target of 120 and 60, respectively. In this case, we revert to the 
+target of \DIFdelbegin \DIFdel{120 and 60, respectively. }\DIFdelend \DIFaddbegin \DIFadd{60. }\DIFaddend In this case, we revert to the 
 default termination condition described in Section~\ref{sec:4s_simulated_signal}.
 
 \begin{table}
@@ -1090,7 +1091,7 @@ default termination condition described in Section~\ref{sec:4s_simulated_signal}
     the validity of our implementation for longer-duration signals.
     Despite requiring more likelihood evaluations for this analysis, the
     GPU implementation still provided a wall-time speedup of
-    26.2$\times$ and a cost reduction of 1.64$\times$.}
+    \DIFdelbeginFL \DIFdelFL{26.2}\DIFdelendFL $\times$\DIFaddbeginFL {} \DIFaddendFL and a cost reduction of \DIFdelbeginFL \DIFdelFL{1.64}\DIFdelendFL $\times$\DIFaddbeginFL {}\DIFaddendFL .}
     \label{fig:8s_posteriors}
 \end{figure*}
 
@@ -1110,16 +1111,18 @@ find excellent agreement between the two frameworks, further validating
 the accuracy of our implementation, despite the differences arising from 
 parallelisation. The CPU-based \texttt{bilby} analysis required 167.2 total CPU-hours to
 converge, performing 58 million likelihood evaluations. Our GPU-based
-\texttt{blackjax-ns} sampler completed the same analysis in 6.37 hours,
-corresponding to a wall-time speedup factor of $\times$26.2. This was
+\texttt{blackjax-ns} sampler completed the same analysis in \DIFdelbegin \DIFdel{6.37 hours, }\DIFdelend \DIFaddbegin {} \DIFadd{hours, with }{} \DIFadd{million likelihood evaluations,
+}\DIFaddend corresponding to a wall-time speedup factor of $\times$\DIFdelbegin \DIFdel{26.2. This was
 achieved despite performing 140 million likelihood evaluations, more than
 double that of the CPU run. This increase is attributable to longer average
 MCMC chain lengths in the GPU sampler, a consequence of the
 batch-adaptive tuning strategy. In hindsight, we could have reduced the
-\texttt{naccept} parameter from 120 to 60 to match the \texttt{bilby} run better for
-this signal.
+}\texttt{\DIFdel{naccept}} %DIFAUXCMD
+\DIFdel{parameter from 120 to 60 to match the }\texttt{\DIFdel{bilby}} %DIFAUXCMD
+\DIFdel{run better for
+this signal}\DIFdelend \DIFaddbegin {}\DIFaddend . 
 The associated cost-reduction factor for this
-analysis was $\times$1.64.
+analysis was $\times$\DIFdelbegin \DIFdel{1.64}\DIFdelend \DIFaddbegin {}\DIFaddend .
 
 The scaling of the runtime for this longer-duration signal provides a
 key insight into the practical limits of GPU parallelisation. In an
@@ -1167,8 +1170,8 @@ that our implementation is functionally analogous to the trusted
 CPU-based framework, producing statistically consistent posterior
 distributions and evidence estimates. The architectural shift to the
 GPU yields substantial performance gains, with typical wall-time
-speedups of $\times$60-100 and cost reductions of
-$\times$4-5 for the problems studied here.
+speedups of $\times$\DIFdelbegin \DIFdel{60-100 }\DIFdelend \DIFaddbegin {} \DIFaddend and cost reductions of
+$\times$\DIFdelbegin \DIFdel{4-5 }\DIFdelend \DIFaddbegin {} \DIFaddend for the problems studied here.
 
 However, the contributions of this work extend beyond the immediate performance
 gains demonstrated in our analyses. By developing and validating a
@@ -1210,15 +1213,16 @@ evaluate novel inner sampling kernels designed specifically for the GPU
 architecture. While the fixed MCMC walk length of the `acceptance-walk'
 kernel is advantageous for parallelisation, our results highlight a key
 challenge: its adaptive tuning strategy, designed for serial execution,
-translates sub-optimally to the batched GPU paradigm. This necessitates
-manual adjustment of the sampler settings for different problems \DIFaddbegin \DIFadd{and
-requires on average longer walks to be performed than in the CPU counterpart}\DIFaddend ,
-as the kernel is not natively optimised for this
+translates sub-optimally to the batched GPU paradigm. \DIFdelbegin \DIFdel{This necessitates
+manual adjustment of the sampler settings for different problems,
+as the kernel }\DIFdelend \DIFaddbegin \DIFadd{The design of the kernel,
+implemented to match }\texttt{\DIFadd{bilby}}\DIFadd{'s implementation as closely as possible,
+}\DIFaddend is not natively optimised for this
 architecture. This motivates the exploration of alternative inner
 sampling kernels, such as those based on the Hit-and-Run Slice Sampling
 (HRSS) algorithm introduced in~\cite{yallup2025nested}, which \DIFdelbegin \DIFdel{are
 better suited to GPUs and }\DIFdelend may offer
-more robust and efficient performance without \DIFdelbegin \DIFdel{problem-specific tuning }\DIFdelend \DIFaddbegin \DIFadd{the same tuning problems}\DIFaddend .
+more robust and efficient performance without \DIFdelbegin \DIFdel{problem-specific tuning}\DIFdelend \DIFaddbegin \DIFadd{the same efficiency problems}\DIFaddend .
 
 GPU-accelerated sampling algorithms such as the one presented in this work can only run when
 paired with a GPU-native likelihood. Our work therefore provides additional motivation for the continued development
