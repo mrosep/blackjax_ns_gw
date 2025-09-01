@@ -17,22 +17,26 @@ class DEInfo(NamedTuple):
     """Diagnostic information for a single DE MCMC step."""
     is_accepted: bool
     evals: int
+    likelihood_evals: int  # Count only in-bounds proposals (like bilby)
 
 
 class DEWalkInfo(NamedTuple):
     """Diagnostic information for a full DE MCMC walk."""
     n_accept: int
     n_steps: int
+    n_likelihood_evals: int  # Total likelihood evaluations (in-bounds only)
 
 
 class DEKernelParams(NamedTuple):
     """Static pytree for DE kernel parameters."""
     live_points: jax.Array
+    loglikelihoods: jax.Array  # Log-likelihoods of all live points
     mix: float
     scale: float
     num_walks: jax.Array
     walks_float: jax.Array
     n_accept_total: jax.Array
+    n_likelihood_evals_total: jax.Array  # Total likelihood evaluations (bilby-style counting)
 
 
 def de_rwalk_one_step_unit_cube(
@@ -43,6 +47,7 @@ def de_rwalk_one_step_unit_cube(
     loglikelihood_0: float,
     params: DEKernelParams,
     stepper_fn: callable,
+    num_survivors: int,
 ):
     """Single DE step in unit hypercube space."""
     key_a, key_b, key_mix, key_gamma = jax.random.split(rng_key, 4)
@@ -50,13 +55,17 @@ def de_rwalk_one_step_unit_cube(
     current_pos = state.position
     live_points = params.live_points
     
-    leaves = jax.tree_util.tree_leaves(live_points)
-    n_live = leaves[0].shape[0]
+    # Use static number of survivors for top_k selection
+    _, top_indices = jax.lax.top_k(params.loglikelihoods, num_survivors)
     
-    # Robust live point selection
-    idx_a = jax.random.randint(key_a, (), 0, n_live)
-    idx_b_raw = jax.random.randint(key_b, (), 0, n_live - 1)
-    idx_b = jnp.where(idx_b_raw >= idx_a, idx_b_raw + 1, idx_b_raw)
+    # Select two distinct random indices from the survivor indices
+    pos_a = jax.random.randint(key_a, (), 0, num_survivors)
+    pos_b_raw = jax.random.randint(key_b, (), 0, num_survivors - 1)
+    pos_b = jnp.where(pos_b_raw >= pos_a, pos_b_raw + 1, pos_b_raw)
+    
+    # Use these positions to get the final indices into the original live_points array
+    idx_a = top_indices[pos_a]
+    idx_b = top_indices[pos_b]
     
     # DE vector calculation
     point_a = jax.tree_util.tree_map(lambda x: x[idx_a], live_points)
@@ -74,13 +83,17 @@ def de_rwalk_one_step_unit_cube(
     
     # Constraint evaluation
     logp_prop = logprior_fn(pos_prop)
-    logl_prop = loglikelihood_fn(pos_prop)
+    logl_prop = loglikelihood_fn(pos_prop)  # Always evaluate (avoid thread divergence)
     
-    constraints = jnp.array([
-        jnp.isfinite(logp_prop),
-        logl_prop > loglikelihood_0
-    ])
+    # Check constraints
+    is_in_bounds = jnp.isfinite(logp_prop)
+    is_above_threshold = logl_prop > loglikelihood_0
+    
+    constraints = jnp.array([is_in_bounds, is_above_threshold])
     is_accepted = jnp.all(constraints)
+    
+    # Count likelihood evaluations only for in-bounds proposals (like bilby)
+    likelihood_evals = jnp.where(is_in_bounds, 1, 0)
     
     # State update
     final_pos = jax.tree_util.tree_map(
@@ -90,7 +103,7 @@ def de_rwalk_one_step_unit_cube(
     final_logl = jnp.where(is_accepted, logl_prop, state.loglikelihood)
     
     new_state = PartitionedState(final_pos, final_logp, final_logl)
-    info = DEInfo(is_accepted=is_accepted, evals=1)
+    info = DEInfo(is_accepted=is_accepted, evals=1, likelihood_evals=likelihood_evals)
     
     return new_state, info
 
@@ -103,10 +116,17 @@ def de_rwalk_dynamic_unit_cube(
     loglikelihood_0: float,
     params: DEKernelParams,
     stepper_fn: callable,
+    num_survivors: int,
 ):
     """MCMC walk with fixed number of steps in unit cube."""
+    # Use partial to create a new function with num_survivors "baked in"
+    one_step_with_static_k = partial(
+        de_rwalk_one_step_unit_cube,
+        num_survivors=num_survivors,
+    )
+    
     def single_step_fn(rng_key, state, loglikelihood_0):
-        return de_rwalk_one_step_unit_cube(
+        return one_step_with_static_k(
             rng_key=rng_key,
             state=state, 
             logprior_fn=logprior_fn,
@@ -117,18 +137,18 @@ def de_rwalk_dynamic_unit_cube(
         )
 
     def body_fun(i, val):
-        key, current_state, n_accept = val
+        key, current_state, n_accept, n_likelihood_evals = val
         step_key, next_key = jax.random.split(key)
         new_state, info = single_step_fn(step_key, current_state, loglikelihood_0)
-        return (next_key, new_state, n_accept + info.is_accepted)
+        return (next_key, new_state, n_accept + info.is_accepted, n_likelihood_evals + info.likelihood_evals)
 
-    init_val = (rng_key, state, jnp.array(0, dtype=jnp.int32))
+    init_val = (rng_key, state, jnp.array(0, dtype=jnp.int32), jnp.array(0, dtype=jnp.int32))
     
-    final_key, final_state, final_n_accept = jax.lax.fori_loop(
+    final_key, final_state, final_n_accept, final_n_likelihood_evals = jax.lax.fori_loop(
         0, params.num_walks, body_fun, init_val
     )
 
-    info = DEWalkInfo(n_accept=final_n_accept, n_steps=params.num_walks)
+    info = DEWalkInfo(n_accept=final_n_accept, n_steps=params.num_walks, n_likelihood_evals=final_n_likelihood_evals)
     return final_state, info
 
 
@@ -150,9 +170,10 @@ def update_bilby_walks_fn(
     
     # --- 1. Define default values with explicit dtypes ---
     # These are the values to use on the first run (initialization).
-    default_walks_float = jnp.array(100.0, dtype=jnp.float32)
+    default_walks_float = jnp.array(200.0, dtype=jnp.float32)
     default_n_accept_total = jnp.array(0, dtype=jnp.int32)
-    default_current_walks = jnp.array(100, dtype=jnp.int32)
+    default_current_walks = jnp.array(200, dtype=jnp.int32)
+    default_n_likelihood_evals_total = jnp.array(0, dtype=jnp.int32)
 
     # --- 2. Get values from previous state and explicitly cast to ensure type match ---
     # These are the values from the previous step. We cast them to the same
@@ -160,6 +181,7 @@ def update_bilby_walks_fn(
     param_walks_float = prev_params.walks_float.astype(jnp.float32)
     param_n_accept_total = prev_params.n_accept_total.astype(jnp.int32)
     param_current_walks = prev_params.num_walks.astype(jnp.int32)
+    param_n_likelihood_evals_total = prev_params.n_likelihood_evals_total.astype(jnp.int32)
 
     # --- 3. Use jnp.where for branchless, type-safe selection ---
     # This replaces lax.cond and is robust to type differences since we
@@ -167,13 +189,16 @@ def update_bilby_walks_fn(
     walks_float = jnp.where(is_uninitialized, default_walks_float, param_walks_float)
     n_accept_total = jnp.where(is_uninitialized, default_n_accept_total, param_n_accept_total)
     current_walks = jnp.where(is_uninitialized, default_current_walks, param_current_walks)
+    n_likelihood_evals_total = jnp.where(is_uninitialized, default_n_likelihood_evals_total, param_n_likelihood_evals_total)
     
     # ===================== FIXED SECTION END =====================
 
     leaves = jax.tree_util.tree_leaves(ns_state.particles)
     nlive = leaves[0].shape[0]
-    delay = jnp.maximum(nlive // 10 + 1, 1)
+    base_delay = nlive // 10 - 1
+    delay = jnp.maximum(base_delay // n_delete, 1)
     
+    # Keep bilby's walk length tuning formula (uses total walks, not likelihood evals)
     avg_accept_per_particle = n_accept_total / n_delete
     accept_prob = jnp.maximum(0.5, avg_accept_per_particle) / jnp.maximum(1.0, current_walks)
     
@@ -188,17 +213,20 @@ def update_bilby_walks_fn(
     
     return DEKernelParams(
         live_points=ns_state.particles,
+        loglikelihoods=ns_state.loglikelihood,
         mix=0.5,
         scale=2.38 / jnp.sqrt(2 * n_dim),
         num_walks=jnp.array(num_walks_int, dtype=jnp.int32),
         walks_float=jnp.array(new_walks_float, dtype=jnp.float32),
         n_accept_total=jnp.array(0, dtype=jnp.int32),
+        n_likelihood_evals_total=jnp.array(0, dtype=jnp.int32),
     )
 
 
 def bilby_adaptive_de_sampler_unit_cube(
     logprior_fn: callable,
     loglikelihood_fn: callable,
+    nlive: int,
     n_target: int = 60,
     max_mcmc: int = 5000,
     num_delete: int = 1,
@@ -207,6 +235,9 @@ def bilby_adaptive_de_sampler_unit_cube(
     """Bilby adaptive DE sampler for unit hypercube."""
     if stepper_fn is None:
         raise ValueError("stepper_fn must be provided for unit cube sampling")
+    
+    # Calculate num_survivors statically as a Python integer
+    num_survivors = nlive - num_delete
         
     delete_fn = partial(default_delete_fn, num_delete=num_delete)
     
@@ -220,7 +251,11 @@ def bilby_adaptive_de_sampler_unit_cube(
             n_delete=num_delete,
         )
 
-    kernel_with_stepper = partial(de_rwalk_dynamic_unit_cube, stepper_fn=stepper_fn)
+    kernel_with_stepper = partial(
+        de_rwalk_dynamic_unit_cube, 
+        stepper_fn=stepper_fn,
+        num_survivors=num_survivors,
+    )
 
     base_kernel_step = build_adaptive_kernel(
         logprior_fn,
@@ -248,11 +283,13 @@ def bilby_adaptive_de_sampler_unit_cube(
         # Create initial DEKernelParams with sentinel value
         initial_de_params = DEKernelParams(
             live_points=particles,
+            loglikelihoods=state.loglikelihood,
             mix=0.5,
             scale=scale,
-            num_walks=jnp.array(100, dtype=jnp.int32),
-            walks_float=jnp.array(100.0, dtype=jnp.float32),
+            num_walks=jnp.array(200, dtype=jnp.int32),
+            walks_float=jnp.array(200.0, dtype=jnp.float32),
             n_accept_total=jnp.array(-1, dtype=jnp.int32),  # Sentinel flag
+            n_likelihood_evals_total=jnp.array(-1, dtype=jnp.int32),  # Sentinel flag
         )
         
         # Set our sentinel state manually
@@ -263,9 +300,11 @@ def bilby_adaptive_de_sampler_unit_cube(
         
         inner_info = info.inner_kernel_info
         batch_n_accept = jnp.sum(inner_info.n_accept)
+        batch_n_likelihood_evals = jnp.sum(inner_info.n_likelihood_evals)
 
         updated_params = new_state.inner_kernel_params._replace(
-            n_accept_total=batch_n_accept
+            n_accept_total=batch_n_accept,
+            n_likelihood_evals_total=batch_n_likelihood_evals
         )
         
         final_state = new_state._replace(inner_kernel_params=updated_params)
