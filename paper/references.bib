@@ -804,3 +804,95 @@ URL = {https://doi.org/10.1214/23-SS144}
   howpublished = {\url{https://github.com/handley-lab/blackjax/tree/nested_sampling}},
   note         = {Accessed: 2025-08-31}
 }
+
+
+@article{Smith:2019ucc,
+    author = "Smith, Rory J. E. and Ashton, Gregory and Vajpeyi, Avi and Talbot, Colm",
+    title = "{Massively parallel Bayesian inference for transient gravitational-wave astronomy}",
+    eprint = "1909.11873",
+    archivePrefix = "arXiv",
+    primaryClass = "gr-qc",
+    reportNumber = "LIGO Document P1900255-v1",
+    doi = "10.1093/mnras/staa2483",
+    journal = "Mon. Not. Roy. Astron. Soc.",
+    volume = "498",
+    number = "3",
+    pages = "4492--4502",
+    year = "2020"
+}
+
+@article{Handley:2015vkr,
+    author = "Handley, W. J. and Hobson, M. P. and Lasenby, A. N.",
+    title = "{polychord: next-generation nested sampling}",
+    eprint = "1506.00171",
+    archivePrefix = "arXiv",
+    primaryClass = "astro-ph.IM",
+    doi = "10.1093/mnras/stv1911",
+    journal = "Mon. Not. Roy. Astron. Soc.",
+    volume = "453",
+    number = "4",
+    pages = "4385--4399",
+    year = "2015"
+}
+
+
+@InProceedings{pmlr-v151-hoffman22a,
+  title = 	 { Tuning-Free Generalized Hamiltonian Monte Carlo },
+  author =       {Hoffman, Matthew D. and Sountsov, Pavel},
+  booktitle = 	 {Proceedings of The 25th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {7799--7813},
+  year = 	 {2022},
+  editor = 	 {Camps-Valls, Gustau and Ruiz, Francisco J. R. and Valera, Isabel},
+  volume = 	 {151},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {28--30 Mar},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v151/hoffman22a/hoffman22a.pdf},
+  url = 	 {https://proceedings.mlr.press/v151/hoffman22a.html},
+  abstract = 	 { Hamiltonian Monte Carlo (HMC) has become a go-to family of Markov chain Monte Carlo (MCMC) algorithms for Bayesian inference problems, in part because we have good procedures for automatically tuning its parameters. Much less attention has been paid to automatic tuning of generalized HMC (GHMC), in which the auxiliary momentum vector is partially updated frequently instead of being completely resampled infrequently. Since GHMC spreads progress over many iterations, it is not straightforward to tune GHMC based on quantities typically used to tune HMC such as average acceptance rate and squared jumped distance. In this work, we propose an ensemble-chain adaptation (ECA) algorithm for GHMC that automatically selects values for all of GHMC’s tunable parameters each iteration based on statistics collected from a population of many chains. This algorithm is designed to make good use of SIMD hardware accelerators such as GPUs, allowing most chains to be updated in parallel each iteration. Unlike typical adaptive-MCMC algorithms, our ECA algorithm does not perturb the chain’s stationary distribution, and therefore does not need to be “frozen” after warmup. Empirically, we find that the proposed algorithm quickly converges to its stationary distribution, producing accurate estimates of posterior expectations with relatively few gradient evaluations per chain. }
+}
+
+
+
+@InProceedings{pmlr-v130-hoffman21a,
+  title = 	 { An Adaptive-MCMC Scheme for Setting Trajectory Lengths in Hamiltonian Monte Carlo },
+  author =       {Hoffman, Matthew and Radul, Alexey and Sountsov, Pavel},
+  booktitle = 	 {Proceedings of The 24th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {3907--3915},
+  year = 	 {2021},
+  editor = 	 {Banerjee, Arindam and Fukumizu, Kenji},
+  volume = 	 {130},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {13--15 Apr},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v130/hoffman21a/hoffman21a.pdf},
+  url = 	 {https://proceedings.mlr.press/v130/hoffman21a.html},
+  abstract = 	 { Hamiltonian Monte Carlo (HMC) is a powerful MCMC algorithm based on simulating Hamiltonian dynamics. Its performance depends strongly on choosing appropriate values for two parameters: the step size used in the simulation, and how long the simulation runs for. The step-size parameter can be tuned using standard adaptive-MCMC strategies, but it is less obvious how to tune the simulation-length parameter. The no-U-turn sampler (NUTS) eliminates this problematic simulation-length parameter, but NUTS’s relatively complex control flow makes it difficult to efficiently run many parallel chains on accelerators such as GPUs. NUTS also spends some extra gradient evaluations relative to HMC in order to decide how long to run each iteration without violating detailed balance. We propose ChEES-HMC, a simple adaptive-MCMC scheme for automatically tuning HMC’s simulation-length parameter, which minimizes a proxy for the autocorrelation of the state’s second moments. We evaluate ChEES-HMC and NUTS on many tasks, and find that ChEES-HMC typically yields larger effective sample sizes per gradient evaluation than NUTS does. When running many chains on a GPU, ChEES-HMC can also run significantly more gradient evaluations per second than NUTS, allowing it to quickly provide accurate estimates of posterior expectations. }
+}
+
+@misc{dau2021wastefreesequentialmontecarlo,
+  title         = {Waste-free Sequential Monte Carlo},
+  author        = {Hai-Dang Dau and Nicolas Chopin},
+  year          = {2021},
+  eprint        = {2011.02328},
+  archiveprefix = {arXiv},
+  primaryclass  = {stat.CO},
+  url           = {https://arxiv.org/abs/2011.02328}
+}
+
+
+@inproceedings{jouppi2023tpu,
+  title={Tpu v4: An optically reconfigurable supercomputer for machine learning with hardware support for embeddings},
+  author={Jouppi, Norm and Kurian, George and Li, Sheng and Ma, Peter and Nagarajan, Rahul and Nai, Lifeng and Patil, Nishant and Subramanian, Suvinay and Swing, Andy and Towles, Brian and others},
+  booktitle={Proceedings of the 50th annual international symposium on computer architecture},
+  pages={1--14},
+  year={2023}
+}
+
+@software{jax2018github,
+  author = {James Bradbury and Roy Frostig and Peter Hawkins and Matthew James Johnson and Chris Leary and Dougal Maclaurin and George Necula and Adam Paszke and Jake Vander{P}las and Skye Wanderman-{M}ilne and Qiao Zhang},
+  title = {{JAX}: composable transformations of {P}ython+{N}um{P}y programs},
+  url = {http://github.com/google/jax},
+  version = {0.3.13},
+  year = {2018},
+}
