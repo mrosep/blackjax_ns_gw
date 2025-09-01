@@ -48,7 +48,6 @@
 \newlabel{sec:background_vectorized_ns}{{2.2.3}{2}{}{subsubsection.2.2.3}{}}
 \citation{Neal2003_slice}
 \citation{bilby_paper,dynesty}
-\citation{DE,DE2}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Recovered posteriors for the 4s signal. The posteriors are in excellentagreement with each other, demonstrating that \texttt  {blackjax-ns} implementation with our custom kernel is functionally equivalent to the \texttt  {bilby} + \texttt  {dynesty} implementation.}}{3}{figure.1}\protected@file@percent }
 \newlabel{fig:4s_posteriors}{{1}{3}{Recovered posteriors for the 4s signal. The posteriors are in excellentagreement with each other, demonstrating that \texttt {blackjax-ns} implementation with our custom kernel is functionally equivalent to the \texttt {bilby} + \texttt {dynesty} implementation}{figure.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{3}{section.3}\protected@file@percent }
@@ -57,6 +56,7 @@
 \newlabel{sec:methods_kernel}{{3.1}{3}{}{subsection.3.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Comparison of the number of live points in the sequential CPU and batched GPU implementations. Although the nominal number of live points used in \texttt  {blackjax-ns} is higher than in \texttt  {bilby}, the saw-tooth pattern means that the effective number of live points is the same.}}{3}{figure.2}\protected@file@percent }
 \newlabel{fig:nlive_comparison}{{2}{3}{Comparison of the number of live points in the sequential CPU and batched GPU implementations. Although the nominal number of live points used in \texttt {blackjax-ns} is higher than in \texttt {bilby}, the saw-tooth pattern means that the effective number of live points is the same}{figure.2}{}}
+\citation{DE,DE2}
 \citation{yallup2025nested}
 \citation{skilling,dynamic_ns,aeons}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sampler configuration and settings}{4}{subsection.3.2}\protected@file@percent }
@@ -101,10 +101,10 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The cost reductions for all 100 events in the injection study.}}{7}{figure.9}\protected@file@percent }
 \newlabel{fig:cost_reduction}{{9}{7}{The cost reductions for all 100 events in the injection study}{figure.9}{}}
 \citation{yallup2025nested}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Injection parameters for the 8s signal.}}{8}{table.4}\protected@file@percent }
-\newlabel{tab:8s_injection_params}{{4}{8}{Injection parameters for the 8s signal}{table.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}8-second simulated signal}{8}{subsection.4.4}\protected@file@percent }
 \newlabel{sec:8s_simulated_signal}{{4.4}{8}{}{subsection.4.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Injection parameters for the 8s signal.}}{8}{table.4}\protected@file@percent }
+\newlabel{tab:8s_injection_params}{{4}{8}{Injection parameters for the 8s signal}{table.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{8}{section.5}\protected@file@percent }
 \newlabel{sec:conclusions}{{5}{8}{}{section.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Recovered posterior distributions for the 8s simulated signal, comparing our GPU-based \texttt  {blackjax-ns} sampler with the CPU-based \texttt  {bilby} sampler. The injected values are marked by black lines. The strong statistical agreement confirms the validity of our implementation for longer-duration signals. Despite requiring more likelihood evaluations for this analysis, the GPU implementation still provided a wall-time speedup of 26.2$\times $ and a cost reduction of 1.64$\times $.}}{9}{figure.10}\protected@file@percent }
@@ -177,7 +177,7 @@
 \newlabel{fig:pp_coverage_bilby}{{A1}{11}{PP coverage plot for the 100-injection study, obtained with the CPU-based \texttt {bilby+dynesty} sampler. This plot is provided for direct comparison with the results from our \texttt {blackjax-ns} implementation shown in Figure~\ref {fig:pp_coverage}. The results confirm that the CPU-based and GPU-based implementations are functionally similar}{figure.A1.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {B}Full run statistics for injection study}{11}{section.A2}\protected@file@percent }
 \newlabel{app:injection_study_stats}{{B}{11}{}{section.A2}{}}
-\newlabel{lastpage}{{B}{11}{}{figure.A2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {B1}{\ignorespaces Comparison of internal run statistics for the 100-injection study. From left to right: the mean number of MCMC steps (walk length) per iteration, the mean number of accepted steps, and the mean acceptance rate, for both the \texttt  {bilby} and \texttt  {blackjax-ns} runs. The batch-adaptive nature of the GPU sampler can often lead to runs with longer chains and lower acceptance rates, as discussed in Appendix~\ref {app:injection_study_stats}.}}{12}{figure.A2.1}\protected@file@percent }
-\newlabel{fig:injection_study_stats}{{B1}{12}{Comparison of internal run statistics for the 100-injection study. From left to right: the mean number of MCMC steps (walk length) per iteration, the mean number of accepted steps, and the mean acceptance rate, for both the \texttt {bilby} and \texttt {blackjax-ns} runs. The batch-adaptive nature of the GPU sampler can often lead to runs with longer chains and lower acceptance rates, as discussed in Appendix~\ref {app:injection_study_stats}}{figure.A2.1}{}}
-\gdef \@abspage@last{12}
+\newlabel{lastpage}{{B}{12}{}{figure.A2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B1}{\ignorespaces Comparison of internal run statistics for the 100-injection study. From left to right: the mean number of MCMC steps (walk length) per iteration, the mean number of accepted steps, and the mean acceptance rate, for both the \texttt  {bilby} and \texttt  {blackjax-ns} runs. The batch-adaptive nature of the GPU sampler can often lead to runs with longer chains and lower acceptance rates, as discussed in Appendix~\ref {app:injection_study_stats}.}}{13}{figure.A2.1}\protected@file@percent }
+\newlabel{fig:injection_study_stats}{{B1}{13}{Comparison of internal run statistics for the 100-injection study. From left to right: the mean number of MCMC steps (walk length) per iteration, the mean number of accepted steps, and the mean acceptance rate, for both the \texttt {bilby} and \texttt {blackjax-ns} runs. The batch-adaptive nature of the GPU sampler can often lead to runs with longer chains and lower acceptance rates, as discussed in Appendix~\ref {app:injection_study_stats}}{figure.A2.1}{}}
+\gdef \@abspage@last{13}

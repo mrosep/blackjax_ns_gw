@@ -306,7 +306,7 @@ This reformulation transforms the computationally intensive task of
 sample generation from a serial challenge into a massively parallel one,
 thereby leveraging the architectural strengths of the GPU. While the
 original work proposed a specific inner sampling kernel, based on
-Hit-and-Run~\citep{Neal2003_slice}, for this task,
+Hit-and-Run Slice Sampling~\citep{Neal2003_slice}, for this task,
 the vectorized framework itself is general. It provides a structure
 within which any suitable inner sampling kernel can be deployed in
 parallel. Here, we implement one particular method used within the \texttt{bilby}

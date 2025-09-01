@@ -1,7 +1,7 @@
 % Basic setup. Most papers should leave these options alone.
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL main_old.tex     Thu Aug 28 07:57:51 2025
-%DIF ADD paper/main.tex   Mon Sep  1 15:25:56 2025
+%DIF DEL main_old.tex   Mon Sep  1 15:28:44 2025
+%DIF ADD main.tex       Mon Sep  1 15:30:30 2025
 \documentclass[fleqn,usenatbib]{mnras}
 
 % MNRAS is set in Times font. If you don't have this installed (most LaTeX
@@ -424,7 +424,7 @@ This reformulation transforms the computationally intensive task of
 sample generation from a serial challenge into a massively parallel one,
 thereby leveraging the architectural strengths of the GPU. While the
 original work proposed a specific inner sampling kernel\DIFaddbegin \DIFadd{, based on
-Hit-and-Run~\mbox{%DIFAUXCMD
+Hit-and-Run Slice Sampling~\mbox{%DIFAUXCMD
 \citep{Neal2003_slice}}\hskip0pt%DIFAUXCMD
 , }\DIFaddend for this task,
 the vectorized framework itself is general. It provides a structure
@@ -499,8 +499,7 @@ algorithm, an individual MCMC walk that proves to be an outlier with a low accep
 will result in a longer walk only for the iteration after it. In our parallel algorithm, if a subset of points
 in a batch has a low acceptance rate, the average rate will be reduced,
 causing the walk length for the entire next batch to increase. 
-The converse is also true: if a subset of points in a batch has a particularly high acceptance rate,
-the average rate will be increased, causing the walk length for the entire next batch to decrease.
+The converse is also true: if a subset of points in a batch has a particularly high acceptance rate, the average rate will be increased, causing the walk length for the entire next batch to decrease.
 This can often lead to a very different total number of likelihood
 evaluations compared to the sequential counterpart. We discuss this further in Sections~\ref{sec:sampler_config}and~\ref{sec:results}
 but depending on the evidence, the likelihood evaluations can be higher or lower, and 
