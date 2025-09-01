@@ -40,14 +40,16 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[GPU-accelerated nested sampling for gravitational waves]{Gravitational wave inference at GPU speed: A \texttt{bilby}-like nested sampling kernel within \texttt{blackjax-ns}}
+\title[GPU-accelerated nested sampling for gravitational waves]{Gravitational-wave inference at GPU speed: A \texttt{bilby}-like nested sampling kernel within \texttt{blackjax-ns}}
 
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
 \author[Metha Prathaban et al.]{
 Metha Prathaban,$^{2,3,4}$\thanks{E-mail: myp23@cam.ac.uk (MP)}
 David Yallup,$^{1,2}$
-James Alvey$^{1,2,5}$
+James Alvey,$^{1,2,5}$
+Ming Yang,$^{1}$
+Will Templeton,$^{1}$
 and Will Handley$^{1,2,5}$
 \\
 % List of institutions
@@ -72,20 +74,25 @@ $^{5}$Gonville and Caius College, University of Cambridge, Cambridge, CB2 1TA, U
 
 % Abstract of the paper
 \begin{abstract}
-We present a GPU-accelerated implementation of the `acceptance-walk'
+We present a GPU-accelerated implementation of the gravitational-wave
+Bayesian inference pipeline for parameter estimation and model comparison. 
+Specifically, we implement the `acceptance-walk'
 sampling method, a cornerstone algorithm for gravitational-wave
 inference within the \texttt{bilby} and \texttt{dynesty} framework.
 By integrating this trusted kernel with the vectorized \texttt{blackjax-ns}
-framework, we achieve wall-time speedups of up to two orders of
+framework, we achieve speedups of up to two orders of
 magnitude while recovering posteriors and evidences that are
 statistically identical to the original CPU implementation. This faithful
 re-implementation of a community-standard algorithm establishes a foundational
 benchmark for gravitational-wave inference. It quantifies the
 performance gains attributable solely to the architectural shift to GPUs,
-thereby creating a vital reference against which future, more advanced parallel
-sampling algorithms can be rigorously assessed. Our results not only
-demonstrate significant speedups but also serve to decouple the
-effects of hardware performance from algorithmic innovation.
+creating a vital reference against which future parallel 
+sampling algorithms can be rigorously assessed. 
+This allows for a clear distinction between algorithmic innovation 
+and the inherent speedup from hardware, a distinction often not
+explicitly drawn in other contexts such as machine learning.
+Our work provides a validated tool for community use to perform
+GPU-accelerated nested sampling in gravitational-wave data analyses.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -101,8 +108,8 @@ keyword1 -- keyword2 -- keyword3
 \section{Introduction}
 
 
-The era of gravitational wave (GW) astronomy, initiated by the landmark
-detections of the Laser Interferometer Gravitational-Wave Observatory (LIGO),
+The era of gravitational-wave (GW) astronomy, initiated by the landmark
+detections at the Laser Interferometer Gravitational-Wave Observatory (LIGO),
 Virgo and now KAGRA, has revolutionized
 our view of the cosmos~\citep{GW150914, GW170817,GWTC1,GWTC2, GWTC3,GWTC3_pop_analysis,GWTC2_GR,siren}. 
 Extracting scientific insights from the data, from measuring the
@@ -112,14 +119,16 @@ This allows for the estimation of posteriors on source parameters
 (parameter estimation) and the comparison of competing physical models (model selection).
 
 The process of Bayesian inference in GW astronomy is, however, computationally
-demanding. Realistic theoretical models for the GW waveform are complex, and the
+demanding. Realistic theoretical models for the GW waveform can be complex, and the
 stochastic sampling algorithms required to explore the high-dimensional parameter
 space can require millions of likelihood evaluations per analysis~\citep{LIGO_guide_signalextraction}.
-The community-standard software tools, the inference library \texttt{bilby}~\citep{bilby_paper}
+There are several community-standard software tools for performing GW inference, such as
+\texttt{pycbc}~\citep{pycbc} and \texttt{lal}~\citep{lal}.
+Here, we focus on the inference library \texttt{bilby}~\citep{bilby_paper}
 paired with a custom implementation of the nested sampler \texttt{dynesty}~\citep{dynesty}, 
-have proven to be a robust and highly effective framework, tuned for the specific needs of GW posteriors.
+which has proven to be a robust and highly effective framework, tuned for the specific needs of GW posteriors.
 However, this framework is predominantly executed on central processing units
-(CPUs), making individual analyses time-consuming and creating a significant
+(CPUs), making individual analyses costly and creating a
 computational bottleneck. This challenge is set to become acute with the
 increased data volumes from future observing runs~\citep{aLIGO, aVirgo, aLVK_prospects} and the advent of
 next-generation observatories, such as the Einstein Telescope~\citep{ET_science_case}, which promise
@@ -131,20 +140,20 @@ this domain, such as the \texttt{jimgw} codebase~\citep{wong2023fastgravitationa
 implemented GPU-accelerated Markov Chain Monte Carlo (MCMC) samplers like \texttt{flowMC}~\citep{flowMC}, 
 paired with GPU implementations of waveform models provided by the
 \texttt{ripple} library~\citep{ripple}. This work has demonstrated that
-substantial, orders-of-magnitude speedups are
-achievable for GW parameter estimation. While these MCMC-based approaches excel at rapidly generating samples
-from the posterior, they do not directly compute the
-Bayesian evidence, which remains key for robust model selection.
+substantial, orders-of-magnitude speedups in runtime are
+achievable for GW parameter estimation. This success in accelerating
+parameter estimation motivates the development of complementary
+GPU-native algorithms to accelerate other key inference tasks, such as 
+model selection.
 
-In this paper, we introduce a GPU-accelerated nested sampling
-algorithm for gravitational wave data analysis. Our method
+In this paper, we introduce a GPU-accelerated nested sampling (NS)
+algorithm for gravitational-wave data analysis. Our method
 builds upon the trusted `acceptance-walk' sampling method used in the
-community-standard \texttt{bilby} and \texttt{dynesty} framework.
+community-standard \texttt{bilby} and \texttt{dynesty} framework~\citep{bilby_paper}.
 We leverage the \texttt{blackjax-ns} sampler, a recent tool
-designed for vectorized execution on GPUs~\citep{yallup2025nested}.
+designed for vectorized NS on GPUs~\citep{yallup2025nested}.
 This sampler, part of the \texttt{blackjax} library, is a novel reformulation
 of the core nested sampling algorithm for massive parallelization~\citep{cabezas2024blackjax}.
-
 Instead of its default slice sampler, we developed a custom
 kernel that implements the `acceptance-walk' method. This
 ensures our sampler's logic is almost identical to the
@@ -156,7 +165,7 @@ robust and trusted algorithm at the core of their analyses.
 
 A key motivation for this work is to establish a clear performance
 baseline for GPU-based nested sampling in gravitational-wave astronomy.
-By adapting the community-standard `bilby`
+By adapting the community-standard \texttt{bilby}
 `acceptance-walk' sampler for a GPU-native framework, we aim to isolate
 and quantify the speedup achieved from hardware parallelization alone.
 This provides a crucial reference point, enabling future work on novel
@@ -173,7 +182,7 @@ our results. Finally, we present our conclusions in Section~\ref{sec:conclusions
 \begin{figure*}
     \centering
     \includegraphics{figures/bilby_blackjax_comparison_4s.pdf}
-    \caption{Recovered posteriors for the 4s signal. The posteriors are in agreement with each other, demonstrating that
+    \caption{Recovered posteriors for the 4s signal. The posteriors are in excellentagreement with each other, demonstrating that
     \texttt{blackjax-ns} implementation with our custom kernel is functionally equivalent to the \texttt{bilby} + \texttt{dynesty} implementation.}
     \label{fig:4s_posteriors}
 \end{figure*}
@@ -189,14 +198,14 @@ comprehensive treatment, we refer the reader to~\cite{skilling, Thrane_2019, lal
 
 The analysis of GW signals is fundamentally a problem of statistical
 inference, for which the Bayesian framework is the community standard.
-The relationship between data, $d$, and a set of source parameters,
+The relationship between data, $d$, and a set of parameters,
 $\theta$, under a specific hypothesis, $H$, is given by Bayes' theorem~\citep{Bayes1763}:
 
 \begin{equation}
-    p(\theta|d, H) = \frac{\mathcal{L}(d|\theta, H) \pi(\theta|H)}{Z(d|H)}.
+    \mathcal{P}(\theta|d, H) = \frac{\mathcal{L}(d|\theta, H) \pi(\theta|H)}{Z(d|H)}.
     \label{eq:bayes_theorem}
 \end{equation}%
-Here, the posterior, $p(\theta|d, H)$, is the probability distribution
+Here, the posterior, $\mathcal{P}(\theta|d, H)$, is the probability distribution
 of the source parameters conditioned on the observed data. It is
 determined by the likelihood, $\mathcal{L}(d|\theta, H)$, which is the
 probability of observing the data given a specific realisation of the
@@ -218,7 +227,7 @@ The second, model selection, evaluates two competing
 models, $H_1$ and $H_2$, under a fully Bayesian framework by computing the ratio of
 their evidences, known as the Bayes factor, $Z_1 / Z_2$. This enables
 principled classification of noise versus true signals, as well as the 
-comparison of different waveform models.
+comparison of different waveform models~\citep{LIGO_guide_signalextraction}.
 
 In GW astronomy, the high dimensionality of the parameter space and
 the computational cost of the likelihood render the direct evaluation
@@ -233,11 +242,11 @@ numerically approximate the posterior and evidence.
 \subsubsection{The nested sampling algorithm}
 \label{sec:background_ns}
 
-Nested Sampling (NS) is a Monte Carlo algorithm designed to solve the
+Nested Sampling is a Monte Carlo algorithm designed to solve the
 Bayesian inference problem outlined in Sec.~\ref{sec:background_bayes}.
 A key strength of the NS algorithm is that it directly computes the
 Bayesian evidence, $Z$, while also producing posterior samples as a
-natural by-product of its execution~\citep{skilling}.
+natural by-product of its execution~\citep{skilling, dynamic_ns}.
 
 The algorithm starts by drawing a population of $N$ `live points'
 from the prior distribution, $\pi(\theta)$. It then proceeds
@@ -252,8 +261,8 @@ the sequence of discarded points mapping the likelihood landscape.
 
 The primary computational challenge within the NS algorithm is the
 efficient generation of a new point from the likelihood-constrained
-prior~\citep{NSNature}. The specific method used for this `inner sampling' task is a
-critical determinant of the sampler's overall efficiency and robustness.
+prior~\citep{NSNature}. The specific method used for this inner kernel is a
+critical determinant of the sampler's overall efficiency and robustness~\citep{NS_methods_buchner}.
 
 \subsubsection{GPU architectures for scientific computing}
 \label{sec:background_gpus}
@@ -263,10 +272,10 @@ Graphics Processing Units (GPUs) offer different advantages for
 computational tasks. CPUs are comprised of a few powerful cores
 optimised for sequential task execution and low latency. In contrast,
 GPUs feature a massively parallel architecture, containing thousands of
-simpler cores designed for high-throughput computation.
+simpler cores designed for high-throughput computation~\citep{GPU_computing}.
 
 This architecture makes GPUs exceptionally effective for problems that can
-be expressed in a Single Instruction, Multiple Data (SIMD) paradigm.
+be expressed in a Single Instruction, Multiple Data (SIMD) paradigm~\citep{CUDAGuide}.
 In such problems, the same operation is performed simultaneously across
 a large number of data elements, leading to substantial performance
 gains over serial execution on a CPU. The primary trade-off is that
@@ -278,15 +287,15 @@ and not all computational problems are amenable to vectorization.
 
 The iterative, one-at-a-time nature of the traditional NS algorithm
 is intrinsically serial, making it a poor fit for the parallel
-architecture of GPUs. To overcome this limitation, Yallup et al.
+architecture of GPUs. To overcome this limitation,~\cite{yallup2025nested}
 recently developed a vectorized formulation of the NS algorithm,
 specifically designed for highly parallel execution within the
-\texttt{blackjax} framework~\citep{yallup2025nested, cabezas2024blackjax}.
+\texttt{blackjax} framework~\citep{cabezas2024blackjax}.
 
-One of the core innovations of this approach is the introduction of batch
+One of the core parts of this approach is the idea of batch
 processing. Instead of replacing a single live point in each iteration,
 the algorithm removes a batch of $k$ points with the lowest likelihoods
-simultaneously. The critical step of replacing these points is then
+simultaneously~\citep{parallel_ns}. The critical step of replacing these points is then
 parallelized. The algorithm launches $k$ independent sampling processes
 on the GPU, with each process tasked with finding one new point that
 satisfies the likelihood constraint, $\mathcal{L} > \mathcal{L}_{\text{min}}$,
@@ -296,10 +305,12 @@ discarded batch.
 This reformulation transforms the computationally intensive task of
 sample generation from a serial challenge into a massively parallel one,
 thereby leveraging the architectural strengths of the GPU. While the
-original work proposed a specific inner sampling kernel for this task,
+original work proposed a specific inner sampling kernel, based on
+Hit-and-Run~\citep{Neal2003_slice}, for this task,
 the vectorized framework itself is general. It provides a structure
-within which any suitable inner sampling method can be deployed in
-parallel.
+within which any suitable inner sampling kernel can be deployed in
+parallel. Here, we implement one particular method used within the \texttt{bilby}
+and \texttt{dynesty} framework.
 
 
 \section{Methods}
@@ -331,10 +342,13 @@ inform jump proposals. A new candidate point is generated by adding a
 scaled vector difference of two other randomly chosen live points to the
 current point in the chain. Under the default \texttt{bilby} configuration, 
 the scaling factor for this vector is chosen stochastically: with equal probability, 
-it is either fixed at 1.0 or drawn from a gamma distribution. This proposed 
+it is either fixed at 1.0 or drawn from a scaled gamma distribution. This proposed 
 point is accepted if it satisfies the likelihood constraint, $\mathcal{L} > \mathcal{L}_{\text{min}}$,
 where $\mathcal{L}_{\text{min}}$ is the likelihood of the
-discarded point being replaced. The walk length is adaptive on a per-iteration
+discarded point being replaced. The sampling
+process is performed in the unit hypercube space, with prior
+transformations applied to evaluate the likelihood of proposed points in the physical parameter space. 
+The walk length is adaptive on a per-iteration
 basis; the algorithm adjusts the number of MCMC steps dynamically to
 target a pre-defined number of accepted steps (e.g., 60) for each new
 live point generated, up to a maximum limit.
@@ -359,24 +373,11 @@ using the same logic as \texttt{bilby} to target a desired number of
 accepted proposals.
 
 While this batch-adaptive approach is essential for efficient GPU
-vectorization, it introduces some important differences. In the sequential CPU
-algorithm, an individual MCMC walk that proves to be an outlier with a low acceptance rate
-will result in a longer walk only for the iteration after it. In our parallel algorithm, if a subset of points
-in a batch has a low acceptance rate, the average rate will be reduced,
-causing the walk length for the entire next batch to increase. 
-The converse is also true: if a subset of points in a batch has a particularly high acceptance rate,
-the average rate will be increased, causing the walk length for the entire next batch to decrease.
-This can often lead to a very different total number of likelihood
-evaluations compared to the sequential counterpart. We discuss this further in Sections~\ref{sec:sampler_config} 
-and~\ref{sec:results}
-but depending on the evidence, the likelihood evaluations can be higher or lower, and 
-may need further tuning.
+vectorization, it introduces some important differences, discussed further in Section~\ref{sec:sampler_config}.
 Despite this architectural modification, our kernel is designed to be functionally
-analogous to the trusted \texttt{bilby} sampler, operating within the
-same unit hypercube space and utilizing the same DE proposal strategy
-to explore the parameter space. Even in cases where
-the GPU-based implementation performs more likelihood evaluations,
-it is significantly faster than its CPU-based counterpart.
+analogous to the trusted \texttt{bilby} sampler. This design
+represents the most direct translation of the \texttt{bilby} logic
+to GPUs, making only the minimal changes required for efficient execution. 
 
 \subsection{Sampler configuration and settings}
 \label{sec:sampler_config}
@@ -386,29 +387,29 @@ and the standard CPU-based `acceptance-walk' kernel is the use of
 batched sampling. In our framework, a batch of $k$ new points is
 run and added to the live set simultaneously. This batch size is
 a user-configurable parameter, \texttt{num\_delete}, and we find that a
-value of $k \approx 0.5 \times \texttt{n\_live}$ provides a good balance
-of parallel efficiency and sampling accuracy for most problems.
+value of \mbox{$k \approx 0.5 \times \texttt{n\_live}$} provides a good balance
+of parallel efficiency and sampling accuracy for most problems~\citep{yallup2025nested}.
 
 This batched approach has direct consequences for the adaptive tuning of
 the MCMC walk length. The tuning is performed only once per \texttt{num\_delete} iterations, 
-rather than at every iteration, and every point in a given batch is tuned to have the same walk length. 
+rather than at every iteration, and every point in a given batch is tuned to have the same walk length.
 This design is important for preventing thread divergence and is the 
 most natural way to implement this algorithm on a GPU.
-However, this less frequent and more global tuning means that the standard settings for
-\texttt{bilby} parameters such as \texttt{naccept} may no longer be optimal. For
-instance, on high-SNR signals which require many nested sampling
-iterations, the walk length can adapt to become overly long.
-Conversely, on low-SNR signals that converge quickly, the sampler has
-fewer opportunities to adapt, potentially resulting in a walk length
-that is shorter than optimal. We discuss this behaviour and provide more
-guidance on parameter settings in Sec.~\ref{sec:results}.
+However, this less frequent tuning renders the standard \texttt{bilby}
+tuning parameter `delay', a smoothing factor for
+the adaptation, sub-optimal. 
+To achieve a comparable number of accepted steps per
+iteration, we therefore adjust this parameter for the parallel
+framework. The `delay' is modified to be a function of the batch size,
+recovering the standard \texttt{bilby} behaviour in the sequential
+limit.
 
-Another subtle but critical consequence of this architectural shift is
+Another subtle but critical consequence of the architectural shift to GPUs is
 its effect on the evolution of the live point set. In the sequential
 CPU case, the number of live points is approximately constant throughout the run. In the
 batched GPU case, the number of live points follows a `saw-tooth'
 pattern, decreasing from $n_{\text{live}}$ to
-$n_{\text{live}} - k$ over one cycle of $k$ iterations before being replenished (Fig.~\ref{fig:nlive_comparison}). This pattern
+\mbox{$n_{\text{live}} - k$} over one cycle of $k$ iterations before being replenished (Fig.~\ref{fig:nlive_comparison}). This pattern
 causes the effective number of live points to be lower than the nominal number,
 making it appear that the sampler is able to converge faster than its sequential counterpart
 when both are configured with the same number of live points.
@@ -417,7 +418,7 @@ when both are configured with the same number of live points.
     \centering
     \includegraphics{figures/weights_comparison.pdf}
     \caption{Comparison of the sample weights for each dead point for the sequential CPU and batched GPU implementations.
-    The weights are calculated using the prior volumes enclosed between successive dead points. 
+    The weights are calculated using the prior volumes enclosed between successive dead points and the likelihoods. 
     The shapes are similar, and both implementations enter the bulk of the posterior distribution at similar iterations,
     indiciating that setting the number of live points in \texttt{blackjax-ns} to 1.4 times the number of live points in \texttt{bilby} 
     does indeed result in a like-for-like comparison. The same saw-tooth pattern can be 
@@ -438,17 +439,16 @@ The following derivation outlines this adjustment.
 \label{sec:setting_n_gpu}
 
 The expected log prior volume fraction, $\log X$, remaining after $k$ iterations
-of a nested sampling run is given by~\citep{skilling}
+of a nested sampling run is given by~\citep{skilling, dynamic_ns, aeons}
 \begin{equation}
     E[\log X_k] = \sum_{i=1}^{k} \frac{1}{n_i},
 \end{equation}
 where $n_i$ is the number of live points at iteration $i$. In the
-CPU-based implementation, $n_i \approx n_{\text{CPU}}$ is constant.
+CPU-based implementation, $n_i = n_{\text{CPU}}$ is constant.
 After $k$ iterations, the expected log volume fraction is therefore
 \begin{equation}
     \log X_{\text{CPU}} = \frac{k}{n_{\text{CPU}}}.
 \end{equation}
-
 In our GPU implementation, the number of live points decreases over one
 batch cycle of $k = \texttt{num\_delete}$ iterations. The total log
 volume shrinkage over one such cycle is the sum over the decreasing
@@ -485,13 +485,15 @@ accelerated using a GPU-native waveform generator.
 
 For this purpose, we generate gravitational waveforms using the
 \texttt{ripple} library, which provides GPU-based implementations of
-common models~\citep{ripple}. This allows the waveform to be calculated
-in parallel across the frequency domain, enabling massive efficiency gains by 
+common models~\citep{ripple, wong2023fastgravitationalwaveparameter, Wouters_BNS}. 
+This allows the waveform to be calculated
+in parallel across the frequency domain and 
+across multiple sets of parameters, enabling massive efficiency gains by 
 ensuring that this calculation does not become a serial bottleneck.
 To isolate the speedup from this combined GPU-based framework,
 we deliberately avoid other established acceleration methods like 
 heterodyning~\citep{TL_relativebinning, relativebinning2, relativebinning3, relativebinning4}, 
-though these are available in the \texttt{ripple} library too.
+though these are available in the \texttt{jimgw} library too~\citep{wong2023fastgravitationalwaveparameter}.
 
 For the analyses in this paper, we restrict our consideration to binary
 black hole systems with aligned spins, for which we use the
@@ -524,14 +526,14 @@ comparison against the CPU-based \texttt{bilby} and \texttt{dynesty}
 framework, and in all such comparisons identical priors were used. The
 implementation of more astrophysically motivated, complex prior
 distributions for mass, spin, and luminosity distance is left to
-future work.
+future work and is independent of the algorithmic performance.
 
-\begin{table}[h!]
+\begin{table}
 \setlength{\tabcolsep}{3pt} % Reduce space between columns (default is 6pt)
 \centering
 \caption{Prior distributions for the parameters of the binary black hole
 system. The specific ranges for the masses and spins
- are dependent on the injection and are specified in Section~\ref{sec:results}.}
+ are dependent on the signal and are specified in Section~\ref{sec:results}.}
 \label{tab:priors}
 \begin{tabular}{l l l c c}
 \hline
@@ -578,15 +580,15 @@ sensitivity for the fourth LIGO-Virgo-KAGRA observing run (O4).
 The frequency range of data analysed is from 20 Hz to 1024 Hz, 
 and the network matched filtered SNR is 39.6. 
 
-Both the CPU and GPU-based analyses were configured with 1000 \textit{effective} live
+Both the CPU and GPU-based analyses were configured with 1000 effective live
 points. As detailed in Sec.~\ref{sec:setting_n_gpu}, this corresponded to
-setting the number of live points in \texttt{blackjax-ns} to 1400, with \texttt{num\_delete} = 700.
+setting the number of live points in \texttt{blackjax-ns} to 1400, with \mbox{\texttt{num\_delete} = 700}.
 The termination condition in both cases was set to dlogZ < 0.1, the default in \texttt{bilby},
-and we used the settings \texttt{naccept} = 60, \texttt{maxmcmc} = 5000 and \texttt{use\_ratio = True}. 
+and we used the settings \mbox{\texttt{naccept} = 60}, \mbox{\texttt{maxmcmc} = 5000} and \mbox{\texttt{use\_ratio = True}}. 
 In both cases, periodic boundary conditions were used for the right ascension, 
 polarization angle, and coalescence phase parameters. The prior ranges
 for the chirp mass and mass ratio were set to $[25.0, 50.0]~M_{\odot}$
-and $[0.25, 1.0]$, respectively, with uniform priors on the aligned
+and $[0.25, 1.0]$, respectively, with priors on the aligned
 spin components over the range $[-1, 1]$. 
 
 The recovered posterior distributions, shown in
@@ -597,26 +599,27 @@ framework is functionally equivalent to the trusted sequential
 implementation in \texttt{bilby}. The computed log-evidence values are
 also in strong agreement, as shown in Figure~\ref{fig:4s_logZ_comparison},
 confirming that our implementation provides a robust unified framework for both
-parameter estimation and model selection.
+parameter estimation and model selection. 
 
 The CPU-based \texttt{bilby} run completed in 2.99 hours on 16 cores, for a total of
 47.8 CPU-hours. In contrast, the GPU-based \texttt{blackjax-ns} run
-completed in 0.8 hours. This corresponds to a wall-time speedup factor
-of $\times$60. In this case, the batch-adaptive nature of the GPU
-sampler led to a slightly higher number of likelihood evaluations
-(70.6 million) compared to the sequential CPU sampler (62.9 million).
+completed in 1.25 hours. This corresponds to a sampling time speedup factor
+of $\times$38. The \texttt{bilby} and \texttt{blackjax-ns} runs performed
+62.9 million and 62.5 million likelihood evaluations and had a
+mean number of accepted steps per iteration of 28.5 and 30.7, respectively.
 
-Beyond wall-time, we also consider the relative financial cost. Based
+Beyond sampling time, we also consider the relative financial cost. Based
 on commercial on-demand rates from Google Cloud, the rental cost for the 16-core
 CPU instance and the L4 GPU instance were approximately equivalent at
 the time of this work. This equivalence in hourly cost implies a direct
-cost-saving factor of approximately $\times$3.7 for the GPU-based analysis.
+cost-saving factor of approximately $\times$2.4 for the GPU-based analysis.
 
 In the interest of benchmarking, we also performed the analysis on 
 an A100 NVIDIA GPU configured with the same run settings as the L4 GPU.
 The A100 is a more powerful GPU, resulting in a lower runtime. Interestingly,
 however, when comparing the relative commercial hourly rates of the two GPUs,
-the L4 GPU analysis was actually cheaper. We summarise these results in 
+the L4 GPU analysis was actually cheaper. The A100 analysis had a 
+worse cost to the CPU implementation. We summarise these results in 
 Table~\ref{tab:4s_time_comparison}.
 
 \begin{table}
@@ -656,16 +659,16 @@ Table~\ref{tab:4s_time_comparison}.
 \begin{table}
     \setlength{\tabcolsep}{3pt}
     \centering
-    \caption{Comparison of the wall-times and cost savings for the 4s signal.}
+    \caption{Comparison of the sampling times and cost savings for the 4s signal.}
     \label{tab:4s_time_comparison}
     \begin{tabular}{l l l c c}
     \hline
     \hline
-    \textbf{Implementation + Hardware} & \textbf{Wall-time (h)} & \textbf{Speedup} & \textbf{Cost Saving} \\
+    \textbf{Implementation + Hardware} & \textbf{Time (h)} & \textbf{Speedup} & \textbf{Cost Saving} \\
     \hline
     \texttt{bilby} (16 Icelake CPU cores) & 47.8 & - & - \\
-    \texttt{blackjax-ns} (NVIDIA L4) & 0.8 & 60$\times$ & 3.7$\times$ \\
-    \texttt{blackjax-ns} (NVIDIA A100) & 0.6 & 80$\times$ & 5$\times$ \\
+    \texttt{blackjax-ns} (NVIDIA L4) & 1.25 & 38$\times$ & 2.4$\times$ \\
+    \texttt{blackjax-ns} (NVIDIA A100) & 0.93 & 51$\times$ & 0.6$\times$ \\
     \hline
     \hline
     \end{tabular}
@@ -707,32 +710,19 @@ ensure accurate evidence computation as well as posterior estimation.
 We therefore set the termination criterion based on the fractional
 remaining evidence, such that the analysis stops when the estimated
 evidence in the live points is less than 0.1\% of the accumulated
-evidence. 
+evidence. Both samplers were configured with
+\mbox{\texttt{naccept} = 60} and \mbox{\texttt{maxmcmc} = 5000}, and the \texttt{blackjax-ns}
+sampler used a batch size of \mbox{\texttt{num\_delete} = 700}. 
 
-In the first instance, both samplers were configured with
-\texttt{naccept} = 60 and \texttt{maxmcmc} = 5000, and the \texttt{blackjax-ns}
-sampler used a batch size of \texttt{num\_delete} = 700. The posterior
-distributions were in good agreement with each other and the 
-percentile-percentile (PP) plot was unbiased. However, due to the low SNR and 
-the algorithmic differences arising from parallelisation,
-we found that the mean accepted steps per iteration was lower in \texttt{blackjax-ns}
-compared to \texttt{bilby}, leading to an unfair comparison in the runtimes. We therefore applied more aggressive tuning to the 
-\texttt{blackjax-ns} chain lengths to compensate for the limited number of opportunities
-to perform the tuning, and re-ran the analysis. In practice, this was achieved by setting \texttt{naccept} = 120
-for the \texttt{blackjax-ns} runs. This resulted in a similar number of likelihood evaluations
-and accepted steps per iteration to \texttt{bilby} (see Figure~\ref{fig:chain_length_comparison}), enabling a fairer and more direct comparison
-of the two implementations. 
-For low SNR signals, we therefore recommend setting \texttt{naccept} to a higher value to ensure
-similar run properties to \texttt{bilby}.
+
 
 \begin{figure}
     \centering
     \includegraphics{figures/chain_length_comparison.pdf}
-    \caption{Comparison of the chain lengths for the sequential CPU and batched GPU implementations.
-   The \texttt{blackjax-ns} implementation can only perform batch tuning, a fundamental algorithmic difference 
-   between the CPU-based and GPU-based implementations of the `acceptance-walk' kernel. This leads to a staircase
-   pattern in the chain lengths, which can be seen in the plot. However, setting \texttt{naccept} = 120 in \texttt{blackjax-ns}
-   and \texttt{naccept} = 60 in \texttt{bilby} results in similar average chain lengths for the injection study.}
+    \caption{Comparison of the accepted number of steps per iteration for the sequential CPU and batched GPU implementations.
+    We adapt our `delay' parameter from the tuning formula such that we obtain similar accepted steps for the 
+    two implementations. The \texttt{blackjax-ns} implementation can only perform tuning every \mbox{\texttt{num\_delete}} iterations,
+    so we tune the chain length more aggressively.}
     \label{fig:chain_length_comparison}
 \end{figure}
 
@@ -745,8 +735,7 @@ intervals are well-calibrated, with the cumulative distributions for all
 parameters lying within the expected statistical variance of the
 line of perfect calibration. This confirms the robustness of our implementation. The full
 set of posterior and evidence results for all 100 injections is made
-publicly available in the data repository accompanying this paper.
-\textcolor{red}{TODO: add link/ref}
+publicly available in the data repository accompanying this paper~\citep{Prathaban_2025_zenodo}.
 
 \begin{figure}
     \centering
@@ -781,14 +770,14 @@ The average chain length for the \texttt{blackjax-ns}
 sampler was 1376, consistent with the average of 1337 for the
 \texttt{bilby+dynesty} sampler. A more detailed breakdown of all run
 statistics is provided in Appendix~\ref{app:injection_study_stats}.
-In terms of wall-time, the \texttt{blackjax-ns} sampler completed the analyses
+In terms of runtime, the \texttt{blackjax-ns} sampler completed the analyses
 in an average of 0.4 hours per injection, with individual run
 times ranging from 9 to 56 minutes.
 In contrast, the CPU-based runs
 required an average of 26.4 total CPU-hours, with some runs taking as long as 
 100 hours. 
 Figure~\ref{fig:speedup_comparison} shows the distribution of the
-resulting wall-time speedup factors, which have a mean value of
+resulting runtime speedup factors, which have a mean value of
 $\times$81.2. As in 
 section~\ref{sec:4s_simulated_signal}, we also translate this performance 
 gain into a cost reduction using commercial cloud computing rates.
@@ -814,7 +803,8 @@ identical to the CPU analysis. With a batch size of one, the
 Sec.~\ref{sec:sampler_config} is eliminated, making the effective
 number of live points equal to the nominal value. This removes the need
 for the corrective scaling of $n_{\text{live}}$ applied in our main
-parallel analyses. In this configuration, the algorithm proceeds
+parallel analyses, and we can also use the same \texttt{naccept}
+value as for the \texttt{bilby} runs. In this configuration, the algorithm proceeds
 analogously to the \texttt{bilby} implementation, and the only source of
 acceleration relative to the CPU is the GPU's ability to parallelise the
 likelihood calculation over the frequency domain.
@@ -824,14 +814,14 @@ SNR of 8.82). The baseline CPU-based \texttt{bilby} analysis required
 30.4 total CPU-hours to complete. The sequential-GPU analysis, which
 benefits only from intra-likelihood parallelisation, completed in
 10.44 hours. This represents a speedup of $\times$2.9. Finally, the
-fully parallel run, using its correctly scaled live point count of 1400
-and a batch size of \texttt{num\_delete} = 700, completed in 0.45 hours.
-This corresponds to a further speedup of $\times$23.2 over the
+fully parallel run, using its correctly scaled live point count of 1400,
+a batch size of \texttt{num\_delete} = 700 and {\texttt{naccept} = 120}, completed in 1.29 hours.
+This corresponds to a further speedup of $\times$8.1 over the
 sequential-GPU run.
 
 This result demonstrates that while a GPU-native likelihood provides
-a significant performance benefit, the dominant contribution to the
-overall speedup (a total of $\times$67.6 in this case) originates from the
+a significant performance benefit, the more dominant contribution to the
+overall speedup (a total of $\times$23.6 in this case) originates from the
 massively parallel, batched sampling architecture. This result
 underscores the importance of the algorithmic reformulation 
 of nested sampling pioneered in~\cite{yallup2025nested}.
@@ -1016,13 +1006,13 @@ architecture. While the fixed MCMC walk length of the `acceptance-walk'
 kernel is advantageous for parallelisation, our results highlight a key
 challenge: its adaptive tuning strategy, designed for serial execution,
 translates sub-optimally to the batched GPU paradigm. This necessitates
-manual adjustment of the sampler settings for different problems,
+manual adjustment of the sampler settings for different problems and
+requires on average longer walks to be performed than in the CPU counterpart,
 as the kernel is not natively optimised for this
 architecture. This motivates the exploration of alternative inner
 sampling kernels, such as those based on the Hit-and-Run Slice Sampling
-(HRSS) algorithm introduced in~\cite{yallup2025nested}, which are
-better suited to GPUs and may offer
-more robust and efficient performance without problem-specific tuning.
+(HRSS) algorithm introduced in~\cite{yallup2025nested}, which may offer
+more robust and efficient performance without the same tuning problems.
 
 GPU-accelerated sampling algorithms such as the one presented in this work can only run when
 paired with a GPU-native likelihood. Our work therefore provides additional motivation for the continued development
@@ -1048,9 +1038,6 @@ cost of future gravitational-wave analyses.
 
 \section*{Acknowledgements}
 
-The authors would like to thank Ming Yang and Will Templeton for their
-invaluable help in the development and testing of early iterations of 
-the code applying \texttt{blackjax-ns} to gravitational-wave inference.
 MP was supported by the Harding Distinguished Postgraduate Scholars Programme (HDPSP). 
 This work was partly performed using the Cambridge Service for Data Driven Discovery (CSD3), 
 part of which is operated by the University of Cambridge Research Computing on behalf of the
@@ -1062,8 +1049,12 @@ grant ST/R00689X/1. DiRAC is part of the National e-Infrastructure.
 \section*{Data Availability}
 
  
-
-\textcolor{red}{TODO: Add data availability statement.}
+All the data used in this analysis, including the relevant nested sampling dataframes, 
+can be obtained from~\cite{Prathaban_2025_zenodo}. We include a file with all the 
+code to reproduce the plots in this paper. The \texttt{blackjax-ns} code is available 
+from~\cite{blackjax_ns_github}, and the custom kernel implementated in this paper can
+be found at~\cite{Prathaban_2025_github}. The latter link also contains instructions and
+example files on how to use the kernel to run GW analyses.
 
 
 
@@ -1137,29 +1128,21 @@ here, instead leaving this analysis for future work.
 
 We present a detailed comparison of the internal sampling statistics for
 the 100-injection study in Figure~\ref{fig:injection_study_stats}.
-While the performance metrics such as acceptance rate of the walks are broadly
-consistent between the two frameworks, we observe instances where the
-\texttt{blackjax-ns} sampler produces significantly longer MCMC chains
-paired with lower acceptance rates.
+Although both sets of runs exhibit similar levels of sample decorrelation
+(mean accepted steps per iteration), we observe that the \texttt{blackjax-ns} sampler
+has a much lower acceptance rate and significantly longer chain lengths.    
 
-This behaviour is a direct consequence of the batch-adaptive tuning
+This behaviour is a direct consequence of the batch sampling
 strategy, which is fundamental to the GPU implementation. As the nested
-sampling run progresses, the live points can transition into regions of
+sampling run progresses, the live points will transition into regions of
 the parameter space with a very different local likelihood geometry, such that there
-is a sudden shift in the difficulty of making moves that are accepted. 
+is an increase in the difficulty of making moves that are accepted. 
 The sequential CPU-based
 sampler can adapt to this change immediately by adjusting the walk
 length for the very next point. In contrast, the batch-based GPU
 sampler only tunes its walk length at the end of a full batch cycle.
-
-If the sampler enters a challenging region shortly after a tuning step,
-it must continue with a now-suboptimal (too short) walk length for many
-iterations. This results in a sharp drop in the acceptance rate for that
-batch. When the tuning is eventually performed, the low average
-acceptance rate of the preceding batch triggers a significant,
-compensatory increase in the walk length for the subsequent batch. This
-mechanism explains the observed correlation between runs with very low
-acceptance rates and long MCMC chains.
+It also has a harder likelihood constraint to satisfy for most points,
+which further exacerbates the problem.
 
 This trade-off between adaptive responsiveness and parallel efficiency
 is an inherent characteristic of the batch-based design. Users of this 
@@ -1179,8 +1162,8 @@ quality of the posteriors.
     study. From left to right: the mean number of MCMC steps (walk length)
     per iteration, the mean number of accepted steps, and the
     mean acceptance rate, for both the \texttt{bilby} and 
-    \texttt{blackjax-ns} runs. The batch-adaptive nature of the GPU sampler can
-    lead to outlier runs with longer chains and lower acceptance rates,
+    \texttt{blackjax-ns} runs. The batch-adaptive nature of the GPU sampler can often
+    lead to runs with longer chains and lower acceptance rates,
     as discussed in Appendix~\ref{app:injection_study_stats}.}
     \label{fig:injection_study_stats}
 \end{figure*}

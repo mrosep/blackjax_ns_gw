@@ -171,6 +171,19 @@
    year={2015},
    month=feb }
 
+@article{pycbc,
+  author  = {{Biwer}, C. M. and {Capano}, Collin D. and {De}, Soumi and {Cabero}, Miriam and {Brown}, Duncan A. and {Nitz}, Alexander H. and {Raymond}, V.},
+  title   = {{PyCBC Inference: A Python-based Parameter Estimation Toolkit for Compact Binary Coalescence Signals}},
+  journal = {Publications of the Astronomical Society of the Pacific},
+  year    = {2019},
+  volume  = {131},
+  number  = {996},
+  pages   = {024503},
+  doi     = {10.1088/1538-3873/aaef0b},
+  adsurl  = {https://ui.adsabs.harvard.edu/abs/2019PASP..131b4503B},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
 @article{skilling,
 author = {John Skilling},
 title = {{Nested sampling for general Bayesian computation}},
@@ -586,6 +599,22 @@ archivePrefix = {arXiv},
     year = "2024"
 }
 
+@article{Wouters_BNS,
+  title = {Robust parameter estimation within minutes on gravitational wave signals from binary neutron star inspirals},
+  author = {Wouters, Thibeau and Pang, Peter T. H. and Dietrich, Tim and Van Den Broeck, Chris},
+  journal = {Phys. Rev. D},
+  volume = {110},
+  issue = {8},
+  pages = {083033},
+  numpages = {17},
+  year = {2024},
+  month = {Oct},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.110.083033},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.110.083033}
+}
+
+
 @article{ET_science_case,
 doi = {10.1088/1475-7516/2023/07/068},
 url = {https://dx.doi.org/10.1088/1475-7516/2023/07/068},
@@ -670,4 +699,108 @@ abstract = {The Einstein Telescope (ET), the European project for a third-genera
     doi = {10.1093/mnras/stae1908},
     url = {https://doi.org/10.1093/mnras/stae1908},
     eprint = {https://academic.oup.com/mnras/article-pdf/533/2/1839/58905444/stae1908.pdf},
+}
+
+@article{GPU_computing,
+  author  = {Owens, John D. and Houston, Mike and Luebke, David and Green, Simon and Stone, John E. and Phillips, James C.},
+  title   = {{GPU computing}},
+  journal = {Proceedings of the IEEE},
+  year    = {2008},
+  volume  = {96},
+  number  = {5},
+  pages   = {879--899},
+  doi     = {10.1109/JPROC.2008.917757}
+}
+
+@misc{CUDAGuide,
+  author       = {{NVIDIA Corporation}},
+  title        = {{CUDA C++ Programming Guide}},
+  year         = {2025},
+  url          = {https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html}
+}
+
+@article{NS_methods_buchner,
+author = {Johannes Buchner},
+title = {{Nested sampling methods}},
+volume = {17},
+journal = {Statistics Surveys},
+number = {none},
+publisher = {Amer. Statist. Assoc., the Bernoulli Soc., the Inst. Math. Statist., and the Statist. Soc. Canada},
+pages = {169 -- 215},
+year = {2023},
+doi = {10.1214/23-SS144},
+URL = {https://doi.org/10.1214/23-SS144}
+}
+
+@article{dynamic_ns,
+  author  = {Higson, Edward and Handley, Will and Hobson, Mike and Lasenby, Anthony},
+  title   = {{Dynamic nested sampling: an improved algorithm for parameter estimation and evidence calculation}},
+  journal = {Statistics and Computing},
+  year    = {2019},
+  volume  = {29},
+  pages   = {891--913},
+  doi     = {10.1007/s11222-018-9844-0}
+}
+
+@inproceedings{parallel_ns,
+  author    = {Henderson, R. Wesley and Goggans, Paul M.},
+  title     = {{Parallelized nested sampling}},
+  booktitle = {AIP Conference Proceedings},
+  year      = {2014},
+  volume    = {1636},
+  pages     = {100--105},
+  doi       = {10.1063/1.4903717}
+}
+
+@article{Neal2003_slice,
+  author    = {Neal, Radford M.},
+  title     = {{Slice Sampling}},
+  journal   = {The Annals of Statistics},
+  year      = {2003},
+  volume    = {31},
+  number    = {3},
+  pages     = {705--741},
+  doi       = {10.1214/aos/1056562461},
+  jstor_url = {https://www.jstor.org/stable/3448413}
+}
+
+@article{aeons,
+    author = "Hu, Zixiao and Baryshnikov, Artem and Handley, Will",
+    title = "{aeons: approximating the end of nested sampling}",
+    eprint = "2312.00294",
+    archivePrefix = "arXiv",
+    primaryClass = "astro-ph.CO",
+    doi = "10.1093/mnras/stae1754",
+    journal = "Mon. Not. Roy. Astron. Soc.",
+    volume = "532",
+    number = "4",
+    pages = "4035--4049",
+    year = "2024"
+}
+
+@misc{Prathaban_2025_zenodo,
+  author       = {Prathaban, Metha and Yallup, David and Alvey, James and Yang, Ming and Templeton, Will and Handley, Will},
+  title        = {{Gravitational-wave inference at GPU speed: A bilby-like nested sampling kernel within blackjax-ns}},
+  year         = {2025},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.17012011},
+  url          = {https://doi.org/10.5281/zenodo.17012011}
+}
+
+@misc{Prathaban_2025_github,
+  author       = {Prathaban, Metha and others},
+  title        = {{blackjax\_ns\_gw: blackjax-ns for Gravitational Wave Inference on GPUs}},
+  year         = {2025},
+  publisher    = {GitHub},
+  howpublished = {\url{https://github.com/mrosep/blackjax_ns_gw}},
+  note         = {Accessed: 2025-08-31}
+}
+
+@misc{blackjax_ns_github,
+  author       = {Yallup, David and Handley, Will and Cabezas, Jo{\~a}o and and others},
+  title        = {{blackjax}: A Library of Bayesian Inference Algorithms in JAX (Nested Sampling Branch)},
+  year         = {2025},
+  publisher    = {GitHub},
+  howpublished = {\url{https://github.com/handley-lab/blackjax/tree/nested_sampling}},
+  note         = {Accessed: 2025-08-31}
 }
