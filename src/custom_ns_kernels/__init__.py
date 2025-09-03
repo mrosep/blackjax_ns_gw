@@ -4,6 +4,7 @@ from .bilby_fixed_rwalk import de_rwalk_sampler_physical_static
 from .bilby_adaptive_rwalk import bilby_adaptive_de_sampler
 from .bilby_adaptive_rwalk_unit_cube import bilby_adaptive_de_sampler_unit_cube
 from .bilby_adaptive_rwalk_unit_cube_refactor import bilby_adaptive_de_sampler_unit_cube as bilby_adaptive_de_sampler_unit_cube_tuple
+from .acceptance_walk_kernel import bilby_adaptive_de_sampler_unit_cube as bilby_adaptive_de_sampler_priorloop
 from .hybrid_slice_jump import hybrid_slice_jump_sampler
 from .hybrid_slice_jump_wrapped import hybrid_slice_jump_sampler as hybrid_slice_jump_sampler_wrapped
 from .unit_cube_wrappers import create_unit_cube_functions, init_unit_cube_particles, transform_to_physical
@@ -18,6 +19,7 @@ __all__ = [
     "bilby_adaptive_de_sampler",
     "bilby_adaptive_de_sampler_unit_cube",
     "bilby_adaptive_de_sampler_unit_cube_tuple",
+    "bilby_adaptive_de_sampler_priorloop",
     "hybrid_slice_jump_sampler",
     "hybrid_slice_jump_sampler_wrapped",
     "create_unit_cube_functions",

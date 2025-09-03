@@ -33,7 +33,7 @@ from custom_ns_kernels import (
 )
 
 from custom_ns_kernels import(
-    bilby_adaptive_de_sampler_unit_cube_tuple, 
+    bilby_adaptive_de_sampler_priorloop, 
     create_unit_cube_functions_tuple, 
     init_unit_cube_particles_tuple, 
     transform_to_physical_tuple
@@ -71,8 +71,8 @@ def get_ravel_order(particles_dict):
 # Loop through all injection directories
 injection_dirs = sorted(glob.glob("4s_injections/injection_*"), key=lambda x: int(x.split('_')[-1]))
 
-start_index = 0
-end_index = 1
+start_index = 95
+end_index = 100
 
 selected_dirs = injection_dirs[start_index:end_index]
 
@@ -371,14 +371,15 @@ for i, injection_dir in enumerate(selected_dirs):
     #     num_delete=n_delete,
     #     stepper_fn=unit_cube_fns['stepper_fn']
     # )
-    nested_sampler = bilby_adaptive_de_sampler_unit_cube_tuple(
+    nested_sampler = bilby_adaptive_de_sampler_priorloop(
         logprior_fn=unit_cube_fns['logprior_fn'],
         loglikelihood_fn=unit_cube_fns['loglikelihood_fn'],
         nlive=n_live,
         n_target=60,
         max_mcmc=5000,
         num_delete=n_delete,
-        stepper_fn=unit_cube_fns['stepper_fn']
+        stepper_fn=unit_cube_fns['stepper_fn'],
+        max_proposals=1000,
     )
     state = nested_sampler.init(unit_cube_particles)
 
@@ -424,8 +425,8 @@ for i, injection_dir in enumerate(selected_dirs):
     final_state = finalise(state, dead)
     #os.makedirs(injection_dir+'/mix1', exist_ok=True)
     #with open(injection_dir+'/mix1/final_state_nlive1400.pkl', 'wb') as f:
-    os.makedirs(injection_dir+'/newcount', exist_ok=True)
-    with open(injection_dir+'/newcount/final_state_nlive1400.pkl', 'wb') as f:
+    os.makedirs(injection_dir+'/priorloop1', exist_ok=True)
+    with open(injection_dir+'/priorloop1/final_state_nlive1400.pkl', 'wb') as f:
         pickle.dump(final_state, f)
 
     # Transform unit cube particles back to physical space
@@ -445,13 +446,13 @@ for i, injection_dir in enumerate(selected_dirs):
     # Save to CSV in the injection directory
     injection_name = os.path.basename(injection_dir)
     #output_filename = os.path.join(injection_dir, f"nlive1400/results_nlive1400.csv")
-    output_filename = os.path.join(injection_dir, f"newcount/results_nlive1400.csv")
+    output_filename = os.path.join(injection_dir, f"priorloop1/results_nlive1400.csv")
     samples.to_csv(output_filename)
 
     # Save timings from progress bar
     #with open(injection_dir+'/nlive1400/timings_nlive1400.pkl', 'wb') as f:
     #    pickle.dump(pbar.format_dict, f)
-    with open(injection_dir+'/newcount/timings_nlive1400.pkl', 'wb') as f:
+    with open(injection_dir+'/priorloop1/timings_nlive1400.pkl', 'wb') as f:
         pickle.dump(pbar.format_dict, f)
     
     print(f"Results saved to {output_filename}")
