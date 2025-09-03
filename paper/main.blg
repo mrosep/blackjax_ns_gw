@@ -3,46 +3,49 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: mnras.bst
 Database file #1: references.bib
+Warning--entry type for "jax2018github" isn't style-file defined
+--line 891 of file references.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 50 entries,
+You've used 56 entries,
             2881 wiz_defined-function locations,
-            1104 strings with 18849 characters,
-and the built_in function-call counts, 24318 in all, are:
-= -- 1992
-> -- 1810
-< -- 150
-+ -- 798
-- -- 272
-* -- 2839
-:= -- 3891
+            1147 strings with 20410 characters,
+and the built_in function-call counts, 27710 in all, are:
+= -- 2261
+> -- 2037
+< -- 172
++ -- 896
+- -- 305
+* -- 3224
+:= -- 4391
 add.period$ -- 0
-call.type$ -- 50
-change.case$ -- 100
-chr.to.int$ -- 43
-cite$ -- 50
-duplicate$ -- 1168
-empty$ -- 1154
-format.name$ -- 426
-if$ -- 4218
+call.type$ -- 56
+change.case$ -- 112
+chr.to.int$ -- 49
+cite$ -- 56
+duplicate$ -- 1344
+empty$ -- 1353
+format.name$ -- 481
+if$ -- 4846
 int.to.chr$ -- 8
 int.to.str$ -- 0
-missing$ -- 40
-newline$ -- 163
-num.names$ -- 372
-pop$ -- 269
+missing$ -- 44
+newline$ -- 181
+num.names$ -- 424
+pop$ -- 312
 preamble$ -- 1
-purify$ -- 200
+purify$ -- 224
 quote$ -- 0
-skip$ -- 717
+skip$ -- 832
 stack$ -- 0
-substring$ -- 1442
-swap$ -- 606
-text.length$ -- 202
+substring$ -- 1649
+swap$ -- 716
+text.length$ -- 232
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 450
+type$ -- 504
 warning$ -- 0
-while$ -- 368
+while$ -- 416
 width$ -- 0
-write$ -- 519
+write$ -- 584
+(There was 1 warning)

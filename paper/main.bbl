@@ -54,6 +54,9 @@ Ashton G.,  Bernstein N.,  Buchner J.,   et al. 2022, \mn@doi [Nature Reviews Me
 \bibitem[\protect\citeauthoryear{{Biwer}, {Capano}, {De}, {Cabero}, {Brown}, {Nitz}  \& {Raymond}}{{Biwer} et~al.}{2019}]{pycbc}
 {Biwer} C.~M.,  {Capano} C.~D.,  {De} S.,  {Cabero} M.,  {Brown} D.~A.,  {Nitz} A.~H.,   {Raymond} V.,  2019, \mn@doi [Publications of the Astronomical Society of the Pacific] {10.1088/1538-3873/aaef0b}, \href {https://ui.adsabs.harvard.edu/abs/2019PASP..131b4503B} {131, 024503}
 
+\bibitem[\protect\citeauthoryear{Bradbury et~al.,}{Bradbury et~al.}{2018}]{jax2018github}
+Bradbury J.,  et~al., 2018, {JAX}: composable transformations of {P}ython+{N}um{P}y programs, \url {http://github.com/google/jax}
+
 \bibitem[\protect\citeauthoryear{Branchesi et~al.}{Branchesi et~al.}{2023}]{ET_science_case}
 Branchesi M.,  et~al., 2023, \mn@doi [Journal of Cosmology and Astroparticle Physics] {10.1088/1475-7516/2023/07/068}, 2023, 068
 
@@ -66,8 +69,14 @@ Cabezas A.,  Corenflos A.,  Lao J.,   Louf R.,  2024, BlackJAX: Composable {B}ay
 \bibitem[\protect\citeauthoryear{Cornish}{Cornish}{2013}]{relativebinning4}
 Cornish N.~J.,  2013, Fast Fisher Matrices and Lazy Likelihoods (\mn@eprint {arXiv} {1007.4820}), \url {https://arxiv.org/abs/1007.4820}
 
+\bibitem[\protect\citeauthoryear{Dau \& Chopin}{Dau \& Chopin}{2021}]{dau2021wastefreesequentialmontecarlo}
+Dau H.-D.,  Chopin N.,  2021, Waste-free Sequential Monte Carlo (\mn@eprint {arXiv} {2011.02328}), \url {https://arxiv.org/abs/2011.02328}
+
 \bibitem[\protect\citeauthoryear{Edwards, Wong, Lam, Coogan, Foreman-Mackey, Isi  \& Zimmerman}{Edwards et~al.}{2024}]{ripple}
 Edwards T. D.~P.,  Wong K. W.~K.,  Lam K. K.~H.,  Coogan A.,  Foreman-Mackey D.,  Isi M.,   Zimmerman A.,  2024, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.110.064028}, 110, 064028
+
+\bibitem[\protect\citeauthoryear{Handley, Hobson  \& Lasenby}{Handley et~al.}{2015}]{Handley:2015vkr}
+Handley W.~J.,  Hobson M.~P.,   Lasenby A.~N.,  2015, \mn@doi [Mon. Not. Roy. Astron. Soc.] {10.1093/mnras/stv1911}, 453, 4385
 
 \bibitem[\protect\citeauthoryear{Henderson \& Goggans}{Henderson \& Goggans}{2014}]{parallel_ns}
 Henderson R.~W.,  Goggans P.~M.,  2014, in AIP Conference Proceedings. pp 100--105, \mn@doi{10.1063/1.4903717}
@@ -77,6 +86,12 @@ Higson E.,  Handley W.,  Hobson M.,   Lasenby A.,  2018, \mn@doi [Bayesian Analy
 
 \bibitem[\protect\citeauthoryear{Higson, Handley, Hobson  \& Lasenby}{Higson et~al.}{2019}]{dynamic_ns}
 Higson E.,  Handley W.,  Hobson M.,   Lasenby A.,  2019, \mn@doi [Statistics and Computing] {10.1007/s11222-018-9844-0}, 29, 891
+
+\bibitem[\protect\citeauthoryear{Hoffman \& Sountsov}{Hoffman \& Sountsov}{2022}]{pmlr-v151-hoffman22a}
+Hoffman M.~D.,  Sountsov P.,  2022, in Camps-Valls G.,  Ruiz F. J.~R.,   Valera I.,  eds,  Proceedings of Machine Learning Research Vol. 151, Proceedings of The 25th International Conference on Artificial Intelligence and Statistics. PMLR, pp 7799--7813, \url {https://proceedings.mlr.press/v151/hoffman22a.html}
+
+\bibitem[\protect\citeauthoryear{Hoffman, Radul  \& Sountsov}{Hoffman et~al.}{2021}]{pmlr-v130-hoffman21a}
+Hoffman M.,  Radul A.,   Sountsov P.,  2021, in Banerjee A.,  Fukumizu K.,  eds,  Proceedings of Machine Learning Research Vol. 130, Proceedings of The 24th International Conference on Artificial Intelligence and Statistics. PMLR, pp 3907--3915, \url {https://proceedings.mlr.press/v130/hoffman21a.html}
 
 \bibitem[\protect\citeauthoryear{Hu \& Veitch}{Hu \& Veitch}{2024}]{HuAccelerationReview}
 Hu Q.,  Veitch J.,  2024, Costs of Bayesian Parameter Estimation in Third-Generation Gravitational Wave Detectors: a Review of Acceleration Methods (\mn@eprint {arXiv} {2412.02651}), \url {https://arxiv.org/abs/2412.02651}
@@ -119,6 +134,9 @@ Romero-Shaw I.~M.,  et~al., 2020, \mn@doi [Monthly Notices of the Royal Astronom
 
 \bibitem[\protect\citeauthoryear{Skilling}{Skilling}{2006}]{skilling}
 Skilling J.,  2006, \mn@doi [Bayesian Analysis] {10.1214/06-BA127}, 1, 833
+
+\bibitem[\protect\citeauthoryear{Smith, Ashton, Vajpeyi  \& Talbot}{Smith et~al.}{2020}]{Smith:2019ucc}
+Smith R. J.~E.,  Ashton G.,  Vajpeyi A.,   Talbot C.,  2020, \mn@doi [Mon. Not. Roy. Astron. Soc.] {10.1093/mnras/staa2483}, 498, 4492
 
 \bibitem[\protect\citeauthoryear{Speagle}{Speagle}{2020}]{dynesty}
 Speagle J.~S.,  2020, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staa278}, 493, 3132–3158
