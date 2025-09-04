@@ -58,25 +58,27 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Comparison of the number of live points in the sequential CPU and batched GPU implementations. Although the nominal number of live points used in \texttt  {blackjax-ns} is higher than in \texttt  {bilby}, the saw-tooth pattern means that the effective number of live points is the same. Here, we use a batch size of $k = 0.5 \times n_{\text  {live}}$.}}{3}{figure.2}\protected@file@percent }
 \newlabel{fig:nlive_comparison}{{2}{3}{Comparison of the number of live points in the sequential CPU and batched GPU implementations. Although the nominal number of live points used in \texttt {blackjax-ns} is higher than in \texttt {bilby}, the saw-tooth pattern means that the effective number of live points is the same. Here, we use a batch size of $k = 0.5 \times n_{\text {live}}$}{figure.2}{}}
 \citation{DE,DE2}
+\citation{dynesty}
 \citation{dau2021wastefreesequentialmontecarlo}
 \citation{yallup2025nested}
 \citation{Handley:2015vkr}
+\citation{skilling,dynamic_ns,aeons}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{4}{section.3}\protected@file@percent }
 \newlabel{sec:methods}{{3}{4}{}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The inner sampling kernel}{4}{subsection.3.1}\protected@file@percent }
 \newlabel{sec:methods_kernel}{{3.1}{4}{}{subsection.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sampler configuration and settings}{4}{subsection.3.2}\protected@file@percent }
 \newlabel{sec:sampler_config}{{3.2}{4}{}{subsection.3.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Comparison of the sample weights for each dead point for the sequential CPU and batched GPU implementations. The weights are calculated using the prior volumes enclosed between successive dead points and the likelihoods. The shapes are similar, and both implementations enter the bulk of the posterior distribution at similar iterations, indiciating that setting the number of live points in \texttt  {blackjax-ns} to 1.4 times the number of live points in \texttt  {bilby} does indeed result in a like-for-like comparison. The same saw-tooth pattern can be seen in the weights for the \texttt  {blackjax-ns} implementation.}}{4}{figure.3}\protected@file@percent }
-\newlabel{fig:weights_comparison}{{3}{4}{Comparison of the sample weights for each dead point for the sequential CPU and batched GPU implementations. The weights are calculated using the prior volumes enclosed between successive dead points and the likelihoods. The shapes are similar, and both implementations enter the bulk of the posterior distribution at similar iterations, indiciating that setting the number of live points in \texttt {blackjax-ns} to 1.4 times the number of live points in \texttt {bilby} does indeed result in a like-for-like comparison. The same saw-tooth pattern can be seen in the weights for the \texttt {blackjax-ns} implementation}{figure.3}{}}
-\citation{skilling,dynamic_ns,aeons}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Setting $n_{\text  {GPU}}$}{4}{subsubsection.3.2.1}\protected@file@percent }
+\newlabel{sec:setting_n_gpu}{{3.2.1}{4}{}{subsubsection.3.2.1}{}}
+\citation{lal,NelsonMeyerReview}
 \citation{ripple,wong2023fastgravitationalwaveparameter,Wouters_BNS}
 \citation{TL_relativebinning,relativebinning2,relativebinning3,relativebinning4}
 \citation{wong2023fastgravitationalwaveparameter}
 \citation{Khan:2015jqa}
 \citation{bilby_validation}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Setting $n_{\text  {GPU}}$}{5}{subsubsection.3.2.1}\protected@file@percent }
-\newlabel{sec:setting_n_gpu}{{3.2.1}{5}{}{subsubsection.3.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Comparison of the sample weights for each dead point for the sequential CPU and batched GPU implementations. The weights are calculated using the prior volumes enclosed between successive dead points and the likelihoods. The shapes are similar, and both implementations enter the bulk of the posterior distribution at similar iterations, indiciating that setting the number of live points in \texttt  {blackjax-ns} to 1.4 times the number of live points in \texttt  {bilby} does indeed result in a like-for-like comparison. The same saw-tooth pattern can be seen in the weights for the \texttt  {blackjax-ns} implementation.}}{5}{figure.3}\protected@file@percent }
+\newlabel{fig:weights_comparison}{{3}{5}{Comparison of the sample weights for each dead point for the sequential CPU and batched GPU implementations. The weights are calculated using the prior volumes enclosed between successive dead points and the likelihoods. The shapes are similar, and both implementations enter the bulk of the posterior distribution at similar iterations, indiciating that setting the number of live points in \texttt {blackjax-ns} to 1.4 times the number of live points in \texttt {bilby} does indeed result in a like-for-like comparison. The same saw-tooth pattern can be seen in the weights for the \texttt {blackjax-ns} implementation}{figure.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Likelihood}{5}{subsection.3.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Prior distributions for the parameters of the binary black hole system. The specific ranges for the masses and spins are dependent on the signal and are specified in Section~\ref {sec:results}.}}{5}{table.1}\protected@file@percent }
 \newlabel{tab:priors}{{1}{5}{Prior distributions for the parameters of the binary black hole system. The specific ranges for the masses and spins are dependent on the signal and are specified in Section~\ref {sec:results}}{table.1}{}}
@@ -86,14 +88,14 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Simulated signals}{6}{subsection.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}4-second simulated signal}{6}{subsubsection.4.1.1}\protected@file@percent }
 \newlabel{sec:4s_simulated_signal}{{4.1.1}{6}{}{subsubsection.4.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Injection Study}{6}{subsection.4.2}\protected@file@percent }
-\newlabel{sec:injection_study}{{4.2}{6}{}{subsection.4.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Injection parameters for the 4s signal.}}{6}{table.2}\protected@file@percent }
 \newlabel{tab:injection_params}{{2}{6}{Injection parameters for the 4s signal}{table.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Comparison of the log evidence for the 4s signal. The results are in excellent agreement, demonstrating the robustness of the \texttt  {blackjax-ns} implementation in recovering the same posteriors and evidence as the \texttt  {bilby} implementation. This unifies parameter estimation and evidence evaluation into a single GPU-accelerated framework.}}{6}{figure.4}\protected@file@percent }
 \newlabel{fig:4s_logZ_comparison}{{4}{6}{Comparison of the log evidence for the 4s signal. The results are in excellent agreement, demonstrating the robustness of the \texttt {blackjax-ns} implementation in recovering the same posteriors and evidence as the \texttt {bilby} implementation. This unifies parameter estimation and evidence evaluation into a single GPU-accelerated framework}{figure.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Comparison of the sampling times and cost savings for the 4s signal.}}{6}{table.3}\protected@file@percent }
 \newlabel{tab:4s_time_comparison}{{3}{6}{Comparison of the sampling times and cost savings for the 4s signal}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Injection Study}{6}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:injection_study}{{4.2}{6}{}{subsection.4.2}{}}
 \citation{Prathaban_2025_zenodo}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Distribution of the network signal-to-noise ratios (SNR) for the injected signals.}}{7}{figure.5}\protected@file@percent }
 \newlabel{fig:snr_dist}{{5}{7}{Distribution of the network signal-to-noise ratios (SNR) for the injected signals}{figure.5}{}}
@@ -101,26 +103,35 @@
 \newlabel{fig:chain_length_comparison}{{6}{7}{Comparison of the accepted number of steps per iteration for the sequential CPU and batched GPU analyses of the first signal from the injection study. We adapt our `delay' parameter from the tuning formula such that we obtain similar accepted steps for the two implementations. The \texttt {blackjax-ns} implementation can only perform tuning every \mbox {\texttt {num\_delete}} iterations, so we tune the chain length more aggressively}{figure.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Percentile-percentile (PP) coverage plot for the 100-injection study, obtained with the \texttt  {blackjax-ns} sampler. The cumulative fraction of events where the true injected parameter falls below a given credible level is plotted against that credible level. The proximity of all parameter curves to the diagonal indicates that the posterior credible intervals are statistically well-calibrated. A corresponding plot for the \texttt  {bilby+dynesty} analysis, which should be identical, is provided in the Appendix for reference.}}{7}{figure.7}\protected@file@percent }
 \newlabel{fig:pp_coverage}{{7}{7}{Percentile-percentile (PP) coverage plot for the 100-injection study, obtained with the \texttt {blackjax-ns} sampler. The cumulative fraction of events where the true injected parameter falls below a given credible level is plotted against that credible level. The proximity of all parameter curves to the diagonal indicates that the posterior credible intervals are statistically well-calibrated. A corresponding plot for the \texttt {bilby+dynesty} analysis, which should be identical, is provided in the Appendix for reference}{figure.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The wall-time speedups for all 100 events in the injection study.}}{7}{figure.8}\protected@file@percent }
-\newlabel{fig:speedup_comparison}{{8}{7}{The wall-time speedups for all 100 events in the injection study}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The cost reductions for all 100 events in the injection study.}}{7}{figure.9}\protected@file@percent }
-\newlabel{fig:cost_reduction}{{9}{7}{The cost reductions for all 100 events in the injection study}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The runtime speedups for all 100 events in the injection study. For the CPU-based analyses, we take the wall-time and multiply by 16 to get the total runtime. For the GPU-based analyses, we use the wall-time directly.}}{7}{figure.8}\protected@file@percent }
+\newlabel{fig:speedup_comparison}{{8}{7}{The runtime speedups for all 100 events in the injection study. For the CPU-based analyses, we take the wall-time and multiply by 16 to get the total runtime. For the GPU-based analyses, we use the wall-time directly}{figure.8}{}}
 \citation{yallup2025nested}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The cost reductions for all 100 events in the injection study. Although the runtime speedups are significant, the more honest and fair comparison is of the relative costs of the two sets of analyses, since GPUs are more expensive than CPUs. We use the commercial on-demand rates for a 16-core CPU instance and an L4 GPU instance at the time of this work, and compare the cost savings obtained from using our GPU-accelerated pipeline.}}{8}{figure.9}\protected@file@percent }
+\newlabel{fig:cost_reduction}{{9}{8}{The cost reductions for all 100 events in the injection study. Although the runtime speedups are significant, the more honest and fair comparison is of the relative costs of the two sets of analyses, since GPUs are more expensive than CPUs. We use the commercial on-demand rates for a 16-core CPU instance and an L4 GPU instance at the time of this work, and compare the cost savings obtained from using our GPU-accelerated pipeline}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces The log evidence difference between the \texttt  {blackjax-ns} and \texttt  {bilby+dynesty} samplers for each injection in the study. For each estimate, we take the mean log evidence estimated by \texttt  {bilby} to be the reference value, and subtract the \texttt  {bilby} estimates from the log evidences calculated by \texttt  {blackjax-ns}. The error bars represent 1$\sigma $ confidence intervals for these differences. There appears to be some underestimation of the error bars, potentially due to some sets of samples not being as well decorrelated as others, despite a reasonable average decorrelation. However, a calibration test was performed to quantify this. For the $\Delta \log \mathcal  {Z}$ estimates, we calculate the percentiles at which $\Delta \log \mathcal  {Z} = 0$ lies. If the error bars are correctly calibrated, the resulting distribution of percentiles should be uniform; the Kolmogorov-Smirnov test returns a p-value of $0.062$, indicating that at the $5\%$ significance level the error bars are well-calibrated.}}{8}{figure.10}\protected@file@percent }
+\newlabel{fig:evidence_vs_steps_iters}{{10}{8}{The log evidence difference between the \texttt {blackjax-ns} and \texttt {bilby+dynesty} samplers for each injection in the study. For each estimate, we take the mean log evidence estimated by \texttt {bilby} to be the reference value, and subtract the \texttt {bilby} estimates from the log evidences calculated by \texttt {blackjax-ns}. The error bars represent 1$\sigma $ confidence intervals for these differences. There appears to be some underestimation of the error bars, potentially due to some sets of samples not being as well decorrelated as others, despite a reasonable average decorrelation. However, a calibration test was performed to quantify this. For the $\Delta \log \mathcal {Z}$ estimates, we calculate the percentiles at which $\Delta \log \mathcal {Z} = 0$ lies. If the error bars are correctly calibrated, the resulting distribution of percentiles should be uniform; the Kolmogorov-Smirnov test returns a p-value of $0.062$, indicating that at the $5\%$ significance level the error bars are well-calibrated}{figure.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Disentangling Sources of GPU Acceleration}{8}{subsection.4.3}\protected@file@percent }
 \newlabel{sec:disentangling_acceleration}{{4.3}{8}{}{subsection.4.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}8-second simulated signal}{8}{subsection.4.4}\protected@file@percent }
 \newlabel{sec:8s_simulated_signal}{{4.4}{8}{}{subsection.4.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Injection parameters for the 8s signal.}}{8}{table.4}\protected@file@percent }
-\newlabel{tab:8s_injection_params}{{4}{8}{Injection parameters for the 8s signal}{table.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{8}{section.5}\protected@file@percent }
-\newlabel{sec:conclusions}{{5}{8}{}{section.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Recovered posterior distributions for the 8s simulated signal, comparing our GPU-based \texttt  {blackjax-ns} sampler with the CPU-based \texttt  {bilby} sampler. The injected values are marked by black lines. The strong statistical agreement confirms the validity of our implementation for longer-duration signals. The GPU implementation provided a wall-time speedup of 46$\times $ and a cost reduction of 2.9$\times $.}}{9}{figure.10}\protected@file@percent }
-\newlabel{fig:8s_posteriors}{{10}{9}{Recovered posterior distributions for the 8s simulated signal, comparing our GPU-based \texttt {blackjax-ns} sampler with the CPU-based \texttt {bilby} sampler. The injected values are marked by black lines. The strong statistical agreement confirms the validity of our implementation for longer-duration signals. The GPU implementation provided a wall-time speedup of 46$\times $ and a cost reduction of 2.9$\times $}{figure.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Comparison of the recovered log-evidence ($Z$) for the 8s signal. The results from both the \texttt  {bilby} and \texttt  {blackjax-ns} frameworks are consistent within their estimated numerical uncertainties.}}{9}{figure.11}\protected@file@percent }
-\newlabel{fig:8s_logZ}{{11}{9}{Comparison of the recovered log-evidence ($Z$) for the 8s signal. The results from both the \texttt {bilby} and \texttt {blackjax-ns} frameworks are consistent within their estimated numerical uncertainties}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Recovered posterior distributions for the 8s simulated signal, comparing our GPU-based \texttt  {blackjax-ns} sampler with the CPU-based \texttt  {bilby} sampler. The injected values are marked by black lines. The strong statistical agreement confirms the validity of our implementation for longer-duration signals. The GPU implementation provided a wall-time speedup of 46$\times $ and a cost reduction of 2.9$\times $.}}{9}{figure.11}\protected@file@percent }
+\newlabel{fig:8s_posteriors}{{11}{9}{Recovered posterior distributions for the 8s simulated signal, comparing our GPU-based \texttt {blackjax-ns} sampler with the CPU-based \texttt {bilby} sampler. The injected values are marked by black lines. The strong statistical agreement confirms the validity of our implementation for longer-duration signals. The GPU implementation provided a wall-time speedup of 46$\times $ and a cost reduction of 2.9$\times $}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Comparison of the recovered log-evidence ($Z$) for the 8s signal. The results from both the \texttt  {bilby} and \texttt  {blackjax-ns} frameworks are consistent within their estimated numerical uncertainties.}}{9}{figure.12}\protected@file@percent }
+\newlabel{fig:8s_logZ}{{12}{9}{Comparison of the recovered log-evidence ($Z$) for the 8s signal. The results from both the \texttt {bilby} and \texttt {blackjax-ns} frameworks are consistent within their estimated numerical uncertainties}{figure.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Injection parameters for the 8s signal.}}{9}{table.4}\protected@file@percent }
+\newlabel{tab:8s_injection_params}{{4}{9}{Injection parameters for the 8s signal}{table.4}{}}
+\citation{jax2018github}
+\citation{jouppi2023tpu}
+\citation{IMRPhenomXPHM}
+\citation{TL_relativebinning,relativebinning2,relativebinning3,relativebinning4}
+\citation{HuAccelerationReview,makaibaker2025}
 \citation{yallup2025nested}
+\citation{ripple}
+\citation{bilby_paper}
 \citation{Williams2021Nessai}
 \citation{Prathaban}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{10}{section.5}\protected@file@percent }
+\newlabel{sec:conclusions}{{5}{10}{}{section.5}{}}
 \citation{Prathaban_2025_zenodo}
 \citation{blackjax_ns_github}
 \citation{Prathaban_2025_github}
@@ -139,58 +150,65 @@
 \bibcite{aVirgo}{{11}{2014}{{Acernese et~al.}}{{Acernese et~al.,}}}
 \bibcite{bilby_paper}{{12}{2019}{{Ashton et~al.}}{{Ashton et~al.}}}
 \bibcite{NSNature}{{13}{2022}{{Ashton et~al.}}{{Ashton, Bernstein, Buchner \& et al.}}}
-\bibcite{Bayes1763}{{14}{1763}{{{Bayes}}}{{{Bayes}}}}
-\bibcite{pycbc}{{15}{2019}{{{Biwer} et~al.}}{{{Biwer}, {Capano}, {De}, {Cabero}, {Brown}, {Nitz} \& {Raymond}}}}
-\bibcite{jax2018github}{{16}{2018}{{Bradbury et~al.}}{{Bradbury et~al.,}}}
-\bibcite{ET_science_case}{{17}{2023}{{Branchesi et~al.}}{{Branchesi et~al.}}}
-\bibcite{NS_methods_buchner}{{18}{2023}{{Buchner}}{{Buchner}}}
-\bibcite{cabezas2024blackjax}{{19}{2024}{{Cabezas et~al.}}{{Cabezas, Corenflos, Lao \& Louf}}}
-\bibcite{relativebinning4}{{20}{2013}{{Cornish}}{{Cornish}}}
-\bibcite{dau2021wastefreesequentialmontecarlo}{{21}{2021}{{Dau \& Chopin}}{{Dau \& Chopin}}}
-\bibcite{ripple}{{22}{2024}{{Edwards et~al.}}{{Edwards, Wong, Lam, Coogan, Foreman-Mackey, Isi \& Zimmerman}}}
-\bibcite{Handley:2015vkr}{{23}{2015}{{Handley et~al.}}{{Handley, Hobson \& Lasenby}}}
-\bibcite{parallel_ns}{{24}{2014}{{Henderson \& Goggans}}{{Henderson \& Goggans}}}
-\bibcite{Higson_Errors}{{25}{2018}{{Higson et~al.}}{{Higson, Handley, Hobson \& Lasenby}}}
-\bibcite{dynamic_ns}{{26}{2019}{{Higson et~al.}}{{Higson, Handley, Hobson \& Lasenby}}}
-\bibcite{pmlr-v151-hoffman22a}{{27}{2022}{{Hoffman \& Sountsov}}{{Hoffman \& Sountsov}}}
-\bibcite{pmlr-v130-hoffman21a}{{28}{2021}{{Hoffman et~al.}}{{Hoffman, Radul \& Sountsov}}}
-\bibcite{HuAccelerationReview}{{29}{2024}{{Hu \& Veitch}}{{Hu \& Veitch}}}
-\bibcite{aeons}{{30}{2024}{{Hu et~al.}}{{Hu, Baryshnikov \& Handley}}}
-\bibcite{Khan:2015jqa}{{31}{2016}{{Khan et~al.}}{{Khan, Husa, Hannam, Ohme, P\"urrer, Jim\'enez~Forteza \& Boh\'e}}}
-\bibcite{TL_relativebinning}{{32}{2023}{{Krishna et~al.}}{{Krishna, Vijaykumar, Ganguly, Talbot, Biscoveanu, George, Williams \& Zimmerman}}}
-\bibcite{relativebinning3}{{33}{2021}{{Leslie et~al.}}{{Leslie, Dai \& Pratten}}}
-\bibcite{CUDAGuide}{{34}{2025}{{{NVIDIA Corporation}}}{{{NVIDIA Corporation}}}}
-\bibcite{Neal2003_slice}{{35}{2003}{{Neal}}{{Neal}}}
-\bibcite{GPU_computing}{{36}{2008}{{Owens et~al.}}{{Owens, Houston, Luebke, Green, Stone \& Phillips}}}
-\bibcite{Prathaban_PE_errors}{{37}{2024}{{Prathaban \& Handley}}{{Prathaban \& Handley}}}
-\bibcite{Prathaban_2025_github}{{38}{2025b}{{Prathaban et~al.}}{{Prathaban et~al.}}}
-\bibcite{Prathaban_2025_zenodo}{{39}{2025a}{{Prathaban et~al.}}{{Prathaban, Yallup, Alvey, Yang, Templeton \& Handley}}}
-\bibcite{Prathaban}{{40}{2025c}{{Prathaban et~al.}}{{Prathaban, Bevins \& Handley}}}
-\bibcite{bilby_validation}{{41}{2020}{{Romero-Shaw et~al.}}{{Romero-Shaw et~al.,}}}
-\bibcite{skilling}{{42}{2006}{{Skilling}}{{Skilling}}}
-\bibcite{Smith:2019ucc}{{43}{2020}{{Smith et~al.}}{{Smith, Ashton, Vajpeyi \& Talbot}}}
-\bibcite{dynesty}{{44}{2020}{{Speagle}}{{Speagle}}}
-\bibcite{DE}{{45}{1997}{{Storn \& Price}}{{Storn \& Price}}}
-\bibcite{aLIGO}{{46}{2015}{{{The LIGO Scientific Collaboration} et~al.}}{{{The LIGO Scientific Collaboration} et~al.}}}
-\bibcite{Thrane_2019}{{47}{2019}{{Thrane \& Talbot}}{{Thrane \& Talbot}}}
-\bibcite{lal}{{48}{2015}{{Veitch et~al.}}{{Veitch et~al.,}}}
-\bibcite{Williams2021Nessai}{{49}{2021}{{{Williams} et~al.}}{{{Williams}, {Veitch} \& {Messenger}}}}
-\bibcite{wong2023fastgravitationalwaveparameter}{{50}{2023a}{{Wong et~al.}}{{Wong, Isi \& Edwards}}}
-\bibcite{flowMC}{{51}{2023b}{{Wong et~al.}}{{Wong, Gabri\'e \& Foreman-Mackey}}}
-\bibcite{Wouters_BNS}{{52}{2024}{{Wouters et~al.}}{{Wouters, Pang, Dietrich \& Van Den~Broeck}}}
-\bibcite{blackjax_ns_github}{{53}{2025b}{{Yallup et~al.}}{{Yallup, Handley, Cabezas, et~al.}}}
-\bibcite{yallup2025nested}{{54}{2025a}{{Yallup et~al.}}{{Yallup, Kroupa \& Handley}}}
-\bibcite{relativebinning2}{{55}{2018}{{Zackay et~al.}}{{Zackay, Dai \& Venumadhav}}}
-\bibcite{DE2}{{56}{2006}{{{ter Braak}}}{{{ter Braak}}}}
+\bibcite{makaibaker2025}{{14}{2025}{{Baker et~al.}}{{Baker, Lasky, Thrane \& Golomb}}}
+\bibcite{Bayes1763}{{15}{1763}{{{Bayes}}}{{{Bayes}}}}
+\bibcite{pycbc}{{16}{2019}{{{Biwer} et~al.}}{{{Biwer}, {Capano}, {De}, {Cabero}, {Brown}, {Nitz} \& {Raymond}}}}
+\bibcite{jax2018github}{{17}{2018}{{Bradbury et~al.}}{{Bradbury et~al.,}}}
+\bibcite{ET_science_case}{{18}{2023}{{Branchesi et~al.}}{{Branchesi et~al.}}}
+\bibcite{NS_methods_buchner}{{19}{2023}{{Buchner}}{{Buchner}}}
+\bibcite{cabezas2024blackjax}{{20}{2024}{{Cabezas et~al.}}{{Cabezas, Corenflos, Lao \& Louf}}}
+\bibcite{NelsonMeyerReview}{{21}{2022}{{Christensen \& Meyer}}{{Christensen \& Meyer}}}
+\bibcite{relativebinning4}{{22}{2013}{{Cornish}}{{Cornish}}}
+\bibcite{dau2021wastefreesequentialmontecarlo}{{23}{2021}{{Dau \& Chopin}}{{Dau \& Chopin}}}
+\bibcite{ripple}{{24}{2024}{{Edwards et~al.}}{{Edwards, Wong, Lam, Coogan, Foreman-Mackey, Isi \& Zimmerman}}}
+\bibcite{Handley:2015vkr}{{25}{2015}{{Handley et~al.}}{{Handley, Hobson \& Lasenby}}}
+\bibcite{parallel_ns}{{26}{2014}{{Henderson \& Goggans}}{{Henderson \& Goggans}}}
+\bibcite{Higson_Errors}{{27}{2018}{{Higson et~al.}}{{Higson, Handley, Hobson \& Lasenby}}}
+\bibcite{dynamic_ns}{{28}{2019}{{Higson et~al.}}{{Higson, Handley, Hobson \& Lasenby}}}
+\bibcite{pmlr-v151-hoffman22a}{{29}{2022}{{Hoffman \& Sountsov}}{{Hoffman \& Sountsov}}}
+\bibcite{pmlr-v130-hoffman21a}{{30}{2021}{{Hoffman et~al.}}{{Hoffman, Radul \& Sountsov}}}
+\bibcite{HuAccelerationReview}{{31}{2024}{{Hu \& Veitch}}{{Hu \& Veitch}}}
+\bibcite{aeons}{{32}{2024}{{Hu et~al.}}{{Hu, Baryshnikov \& Handley}}}
+\bibcite{jouppi2023tpu}{{33}{2023}{{Jouppi et~al.}}{{Jouppi et~al.,}}}
+\bibcite{Khan:2015jqa}{{34}{2016}{{Khan et~al.}}{{Khan, Husa, Hannam, Ohme, P\"urrer, Jim\'enez~Forteza \& Boh\'e}}}
+\bibcite{TL_relativebinning}{{35}{2023}{{Krishna et~al.}}{{Krishna, Vijaykumar, Ganguly, Talbot, Biscoveanu, George, Williams \& Zimmerman}}}
+\bibcite{relativebinning3}{{36}{2021}{{Leslie et~al.}}{{Leslie, Dai \& Pratten}}}
+\bibcite{CUDAGuide}{{37}{2025}{{{NVIDIA Corporation}}}{{{NVIDIA Corporation}}}}
+\bibcite{Neal2003_slice}{{38}{2003}{{Neal}}{{Neal}}}
+\bibcite{GPU_computing}{{39}{2008}{{Owens et~al.}}{{Owens, Houston, Luebke, Green, Stone \& Phillips}}}
+\bibcite{Prathaban_PE_errors}{{40}{2024}{{Prathaban \& Handley}}{{Prathaban \& Handley}}}
+\bibcite{Prathaban_2025_github}{{41}{2025b}{{Prathaban et~al.}}{{Prathaban et~al.}}}
+\bibcite{Prathaban_2025_zenodo}{{42}{2025a}{{Prathaban et~al.}}{{Prathaban, Yallup, Alvey, Yang, Templeton \& Handley}}}
+\bibcite{Prathaban}{{43}{2025c}{{Prathaban et~al.}}{{Prathaban, Bevins \& Handley}}}
+\bibcite{IMRPhenomXPHM}{{44}{2021}{{Pratten et~al.}}{{Pratten et~al.,}}}
+\bibcite{bilby_validation}{{45}{2020}{{Romero-Shaw et~al.}}{{Romero-Shaw et~al.,}}}
+\bibcite{skilling}{{46}{2006}{{Skilling}}{{Skilling}}}
+\bibcite{Smith:2019ucc}{{47}{2020}{{Smith et~al.}}{{Smith, Ashton, Vajpeyi \& Talbot}}}
+\bibcite{dynesty}{{48}{2020}{{Speagle}}{{Speagle}}}
+\bibcite{DE}{{49}{1997}{{Storn \& Price}}{{Storn \& Price}}}
+\bibcite{aLIGO}{{50}{2015}{{{The LIGO Scientific Collaboration} et~al.}}{{{The LIGO Scientific Collaboration} et~al.}}}
+\bibcite{Thrane_2019}{{51}{2019}{{Thrane \& Talbot}}{{Thrane \& Talbot}}}
+\bibcite{lal}{{52}{2015}{{Veitch et~al.}}{{Veitch et~al.,}}}
+\bibcite{Williams2021Nessai}{{53}{2021}{{{Williams} et~al.}}{{{Williams}, {Veitch} \& {Messenger}}}}
+\bibcite{wong2023fastgravitationalwaveparameter}{{54}{2023a}{{Wong et~al.}}{{Wong, Isi \& Edwards}}}
+\bibcite{flowMC}{{55}{2023b}{{Wong et~al.}}{{Wong, Gabri\'e \& Foreman-Mackey}}}
+\bibcite{Wouters_BNS}{{56}{2024}{{Wouters et~al.}}{{Wouters, Pang, Dietrich \& Van Den~Broeck}}}
+\bibcite{blackjax_ns_github}{{57}{2025b}{{Yallup et~al.}}{{Yallup, Handley, Cabezas, et~al.}}}
+\bibcite{yallup2025nested}{{58}{2025a}{{Yallup et~al.}}{{Yallup, Kroupa \& Handley}}}
+\bibcite{relativebinning2}{{59}{2018}{{Zackay et~al.}}{{Zackay, Dai \& Venumadhav}}}
+\bibcite{DE2}{{60}{2006}{{{ter Braak}}}{{{ter Braak}}}}
 \citation{skilling,Higson_Errors}
 \citation{Prathaban_PE_errors}
-\@writefile{toc}{\contentsline {section}{\numberline {A}PP coverage plot for \texttt  {bilby} and \texttt  {dynesty}}{11}{section.A1}\protected@file@percent }
-\newlabel{app:bilby_pp_plot}{{A}{11}{}{section.A1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Full run statistics for injection study}{11}{section.A2}\protected@file@percent }
-\newlabel{app:injection_study_stats}{{B}{11}{}{section.A2}{}}
-\newlabel{lastpage}{{B}{11}{}{figure.A2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}PP coverage plot for \texttt  {bilby} and \texttt  {dynesty}}{12}{section.A1}\protected@file@percent }
+\newlabel{app:bilby_pp_plot}{{A}{12}{}{section.A1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Full run statistics for injection study}{12}{section.A2}\protected@file@percent }
+\newlabel{app:injection_study_stats}{{B}{12}{}{section.A2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {A1}{\ignorespaces PP coverage plot for the 100-injection study, obtained with the CPU-based \texttt  {bilby+dynesty} sampler. This plot is provided for direct comparison with the results from our \texttt  {blackjax-ns} implementation shown in Figure~\ref {fig:pp_coverage}. The results confirm that the CPU-based and GPU-based implementations are functionally similar.}}{12}{figure.A1.1}\protected@file@percent }
 \newlabel{fig:pp_coverage_bilby}{{A1}{12}{PP coverage plot for the 100-injection study, obtained with the CPU-based \texttt {bilby+dynesty} sampler. This plot is provided for direct comparison with the results from our \texttt {blackjax-ns} implementation shown in Figure~\ref {fig:pp_coverage}. The results confirm that the CPU-based and GPU-based implementations are functionally similar}{figure.A1.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Likelihood level parallelisation performance}{12}{section.A3}\protected@file@percent }
+\newlabel{lastpage}{{C}{12}{}{figure.A3.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {B1}{\ignorespaces Comparison of internal run statistics for the 100-injection study. From left to right: the mean number of likelihood evaluations per iteration, the mean number of accepted steps, and the mean acceptance rate, for both the \texttt  {bilby} and \texttt  {blackjax-ns} runs. The results show that despite the differences in tuning strategy, motivated by architectural differences between the CPU and GPU, the two samplers exhibit similar properties.}}{13}{figure.A2.1}\protected@file@percent }
 \newlabel{fig:injection_study_stats}{{B1}{13}{Comparison of internal run statistics for the 100-injection study. From left to right: the mean number of likelihood evaluations per iteration, the mean number of accepted steps, and the mean acceptance rate, for both the \texttt {bilby} and \texttt {blackjax-ns} runs. The results show that despite the differences in tuning strategy, motivated by architectural differences between the CPU and GPU, the two samplers exhibit similar properties}{figure.A2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C1}{\ignorespaces Scaling of likelihood wallclock time on an NVIDIA L4 GPU. A typical representative \texttt  {jimgw} likelihood for H1 and L1 detectors on a 4 second window using the \texttt  {IMRPhenomD} waveform model from \texttt  {ripple} is used. Calls of likelihood vectorized over $N$ samples are made, and the wall time averaged over 50 calls is reported. Comparison is made between the \emph  {Full} likelihood using all frequency bins, and a \emph  {Heterodyned} likelihood compressing to 300 frequency bins.}}{13}{figure.A3.1}\protected@file@percent }
+\newlabel{fig:scaling_l4}{{C1}{13}{Scaling of likelihood wallclock time on an NVIDIA L4 GPU. A typical representative \texttt {jimgw} likelihood for H1 and L1 detectors on a 4 second window using the \texttt {IMRPhenomD} waveform model from \texttt {ripple} is used. Calls of likelihood vectorized over $N$ samples are made, and the wall time averaged over 50 calls is reported. Comparison is made between the \emph {Full} likelihood using all frequency bins, and a \emph {Heterodyned} likelihood compressing to 300 frequency bins}{figure.A3.1}{}}
 \gdef \@abspage@last{13}

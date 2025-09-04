@@ -48,6 +48,9 @@ Ashton G.,  et~al., 2019, \mn@doi [Astrophys. J. Suppl.] {10.3847/1538-4365/ab06
 \bibitem[\protect\citeauthoryear{Ashton, Bernstein, Buchner  \& et al.}{Ashton et~al.}{2022}]{NSNature}
 Ashton G.,  Bernstein N.,  Buchner J.,   et al. 2022, \mn@doi [Nature Reviews Methods Primers] {10.1038/s43586-022-00121-x}, 2, 39
 
+\bibitem[\protect\citeauthoryear{Baker, Lasky, Thrane  \& Golomb}{Baker et~al.}{2025}]{makaibaker2025}
+Baker A.~M.,  Lasky P.~D.,  Thrane E.,   Golomb J.,  2025, Significant challenges for astrophysical inference with next-generation gravitational-wave observatories (\mn@eprint {arXiv} {2503.04073})
+
 \bibitem[\protect\citeauthoryear{{Bayes}}{{Bayes}}{1763}]{Bayes1763}
 {Bayes} T.,  1763, \mn@doi [Philosophical Transactions of the Royal Society of London] {10.1098/rstl.1763.0053}, \href {https://ui.adsabs.harvard.edu/abs/1763RSPT...53..370B} {53, 370}
 
@@ -65,6 +68,9 @@ Buchner J.,  2023, \mn@doi [Statistics Surveys] {10.1214/23-SS144}, 17, 169
 
 \bibitem[\protect\citeauthoryear{Cabezas, Corenflos, Lao  \& Louf}{Cabezas et~al.}{2024}]{cabezas2024blackjax}
 Cabezas A.,  Corenflos A.,  Lao J.,   Louf R.,  2024, BlackJAX: Composable {B}ayesian inference in {JAX} (\mn@eprint {arXiv} {2402.10797})
+
+\bibitem[\protect\citeauthoryear{Christensen \& Meyer}{Christensen \& Meyer}{2022}]{NelsonMeyerReview}
+Christensen N.,  Meyer R.,  2022, \mn@doi [Rev. Mod. Phys.] {10.1103/RevModPhys.94.025001}, 94, 025001
 
 \bibitem[\protect\citeauthoryear{Cornish}{Cornish}{2013}]{relativebinning4}
 Cornish N.~J.,  2013, Fast Fisher Matrices and Lazy Likelihoods (\mn@eprint {arXiv} {1007.4820}), \url {https://arxiv.org/abs/1007.4820}
@@ -99,6 +105,9 @@ Hu Q.,  Veitch J.,  2024, Costs of Bayesian Parameter Estimation in Third-Genera
 \bibitem[\protect\citeauthoryear{Hu, Baryshnikov  \& Handley}{Hu et~al.}{2024}]{aeons}
 Hu Z.,  Baryshnikov A.,   Handley W.,  2024, \mn@doi [Mon. Not. Roy. Astron. Soc.] {10.1093/mnras/stae1754}, 532, 4035
 
+\bibitem[\protect\citeauthoryear{Jouppi et~al.,}{Jouppi et~al.}{2023}]{jouppi2023tpu}
+Jouppi N.,  et~al., 2023, in Proceedings of the 50th annual international symposium on computer architecture. pp 1--14
+
 \bibitem[\protect\citeauthoryear{Khan, Husa, Hannam, Ohme, P\"urrer, Jim\'enez~Forteza  \& Boh\'e}{Khan et~al.}{2016}]{Khan:2015jqa}
 Khan S.,  Husa S.,  Hannam M.,  Ohme F.,  P\"urrer M.,  Jim\'enez~Forteza X.,   Boh\'e A.,  2016, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.93.044007}, 93, 044007
 
@@ -128,6 +137,9 @@ Prathaban M.,  Yallup D.,  Alvey J.,  Yang M.,  Templeton W.,   Handley W.,  202
 
 \bibitem[\protect\citeauthoryear{Prathaban, Bevins  \& Handley}{Prathaban et~al.}{2025c}]{Prathaban}
 Prathaban M.,  Bevins H.,   Handley W.,  2025c, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staf962}, p. staf962
+
+\bibitem[\protect\citeauthoryear{Pratten et~al.,}{Pratten et~al.}{2021}]{IMRPhenomXPHM}
+Pratten G.,  et~al., 2021, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.103.104056}, 103, 104056
 
 \bibitem[\protect\citeauthoryear{Romero-Shaw et~al.,}{Romero-Shaw et~al.}{2020}]{bilby_validation}
 Romero-Shaw I.~M.,  et~al., 2020, \mn@doi [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/staa2850}, 499, 3295
