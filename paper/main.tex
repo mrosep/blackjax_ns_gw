@@ -1253,16 +1253,24 @@ is part of the ongoing programme of research this work establishes on a GPU GW p
 effective parallelism across chains, the algorithm in this work is bottlenecked by the ability to 
 parallelise the likelihood evaluation itself. We demonstrate the scaling of the likelihood evaluation 
 time with the number of samples in Figure~\ref{fig:scaling_l4}. The emerging pattern of polynomial 
-runtime scaling with the number of samples, particularly for the \emph{Full} bin likelihood we investigate
- primarily in this work, indicates that the parallel throughput of the GPU is being saturated. This 
- bottleneck can be mitigated by either; using a compressed likelihood (\emph{Heterodyning} being an 
- example of this shown in the figure), expanding processing over multiple GPUs, or, if possible, 
- rewriting the likelihood to be more parallelism friendly.
+runtime scaling with the number of samples, particularly for the high frequency bin number likelihoods we investigate
+primarily in this work, indicates that the parallel throughput of the GPU is being saturated. This 
+bottleneck can be mitigated by either; using a compressed likelihood (e.g. by heterodyning) or expanding 
+processing over multiple GPUs. If possible, rewriting the likelihood to be more parallelism friendly is 
+the most efficient solution, but this is challenging for GW data analysis.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\columnwidth]{figures/scaling_l4.pdf}
-    \caption{Scaling of likelihood wallclock time on an NVIDIA L4 GPU. A typical representative \texttt{jimgw} likelihood for H1 and L1 detectors on a 4 second window using the \texttt{IMRPhenomD} waveform model from \texttt{ripple} is used. Calls of likelihood vectorized over $N$ samples are made, and the wall time averaged over 50 calls is reported. Comparison is made between the \emph{Full} likelihood using all frequency bins, and a \emph{Heterodyned} likelihood compressing to 300 frequency bins.}
+    \includegraphics[width=1.0\columnwidth]{figures/likelihood_scaling.pdf}
+    \caption{Scaling of likelihood wallclock time on an NVIDIA L4 GPU. 
+    A typical representative likelihood for a 3-detector analysis 
+    on a 4 second signal using the \texttt{IMRPhenomD} waveform model from 
+    \texttt{ripple} is used. Calls of likelihood vectorized over $N$ 
+    samples are made, and the wall time averaged over many calls is reported. 
+    Comparison is made between different numbers of frequency bins over 
+    which the likelihood is evaluated. As can be seen, reducing the number of 
+    frequency bins alleviates this bottleneck, and one way to achieve this for
+    realistic likelihoods is by using heterodyning.}
     \label{fig:scaling_l4}
 \end{figure}
 
