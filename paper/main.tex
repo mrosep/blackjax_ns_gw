@@ -1188,6 +1188,17 @@ quality of the posteriors.
     \label{fig:injection_study_stats}
 \end{figure*}
 
+\section{Likelihood level parallelisation performance}
+The performance gains from a GPU sampling framework arises from the ability to exploit massive parallelism. In particular, we seek to exploit parallelism across multiple short Markov chains, as this is the central construction of NS. The potential bottlenecks for parallelism arise from the NS algorithms ability to effectively synchronise the chains, and (if this condition is met) the ability to parallelise the likelihood evaluation itself across these chains. Developing algorithms that can effectively achieve the former goal is part of the ongoing programme of research this work establishes on a GPU GW problem. Regardless of effective parallelism across chains, the algorithm in this work is bottlenecked by the ability to parallelise the likelihood evaluation itself. We demonstrate the scaling of the likelihood evaluation time with the number of samples in Figure~\ref{fig:scaling_l4}. The emerging pattern of polynomial runtime scaling with the number of samples, particularly for the \emph{Full} bin likelihood we investigate primarily in this work, indicates that the parallel throughput of the GPU is being saturated. This bottleneck can be mitigated by either; using a compressed likelihood (\emph{Heterodyning} being an example of this shown in the figure), expanding processing over multiple GPUs, or -- if possible -- rewriting the likelihood to be more parallelism friendly.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\columnwidth]{figures/scaling_l4.pdf}
+    \caption{Scaling of likelihood wallclock time on an NVIDIA L4 GPU. A typical representative \texttt{jimgw} likelihood for H1 and L1 detectors on a 4 second window using the \texttt{IMRPhenomD} waveform model from \texttt{ripple} is used. Calls of likelihood vectorized over $N$ samples are made, and the wall time averaged over 50 calls is reported. Comparison is made between the \emph{Full} likelihood using all frequency bins, and a \emph{Heterodyned} likelihood compressing to 300 frequency bins.}
+    \label{fig:scaling_l4}
+\end{figure}
+
+
 % The full run statistics for the injection study are shown in Figure~\ref{fig:injection_study_stats}.
 % In general, the accepted steps per iteration and the acceptance rates
 % for both samplers are similar. However, the \texttt{blackjax-ns} sampler
