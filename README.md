@@ -12,11 +12,11 @@ This repository contains the source code and manuscript for the paper:
 
 If you use this code in your work, please cite both:
 
-1. **BlackJAX Nested Sampling Framework:**  
-   Yallup, D., Handley, W. J., Hobson, M. P., & Lasenby, A. N. (2024). "blackjax-ns: Nested Sampling with normalizing flows." *NeurIPS ML4PS Workshop*. [OpenReview](https://openreview.net/forum?id=ekbkMSuPo4&referrer=%5Bthe%20profile%20of%20David%20Yallup%5D)
+1. **Nested Slice Sampling Framework:**  
+   Yallup, D., Kroupa, N., & Handley, W. (2025). "Nested Slice Sampling." *FPI-ICLR2025*. [OpenReview](https://openreview.net/forum?id=ekbkMSuPo4&referrer=%5Bthe%20profile%20of%20David%20Yallup%5D)
 
 2. **Gravitational-wave Inference Application:**  
-   Piotrzkowski, M., Handley, W. J., & Lasenby, A. N. (2024). "Gravitational-wave inference at GPU speed: A bilby-like nested sampling kernel within blackjax-ns." [arXiv:2509.04336](https://arxiv.org/abs/2509.04336)
+   Prathaban, M., Yallup, D., Alvey, J., Yang, M., Templeton, W., & Handley, W. (2024). "Gravitational-wave inference at GPU speed: A bilby-like nested sampling kernel within blackjax-ns." [arXiv:2509.04336](https://arxiv.org/abs/2509.04336)
 
 ## Abstract
 
