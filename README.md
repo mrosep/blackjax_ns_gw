@@ -16,7 +16,7 @@ If you use this code in your work, please cite both:
    Yallup, D., Kroupa, N., & Handley, W. (2025). "Nested Slice Sampling." *FPI-ICLR2025*. [OpenReview](https://openreview.net/forum?id=ekbkMSuPo4&referrer=%5Bthe%20profile%20of%20David%20Yallup%5D)
 
 2. **Gravitational-wave Inference Application:**  
-   Prathaban, M., Yallup, D., Alvey, J., Yang, M., Templeton, W., & Handley, W. (2024). "Gravitational-wave inference at GPU speed: A bilby-like nested sampling kernel within blackjax-ns." [arXiv:2509.04336](https://arxiv.org/abs/2509.04336)
+   Prathaban, M., Yallup, D., Alvey, J., Yang, M., Templeton, W., & Handley, W. (2025). "Gravitational-wave inference at GPU speed: A bilby-like nested sampling kernel within blackjax-ns." [arXiv:2509.04336](https://arxiv.org/abs/2509.04336)
 
 ## Abstract
 
@@ -54,7 +54,7 @@ This repository is structured into two main directories:
 
 3. **Install all dependencies:**
    ```bash
-   pip install -r src/requirements.txt
+   pip install -r requirements.txt
    ```
    This will install key packages including: `blackjax` (nested sampling branch), `bilby`, `anesthetic`, `jimgw`, `ripple`, and other essential libraries for gravitational-wave analysis.
 
