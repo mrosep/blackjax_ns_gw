@@ -318,8 +318,7 @@ Establishing this baseline demonstrates the flexibility of the \texttt{blackjax}
 nested sampling framework, and gives scope for future work to explore other 
 parallel inner sampling methods.
 
-
-
+\vspace*{-20pt}
 \section{Methods}
 \label{sec:methods}
 
@@ -924,31 +923,6 @@ $n_{\text{live}}=1000$ for \texttt{bilby}, and an \texttt{naccept}
 target of 60. Again, we use the 
 termination condition described in Section~\ref{sec:injection_study}.
 
-\begin{table}
-    \centering
-    \caption{Injection parameters for the 8s signal.}
-    \label{tab:8s_injection_params}
-    \begin{tabular}{l l l c c}
-    \hline
-    \hline
-    \textbf{Parameter} & \textbf{Value} \\
-    \hline
-    $\mathcal{M}$ & 10.0 M$_{\odot}$ \\
-    $q$ & 0.70 \\
-    $\chi_1$ & -0.34 \\
-    $\chi_2$ & 0.01 \\
-    $d_L$ & 500 Mpc \\
-    $\theta_{\textrm{JN}}$ & 1.30 rad \\
-    $\psi$ & 1.83 rad \\
-    $\phi$ & 5.21 rad \\
-    $t_c$ & 0.0 s\\
-    $\alpha$ & 1.07 rad \\
-    $\delta$ & -1.01 rad \\
-    \hline
-    \hline
-    \end{tabular}
-    \end{table}
-
 \begin{figure*}
     \centering
     \includegraphics{figures/8s_corner_comparison.pdf}
@@ -1025,6 +999,32 @@ analogous to the scaling seen in the CPU-based case.
 
 \section{Conclusions}
 \label{sec:conclusions}
+
+\begin{table}
+    \centering
+    \caption{Injection parameters for the 8s signal.}
+    \label{tab:8s_injection_params}
+    \begin{tabular}{l l l c c}
+    \hline
+    \hline
+    \textbf{Parameter} & \textbf{Value} \\
+    \hline
+    $\mathcal{M}$ & 10.0 M$_{\odot}$ \\
+    $q$ & 0.70 \\
+    $\chi_1$ & -0.34 \\
+    $\chi_2$ & 0.01 \\
+    $d_L$ & 500 Mpc \\
+    $\theta_{\textrm{JN}}$ & 1.30 rad \\
+    $\psi$ & 1.83 rad \\
+    $\phi$ & 5.21 rad \\
+    $t_c$ & 0.0 s\\
+    $\alpha$ & 1.07 rad \\
+    $\delta$ & -1.01 rad \\
+    \hline
+    \hline
+    \end{tabular}
+    \end{table}
+
 
 In this work, we have presented the development and validation of a
 GPU-accelerated implementation of the `acceptance-walk' nested sampling
@@ -1229,7 +1229,6 @@ Figure~\ref{fig:injection_study_stats} shows the full statistics for each inject
 Although we had to employ batch tuning to the chains, in contrast to the per-iteration
 strategy employed in \texttt{bilby}, the results show that this still resulted in 
 similar behaviours for the chains and thus our results represent a like-for-like comparison.
-
 
 \begin{figure*}
     \centering

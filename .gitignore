@@ -24,3 +24,48 @@ my_venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# Unused figures (kept locally for reference)
+paper/figures/evidence_vs_steps_bilby.pdf
+paper/figures/evidence_vs_steps.pdf
+paper/figures/injection_0_progress.pdf
+paper/figures/ks_test_vs_steps_bilby.pdf
+paper/figures/ks_test_vs_steps.pdf
+paper/figures/likelihood_scaling_restricted.pdf
+paper/figures/logz_percentile_calibration.pdf
+paper/figures/luminosity_distance_prior_check.pdf
+paper/figures/method_comparison_longerchains.pdf
+paper/figures/method_comparison_nlive1400.pdf
+paper/figures/method_comparison.pdf
+paper/figures/percentile_calibration_vs_steps.pdf
+paper/figures/scaling_a100.pdf
+paper/figures/scaling_l4.pdf
+paper/figures/speedup_comparison.pdf
+
+# Old kernel directory (kept locally for reference)
+src/custom_ns_kernels/
+
+# Old script files (kept locally for reference)
+src/bilbykernel_unitcube_4s.py
+src/bilby_injections_priorloop.py
+
+# Exclude everything from src/ except essential files
+src/*
+
+# Include essential directories
+!src/custom_kernels/
+!src/injection_plots/
+
+# Include essential 4s data files
+!src/4s_*.npy
+!src/4s_*.pkl
+
+# Include noise curve files
+!src/AdV_asd.txt
+!src/aLIGO_O4_high_asd.txt
+
+# Include essential python scripts
+!src/bilby_4s.py
+!src/bilby_injections.py
+!src/blackjax_4s.py
+!src/blackjax_injections.py

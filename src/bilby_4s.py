@@ -2,25 +2,38 @@ import bilby
 import json
 import os
 import numpy as np
-import sys
+
 from gwpy.timeseries import TimeSeries
 
 logger = bilby.core.utils.setup_logger()
 
-data_dir = f"4s_injections/injection_{sys.argv[1]}"
-outdir = data_dir + "/bilby_run-bugfix"
+outdir = "bilby_4s_powerlawprior"
 label = "aligned_spin_injections"
 
 bilby.core.utils.setup_logger(outdir=outdir, label=label)
 
 # Set up a random seed for result reproducibility.  This is optional!
-# bilby.core.utils.random.seed(88170235)
-bilby.core.utils.random.seed(int(sys.argv[1]))
+bilby.core.utils.random.seed(88170235)
 
 detectors = ["H1", "L1", "V1"]
 
-with open(data_dir+"/injection_params.json", "r") as f:
-    injection_parameters = json.load(f)
+injection_parameters = dict(
+    chirp_mass=35.0,
+    mass_ratio=0.9,
+    a_1=0.4,
+    a_2=0.3,
+    tilt_1=0,
+    tilt_2=np.pi,
+    chi_1=0.4,
+    chi_2=-0.3,
+    luminosity_distance=1000.0,
+    theta_jn=0.4,
+    psi=2.659,
+    phase=1.3,
+    geocent_time=1126259642.413,
+    ra=1.375,
+    dec=-1.2108,
+)
 
 
 maximum_frequency = 1024
@@ -56,7 +69,7 @@ waveform_generator = bilby.gw.WaveformGenerator(
 #ifos = bilby.gw.detector.InterferometerList(["H1", "L1", "V1"])
 
 #ifos = bilby.gw.detector.InterferometerList.from_pickle('./ifo_newparams_H1L1V1.pkl')
-ifos = bilby.gw.detector.InterferometerList.from_pickle(data_dir+'/4s_H1L1V1.pkl')
+ifos = bilby.gw.detector.InterferometerList.from_pickle('./4s_H1L1V1.pkl')
 
 #freqs = np.load('injected_frequency_array.npy')
 #H1_strain = np.load('injected_H1_strain.npy')
@@ -84,24 +97,23 @@ for ifo in ifos:
         
 priors = bilby.gw.prior.BBHPriorDict(aligned_spin=True)
 priors["chirp_mass"] = bilby.core.prior.Uniform(
-    20.0, 50.0, name="chirp_mass"
+    25.0, 50.0, name="chirp_mass"
 )
 priors["mass_ratio"] = bilby.core.prior.Uniform(
-    0.5, 1.0, name="mass_ratio"
+    0.25, 1.0, name="mass_ratio"
 )
 # Set the prior on trigger time
-#priors["geocent_time"] = bilby.core.prior.Uniform(
-#    injection_parameters["geocent_time"] - 0.1, injection_parameters["geocent_time"] + 0.1, name="geocent_time"
-#)
-priors["geocent_time"] = bilby.core.prior.Uniform(1126259642.313, 1126259642.513, name="geocent_time")
+priors["geocent_time"] = bilby.core.prior.Uniform(
+    injection_parameters["geocent_time"] - 0.1, injection_parameters["geocent_time"] + 0.1, name="geocent_time"
+)
 #priors["luminosity_distance"] = bilby.gw.prior.UniformComovingVolume(minimum=100.0, maximum=5000.0, cosmology='Planck15', name='luminosity_distance')
-#priors['luminosity_distance'] = bilby.core.prior.analytical.Beta(alpha=3.0, beta=1.0, minimum=100.0, maximum=5000.0, name='luminosity_distance')
-priors["luminosity_distance"] = bilby.core.prior.analytical.PowerLaw(alpha=2.0, minimum=100.0, maximum=5000.0, name='luminosity_distance')
-priors['chi_1'] = bilby.core.prior.Uniform(minimum=-0.8, maximum=0.8, name='chi_1')
-priors['chi_2'] = bilby.core.prior.Uniform(minimum=-0.8, maximum=0.8, name='chi_2')
+priors['luminosity_distance'] = bilby.core.prior.analytical.Beta(alpha=3.0, beta=1.0, minimum=100.0, maximum=5000.0, name='luminosity_distance')
+#priors["luminosity_distance"] = bilby.core.prior.analytical.PowerLaw(alpha=2.0, minimum=100.0, maximum=5000.0, name='luminosity_distance')
+priors['chi_1'] = bilby.core.prior.Uniform(minimum=-1.0, maximum=1.0, name='chi_1')
+priors['chi_2'] = bilby.core.prior.Uniform(minimum=-1.0, maximum=1.0, name='chi_2')
 priors['mass_1'] = bilby.core.prior.Constraint(minimum=1, maximum=1000, name='mass_1')
 priors['mass_2'] = bilby.core.prior.Constraint(minimum=1, maximum=1000, name='mass_2')
-print(priors)
+
 #priors['psi'] = bilby.core.prior.Uniform(minimum=0, maximum=np.pi, name='psi', unit=None, boundary='periodic')
 #priors['phase'] = bilby.core.prior.Uniform(minimum=0, maximum=2*np.pi, name='phase', unit=None, boundary='periodic')
 
@@ -143,12 +155,11 @@ result = bilby.run_sampler(
     label=label,
     nlive=1000,
     naccept=60,
-    #check_point=False,
     check_point_plot=True,
     plot=True,
     check_point_delta_t=1800,
     use_ratio=True,
-    print_method="interval-60", 
+    print_method="interval-60",
     sample="acceptance-walk",
     npool=16,
     do_clustering=False,
