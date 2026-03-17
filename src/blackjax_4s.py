@@ -34,10 +34,15 @@ from custom_kernels import (
 # Initialize waveform
 waveform = RippleIMRPhenomD(f_ref=50)
 
-# Noise curve paths (using local files)
+# Noise curve paths
+# asd_paths = {
+#     "H1": "/mnt/data/myp23/env/lib/python3.10/site-packages/bilby/gw/detector/noise_curves/aLIGO_O4_high_asd.txt",
+#     "L1": "/mnt/data/myp23/env/lib/python3.10/site-packages/bilby/gw/detector/noise_curves/aLIGO_O4_high_asd.txt",
+#     "V1": "/mnt/data/myp23/env/lib/python3.10/site-packages/bilby/gw/detector/noise_curves/AdV_asd.txt",
+# }
 asd_paths = {
     "H1": "aLIGO_O4_high_asd.txt",
-    "L1": "aLIGO_O4_high_asd.txt", 
+    "L1": "aLIGO_O4_high_asd.txt",
     "V1": "AdV_asd.txt",
 }
 
@@ -95,7 +100,7 @@ detectors = [H1, L1, V1]
 detector_names = ['H1', 'L1', 'V1']
 
 for det, name in zip(detectors, detector_names):
-    det.frequencies = filtered_frequencies  
+    det.frequencies = filtered_frequencies
     det.data = detector_data[name][freq_mask]
 
 # Load PSD data for all detectors
@@ -289,7 +294,7 @@ def logprior_fn(params):
 
 # Setup for unit cube sampling
 n_live = 1400 #recalibrated to get compression rate roughly the same as bilby
-n_delete = int(n_live * 0.5)
+n_delete = 1  # Testing new vectorized kernel
 
 rng_key = jax.random.PRNGKey(10)
 rng_key, init_key = jax.random.split(rng_key, 2)
@@ -320,7 +325,6 @@ nested_sampler = acceptance_walk_sampler(
     max_mcmc=5000,
     num_delete=n_delete,
     stepper_fn=unit_cube_fns['stepper_fn'],
-    max_proposals=1000
 )
 state = nested_sampler.init(unit_cube_particles)
 

@@ -439,6 +439,7 @@ unit_cube_fns = create_unit_cube_functions(
 # =============================================================================
 
 # Configure the acceptance walk nested sampler
+# Uses the GPU-optimized improved kernel with per-particle early termination
 nested_sampler = acceptance_walk_sampler(
     logprior_fn=unit_cube_fns['logprior_fn'],        # Unit cube log-prior (uniform)
     loglikelihood_fn=unit_cube_fns['loglikelihood_fn'],  # Wrapped likelihood
@@ -447,7 +448,6 @@ nested_sampler = acceptance_walk_sampler(
     max_mcmc=5000,                                    # Maximum MCMC steps per chain
     num_delete=n_delete,                              # Batch size
     stepper_fn=unit_cube_fns['stepper_fn'],          # Custom stepper for periodic params
-    max_proposals=1000  # Max attempts to generate valid unit cube sample - conservative, rarely hits limit
 )
 
 # Initialize sampler state

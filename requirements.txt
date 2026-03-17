@@ -1,5 +1,5 @@
 # BlackJAX nested sampling (essential - install this first)
-blackjax @ git+https://github.com/handley-lab/blackjax.git@nested_sampling
+blackjax @ git+https://github.com/handley-lab/blackjax.git@dedbf11da33eb5ca286f6731e2c51f2b254b953f
 
 # Original dependencies from working environment
 absl-py==2.2.0

@@ -56,7 +56,9 @@ This repository is structured into two main directories:
    ```bash
    pip install -r requirements.txt
    ```
-   This will install key packages including: `blackjax` (nested sampling branch), `bilby`, `anesthetic`, `jimgw`, `ripple`, and other essential libraries for gravitational-wave analysis.
+   This will install key packages including: `blackjax` (nested sampling branch, pinned to a specific compatible commit), `bilby`, `anesthetic`, `jimgw`, `ripple`, and other essential libraries for gravitational-wave analysis.
+
+   > **Note on BlackJAX version compatibility:** The `requirements.txt` pins BlackJAX to commit `dedbf11` on the `nested_sampling` branch. This is required because later versions of the branch removed the `PartitionedState` API that our custom kernels depend on. Do not install from the unpinned `nested_sampling` branch head, as it will produce an `ImportError`.
 
 ### Running the Main Analysis
 
@@ -124,6 +126,7 @@ See the [arXiv paper](https://arxiv.org/abs/2509.04336) for detailed explanation
 
 ### Troubleshooting
 
+- **`ImportError: cannot import name 'PartitionedState'`**: You have an incompatible version of BlackJAX. Install the pinned version: `pip install blackjax@git+https://github.com/handley-lab/blackjax.git@dedbf11da33eb5ca286f6731e2c51f2b254b953f`
 - **Import Errors**: Ensure all dependencies are installed and the `custom_kernels` module is in the Python path
 - **CUDA Errors**: Verify your GPU drivers and CUDA installation are compatible with the JAX CUDA packages
 - **Memory Issues**: Reduce `n_live` or adjust `XLA_PYTHON_CLIENT_MEM_FRACTION` environment variable

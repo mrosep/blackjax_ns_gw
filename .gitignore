@@ -69,3 +69,5 @@ src/*
 !src/bilby_injections.py
 !src/blackjax_4s.py
 !src/blackjax_injections.py
+!src/example.py
+!src/example_newAPI.py

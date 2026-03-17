@@ -371,7 +371,6 @@ for i, injection_dir in enumerate(selected_dirs):
         max_mcmc=5000,
         num_delete=n_delete,
         stepper_fn=unit_cube_fns['stepper_fn'],
-        max_proposals=1000
     )
     state = nested_sampler.init(unit_cube_particles)
 
