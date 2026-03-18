@@ -333,11 +333,11 @@ def bilby_adaptive_de_sampler_unit_cube_improved(
     )
 
     def init_fn(particles):
-        # Use vmapped functions for initialization (evaluates on all particles)
+        # Pass non-vmapped functions: adaptive_init vmaps them internally
         state = adaptive_init(
             particles=particles,
-            logprior_fn=vmapped_logprior,
-            loglikelihood_fn=vmapped_loglikelihood,
+            logprior_fn=logprior_fn,
+            loglikelihood_fn=loglikelihood_fn,
             update_inner_kernel_params_fn=None,
         )
 
