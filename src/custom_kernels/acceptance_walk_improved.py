@@ -319,16 +319,13 @@ def bilby_adaptive_de_sampler_unit_cube_improved(
         max_mcmc=max_mcmc,
     )
 
-    # FIX: vmap the inner kernel for parallel execution over particles
-    # in_axes: (rng_key=0, state=0, logprior_fn=None, loglikelihood_fn=None,
-    #           loglikelihood_0=None, params=None)
-    vmapped_kernel = jax.vmap(kernel_with_stepper, in_axes=(0, 0, None, None, None, None))
-
+    # Do NOT vmap here: the pinned BlackJAX base kernel vmaps the inner
+    # kernel internally with in_axes=(0, 0, None, None, None, None).
     base_kernel_step = build_adaptive_kernel(
-        logprior_fn,  # Non-vmapped for inner kernel (single particle)
+        logprior_fn,
         loglikelihood_fn,
         delete_fn,
-        vmapped_kernel,
+        kernel_with_stepper,
         update_fn,
     )
 
