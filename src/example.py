@@ -537,25 +537,8 @@ with open('example_timings.pkl', 'wb') as f:
 
 # Print summary statistics
 print(f"\nAnalysis Summary:")
-print(f"Log Evidence: {final_state.logZ:.2f} ± {jnp.sqrt(final_state.logZ_var):.2f}")
-print(f"Number of likelihood evaluations: {len(dead) * n_delete}")
-
-# Extract adaptation diagnostics if available
-if hasattr(final_state, 'inner_kernel_info') and final_state.inner_kernel_info is not None:
-    info = final_state.inner_kernel_info
-    
-    if hasattr(info, 'n_accept') and hasattr(info, 'n_steps'):
-        n_accept = np.array(info.n_accept)
-        n_steps = np.array(info.n_steps)
-        
-        # Calculate efficiency metrics
-        acceptance_rates = n_accept / n_steps
-        total_evals = np.sum(n_steps)
-        overall_acceptance = np.sum(n_accept) / total_evals
-        
-        print(f"Total likelihood evaluations: {total_evals}")
-        print(f"Overall acceptance rate: {overall_acceptance:.3f}")
-        print(f"Mean steps per iteration: {np.mean(n_steps):.1f} ± {np.std(n_steps):.1f}")
+print(f"Log Evidence: {state.logZ:.2f}")
+print(f"Number of dead points: {len(dead) * n_delete}")
 
 print("\nExample completed successfully!")
 print("For advanced analysis, use anesthetic or other tools to process example_results.csv")
