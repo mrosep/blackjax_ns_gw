@@ -150,7 +150,11 @@ def de_rwalk_scan_unit_cube(
         new_likelihood_evals = loop_state.n_likelihood_evals + needs_likelihood.astype(jnp.int32)
 
         # ===== 6. Update Termination Mask for NEXT Iteration =====
-        finished_walks = new_walks >= params.num_walks
+        # As in bilby's acceptance walk, a walk is num_walks proposals
+        # (accepted or not), not num_walks accepted moves. Stopping at a
+        # fixed number of accepts samples the accepted-move chain, which
+        # favours high-acceptance (high-likelihood) regions and biases logZ up.
+        finished_walks = new_proposals >= params.num_walks
         hit_budget = new_proposals >= max_mcmc
         new_is_active = loop_state.is_active & ~finished_walks & ~hit_budget
 
